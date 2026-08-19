@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechCore // Cyber SOC & IT Analyst Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app" class="soc-desktop">
+    <!-- Top System Header -->
+    <header class="soc-header">
+      <div class="header-left">
+        <div class="brand">
+          <span class="brand-badge">SOC-OPS</span>
+          <span class="brand-name">TechCore<strong>SecStation v2.4</strong></span>
+        </div>
+        <div class="status-pill status-online">
+          <span class="pulse-dot"></span> AUDITORIA ATIVA
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="stat-card">
+          <span class="stat-label">EXPEDIENTE</span>
+          <span class="stat-value text-cyan" id="clock-display">09:00</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">SAÚDE DA SEGURANÇA</span>
+          <div class="health-bar-wrapper">
+            <div class="health-bar" id="health-bar" style="width: 100%;"></div>
+            <span class="stat-value" id="health-text">100%</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">REPUTAÇÃO TI</span>
+          <span class="stat-value text-emerald" id="reputation-text">100 pts</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">AMEAÇAS BLOQUEADAS</span>
+          <span class="stat-value text-purple" id="threats-blocked">0</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="sound-toggle-btn" class="btn-icon" title="Alternar Efeitos Sonoros">
+          🔊
+        </button>
+        <button id="ref-guide-btn" class="btn-guide-toggle">
+          📋 Guia de Referência
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <div class="soc-body">
+      <!-- Sidebar Navigation -->
+      <nav class="soc-sidebar">
+        <div class="nav-title">MÓDULOS DE OPERAÇÃO</div>
+        <button class="nav-tab active" data-channel="all">
+          <span class="nav-icon">📊</span> Fila Geral de Tarefas
+          <span class="badge" id="badge-all">0</span>
+        </button>
+        <button class="nav-tab" data-channel="email">
+          <span class="nav-icon">📨</span> TechMail (E-mail)
+          <span class="badge" id="badge-email">0</span>
+        </button>
+        <button class="nav-tab" data-channel="github">
+          <span class="nav-icon">🐙</span> TechHub (GitHub)
+          <span class="badge" id="badge-github">0</span>
+        </button>
+        <button class="nav-tab" data-channel="iam">
+          <span class="nav-icon">🔐</span> TechAccess (IAM)
+          <span class="badge" id="badge-iam">0</span>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="nav-title">SISTEMA</div>
+        <button class="nav-tab" id="view-logs-btn">
+          <span class="nav-icon">📜</span> Log de Auditoria
+        </button>
+
+        <!-- Pinned Security Cheat Sheet in Sidebar -->
+        <div class="cheat-sheet-card" id="cheat-sheet-sidebar">
+          <div class="cheat-header">
+            <span>🛡️ COLA DE SEGURANÇA</span>
+            <small>OFICIAL</small>
+          </div>
+          <div class="cheat-body">
+            <div class="cheat-item">
+              <strong>Repositórios Válidos:</strong>
+              <code>core-api-v2</code>, <code>auth-service</code>, <code>deploy-pipeline</code>
+            </div>
+            <div class="cheat-item">
+              <strong>Domínios Permitidos:</strong>
+              <code>@techcore.com</code> (Colaboradores)<br>
+              <code>@techcore-hr.com</code> (APENAS RH)
+            </div>
+            <div class="cheat-item">
+              <strong>Usuários Autorizados:</strong>
+              <code>carlos.dev</code> (Sênior Backend)<br>
+              <code>beatriz.sec</code> (SecOps)<br>
+              <code>marcos.rh</code> (Gerente RH)
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Central Task Feed List -->
+      <section class="task-feed-panel">
+        <div class="panel-header">
+          <h2>Fila de Solicitações</h2>
+          <span class="feed-counter" id="feed-progress-label">Item 1 de 10</span>
+        </div>
+        <div class="task-list" id="task-list-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Main Action & Details Viewport -->
+      <main class="viewport-panel">
+        <div id="welcome-screen" class="viewport-empty">
+          <div class="empty-icon">🛡️</div>
+          <h2>Estação de Trabalho Pronta</h2>
+          <p>Você é o analista de TI responsável pela segurança e operações na TechCore. Analise minuciosamente cada solicitação contra o Guia de Referência Rápida antes de tomar decisões!</p>
+          <div class="welcome-stats-preview">
+            <div class="preview-item">📨 <strong>TechMail:</strong> Detecte Phishing e Typosquatting</div>
+            <div class="preview-item">🐙 <strong>TechHub:</strong> Revise PRs, repos e backdoors</div>
+            <div class="preview-item">🔐 <strong>TechAccess:</strong> Audite privilégios e chamados</div>
+          </div>
+          <button class="btn-primary" id="btn-start-game">Iniciar Turno de Trabalho (09:00) ➔</button>
+        </div>
+
+        <div id="active-task-screen" class="viewport-content" style="display: none;">
+          <!-- Item Card Header -->
+          <div class="item-header" id="task-header-view">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Item Body / Content Renderer -->
+          <div class="item-body" id="task-body-view">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Technical Inspector Tool (Inspect URL / Header / Diff) -->
+          <div class="inspector-box" id="inspector-view">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Actions Bar -->
+          <div class="action-footer" id="task-actions-view">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Outcome Modal / Feedback Card -->
+        <div id="outcome-modal" class="modal-overlay" style="display: none;">
+          <div class="modal-card">
+            <div class="modal-icon" id="outcome-icon">✅</div>
+            <h3 id="outcome-title">Ação Processada</h3>
+            <div class="outcome-consequence" id="outcome-consequence"></div>
+            <div class="outcome-explanation" id="outcome-explanation"></div>
+            <button class="btn-primary" id="outcome-next-btn">Próximo Item ➔</button>
+          </div>
+        </div>
+
+        <!-- End of Game / Shift Review Screen -->
+        <div id="game-over-screen" class="viewport-content review-screen" style="display: none;">
+          <div class="review-header">
+            <span class="review-badge" id="final-rank-badge">AUDITORIA CONCLUÍDA</span>
+            <h1 id="final-verdict-title">Relatório de Desempenho do CISO</h1>
+            <p id="final-verdict-desc">Avaliação da sua atuação durante o turno de segurança na TechCore.</p>
+          </div>
+
+          <div class="review-stats-grid">
+            <div class="review-stat-box">
+              <span class="label">Saúde da Infraestrutura</span>
+              <span class="value" id="final-health">100%</span>
+            </div>
+            <div class="review-stat-box">
+              <span class="label">Reputação TI</span>
+              <span class="value" id="final-rep">100 pts</span>
+            </div>
+            <div class="review-stat-box">
+              <span class="label">Ameaças Neutralizadas</span>
+              <span class="value" id="final-threats">10/10</span>
+            </div>
+            <div class="review-stat-box">
+              <span class="label">Classificação Final</span>
+              <span class="value text-cyan" id="final-score-title">CISO Approved</span>
+            </div>
+          </div>
+
+          <div class="review-log-section">
+            <h3>Registro Detalhado de Decisões</h3>
+            <div class="review-table-container" id="final-log-container">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <div class="review-actions">
+            <button class="btn-primary" id="btn-restart-game">Jogar Novamente 🔄</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Quick Reference Guide Modal (For Mobile / Overlay Toggle) -->
+    <div id="guide-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-card guide-modal-content">
+        <div class="guide-modal-header">
+          <h3>📋 GUIA DE REFERÊNCIA RÁPIDA - TI TECHCORE</h3>
+          <button class="close-btn" id="close-guide-btn">×</button>
+        </div>
+        <div class="guide-modal-body">
+          <div class="guide-section">
+            <h4>1. Projetos Oficiais no GitHub (@TechCore-Official)</h4>
+            <ul>
+              <li><code>core-api-v2</code>: API principal de pagamentos.</li>
+              <li><code>auth-service</code>: Microsserviço de autenticação e tokens.</li>
+              <li><code>deploy-pipeline</code>: Scripts de automação CI/CD.</li>
+              <li><em class="text-danger">Qualquer outro repositório ou branch desconhecida fora disso deve ser tratada como suspeita!</em></li>
+            </ul>
+          </div>
+          <div class="guide-section">
+            <h4>2. Domínios de E-mail Oficiais</h4>
+            <ul>
+              <li><code>@techcore.com</code>: Válido para colaboradores.</li>
+              <li><code>@techcore-hr.com</code>: Válido <strong>APENAS</strong> para comunicados oficiais do RH.</li>
+              <li><em class="text-danger">Atenção a variações (ex: @tech-core.com, @techcore-beneficios.com, @techcore-suporte.com) — são golpes!</em></li>
+            </ul>
+          </div>
+          <div class="guide-section">
+            <h4>3. Usuários Autorizados Conhecidos</h4>
+            <ul>
+              <li><code>carlos.dev</code>: Desenvolvedor Sênior - Backend.</li>
+              <li><code>beatriz.sec</code>: Analista de Segurança / SecOps.</li>
+              <li><code>marcos.rh</code>: Gerente de Recursos Humanos.</li>
+              <li><em class="text-danger">Novos usuários solicitando acesso de admin sem chamado prévio devem ser checados/barrados.</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
