@@ -628,8 +628,14 @@ class TechMailSimulator {
 
   cacheDOMElements() {
     this.startScreen = document.getElementById('start-screen');
+    this.exitScreen = document.getElementById('exit-screen');
+    this.instructionsModal = document.getElementById('instructions-modal');
     this.mainWorkspace = document.getElementById('main-workspace');
+
     this.btnStartShift = document.getElementById('btn-start-shift');
+    this.btnExitSite = document.getElementById('btn-exit-site');
+    this.btnReopenSite = document.getElementById('btn-reopen-site');
+    this.btnEnterWorkstation = document.getElementById('btn-enter-workstation');
 
     this.shiftClock = document.getElementById('shift-clock');
     this.btnOpenGuide = document.getElementById('btn-open-guide');
@@ -689,17 +695,44 @@ class TechMailSimulator {
   }
 
   bindEvents() {
+    // 1. Click "Começar o seu turno" -> Open Instructions Modal
     this.btnStartShift.addEventListener('click', () => {
       audio.click();
+      this.instructionsModal.style.display = 'flex';
+    });
+
+    // 2. Click "Sair" -> Exit screen / window.close
+    this.btnExitSite.addEventListener('click', () => {
+      audio.click();
+      this.startScreen.style.display = 'none';
+      this.exitScreen.style.display = 'flex';
+      try {
+        window.close();
+      } catch (e) {}
+    });
+
+    // 3. Reopen from exit screen
+    this.btnReopenSite.addEventListener('click', () => {
+      audio.click();
+      this.exitScreen.style.display = 'none';
+      this.startScreen.style.display = 'flex';
+    });
+
+    // 4. Click "Entendido! Acessar Estação de Trabalho" in instructions modal
+    this.btnEnterWorkstation.addEventListener('click', () => {
+      audio.click();
+      this.instructionsModal.style.display = 'none';
       this.startShift();
     });
 
+    // Sound toggle
     this.btnSoundToggle.addEventListener('click', () => {
       audio.enabled = !audio.enabled;
       this.btnSoundToggle.textContent = audio.enabled ? '🔊' : '🔇';
       if (audio.enabled) audio.click();
     });
 
+    // Guide Modal in Topbar
     this.btnOpenGuide.addEventListener('click', () => {
       audio.click();
       this.guideModal.style.display = 'flex';
@@ -710,11 +743,13 @@ class TechMailSimulator {
       this.guideModal.style.display = 'none';
     });
 
+    // Back to Inbox button in reader
     this.btnBackToInbox.addEventListener('click', () => {
       audio.click();
       this.showInboxList();
     });
 
+    // Toggle Technical Headers dropdown in reader
     this.btnToggleHeaders.addEventListener('click', () => {
       audio.click();
       const isHidden = this.technicalHeadersBox.style.display === 'none';
@@ -754,6 +789,7 @@ class TechMailSimulator {
       });
     });
 
+    // Restart shift button in final audit report
     this.btnRestartShift.addEventListener('click', () => {
       audio.click();
       this.restartShift();
@@ -917,7 +953,6 @@ class TechMailSimulator {
 
     // Render Decision Buttons
     if (isProcessed) {
-      const pastDecision = this.decisionsHistory.find(d => d.scenarioIndex === index);
       this.decisionButtonsGroup.innerHTML = `
         <div style="font-size: 13px; color: var(--google-green); font-weight: 600;">
           ✓ Este item já foi processado anteriormente durante este expediente.
@@ -1055,7 +1090,7 @@ class TechMailSimulator {
   }
 }
 
-// Start Simulator
+// Start Simulator on DOM Ready
 window.addEventListener('DOMContentLoaded', () => {
   window.simulator = new TechMailSimulator();
 });

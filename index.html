@@ -11,49 +11,97 @@
 </head>
 <body>
 
-  <!-- ================= TELA DE INÍCIO / SPLASH SCREEN ================= -->
+  <!-- ================= 1. TELA DE INÍCIO MINIMALISTA (APENAS 2 BOTÕES) ================= -->
   <div id="start-screen" class="start-screen-overlay">
-    <div class="start-card">
+    <div class="start-card start-card-minimal">
       <div class="start-badge">TECHCORE ENTERPRISE SEC-OPS</div>
       <h1 class="start-title">Simulador de Analista de TI</h1>
-      <p class="start-subtitle">Você foi escalado para o turno de segurança e operações de hoje (09:00 às 18:00). Monitore a caixa de entrada do <strong>TechMail</strong>, revise Pull Requests no <strong>GitHub</strong> e audite pedidos de acesso no <strong>IAM</strong>.</p>
+      <p class="start-subtitle">Bem-vindo à estação de trabalho de operações e segurança da informação da TechCore Inc.</p>
 
-      <div class="start-alert-box">
-        <div class="alert-icon">⚠️</div>
-        <div class="alert-text">
-          <strong>Atenção:</strong> Durante o seu turno, <em>não haverá contadores ou alertas imediatos</em> de vírus ou invasões. Analise criticamente cada solicitação com base na sua <strong>Guia de Referência</strong>. Todas as suas ações serão avaliadas pelo CISO no relatório final ao término do expediente!
-        </div>
-      </div>
-
-      <!-- Quick Guide Preview inside Start Screen -->
-      <div class="start-guide-box">
-        <div class="guide-box-title">📋 SUA GUIA DE REFERÊNCIA RÁPIDA (COLA DE TI)</div>
-        <div class="guide-box-grid">
-          <div class="guide-col">
-            <span class="col-head">🐙 Repos Oficiais (@TechCore-Official)</span>
-            <code>core-api-v2</code> • <code>auth-service</code> • <code>deploy-pipeline</code>
-          </div>
-          <div class="guide-col">
-            <span class="col-head">📧 Domínios de E-mail Válidos</span>
-            <code>@techcore.com</code> (Colaboradores)<br>
-            <code>@techcore-hr.com</code> (APENAS RH Oficial)
-          </div>
-          <div class="guide-col">
-            <span class="col-head">👤 Usuários Autorizados Conhecidos</span>
-            <code>carlos.dev</code> (Sênior) • <code>beatriz.sec</code> (SecOps) • <code>marcos.rh</code> (RH)
-          </div>
-        </div>
-      </div>
-
-      <div class="start-actions">
+      <div class="minimal-start-actions">
         <button id="btn-start-shift" class="btn-start-primary">
-          <span class="btn-icon-play">▶</span> Iniciar Turno de Trabalho (09:00)
+          <span class="btn-icon-play">▶</span> Começar o seu turno
+        </button>
+        <button id="btn-exit-site" class="btn-start-secondary">
+          <span class="btn-icon-exit">🚪</span> Sair
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= AMBIENTE PRINCIPAL DO SISTEMA ================= -->
+  <!-- ================= TELA DE SAÍDA (QUANDO CLICA EM SAIR) ================= -->
+  <div id="exit-screen" class="start-screen-overlay" style="display: none;">
+    <div class="start-card start-card-minimal" style="text-align: center; align-items: center;">
+      <div style="font-size: 48px; margin-bottom: 8px;">👋</div>
+      <h1 class="start-title">Sessão Encerrada</h1>
+      <p class="start-subtitle">Você saiu da estação de trabalho da TechCore. Tenha um ótimo dia!</p>
+      <div class="minimal-start-actions" style="justify-content: center; margin-top: 10px;">
+        <button id="btn-reopen-site" class="btn-start-primary">
+          🔄 Voltar ao Início
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. MODAL DE INSTRUÇÕES DE SEGURANÇA (APÓS CLICAR EM COMEÇAR) ================= -->
+  <div id="instructions-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card instructions-modal-card">
+      <div class="modal-header">
+        <div class="instructions-header-title">
+          <span class="instructions-icon">📋</span>
+          <div>
+            <h3>Instruções de Segurança do Turno</h3>
+            <small>Guia Oficial: Como identificar e evitar e-mails falsos e ameaças cibernéticas</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body-guide">
+        <!-- Topic 1: Fake Emails & Phishing -->
+        <div class="guide-topic">
+          <h4>📧 1. Como Identificar E-mails Falsos (Phishing & Typosquatting)</h4>
+          <ul>
+            <li><strong>Domínio de Colaboradores:</strong> Somente <code>@techcore.com</code> é legítimo para a equipe geral.</li>
+            <li><strong>Domínio Exclusivo do RH:</strong> Somente <code>@techcore-hr.com</code> é válido para comunicados oficiais do Recursos Humanos.</li>
+            <li><span class="alert-highlight">⚠️ Cuidado com variações fraudulentas:</span> Golpistas utilizam endereços quase idênticos como <code>@tech-core.com</code> (com hífen), <code>@techcore-beneficios.com</code> ou <code>@techcore-suporte.com</code>.</li>
+            <li><strong>Engenharia Social / Urgência:</strong> Desconfie de e-mails com ameaça de cancelamento de benefícios, bloqueio de 2FA imediato ou pedidos secretos da diretoria.</li>
+          </ul>
+        </div>
+
+        <!-- Topic 2: GitHub PRs -->
+        <div class="guide-topic">
+          <h4>🐙 2. Como Avaliar Pull Requests no GitHub (@TechCore-Official)</h4>
+          <ul>
+            <li><strong>Repositórios Oficiais:</strong> Apenas <code>core-api-v2</code>, <code>auth-service</code> e <code>deploy-pipeline</code>.</li>
+            <li><strong>Inspeção de Código (Diff):</strong> Sempre analise as linhas alteradas! Procure mineradores de cripto ocultos (ex: <code>xmrig</code>), scripts de exfiltração de senhas em CI/CD ou backdoors de autenticação.</li>
+          </ul>
+        </div>
+
+        <!-- Topic 3: IAM Access & Authorized Users -->
+        <div class="guide-topic">
+          <h4>🔐 3. Controle de Acessos & Usuários Autorizados</h4>
+          <ul>
+            <li><strong>Membros Autorizados:</strong> <code>carlos.dev</code> (Sênior Backend), <code>beatriz.sec</code> (SecOps) e <code>marcos.rh</code> (RH).</li>
+            <li><strong>Menor Privilégio:</strong> Novos colaboradores pedindo acesso root/administrador em Produção sem chamado aprovado pela equipe de segurança devem ser rejeitados.</li>
+          </ul>
+        </div>
+
+        <!-- Topic 4: Secret Shift Rule -->
+        <div class="guide-topic info-banner-topic">
+          <h4>🤫 4. Regra de Ouro do Expediente (09:00 às 18:00)</h4>
+          <p>Durante o seu turno, <strong>não haverá avisos ou contadores imediatos de vírus</strong>. Seja minucioso em cada decisão! Ao final do expediente, o CISO apresentará o seu <strong>Relatório de Auditoria Completo</strong> com todos os acertos, incidentes e sua nota de desempenho.</p>
+        </div>
+      </div>
+
+      <div class="instructions-modal-footer">
+        <button id="btn-enter-workstation" class="btn-start-primary" style="width: 100%; justify-content: center;">
+          <span>🚀</span> Entendido! Acessar Estação de Trabalho (09:00)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 3. AMBIENTE PRINCIPAL DO SISTEMA (TECHMAIL / GMAIL) ================= -->
   <div id="main-workspace" class="workspace-layout" style="display: none;">
     
     <!-- Top Global App Bar -->
@@ -151,7 +199,7 @@
       <!-- Center Inbox / Task Feed Table -->
       <section class="inbox-panel" id="inbox-list-view">
         
-        <!-- Gmail Style Action Bar (Select all, Refresh, More, Tabs) -->
+        <!-- Gmail Style Action Bar -->
         <div class="inbox-toolbar">
           <div class="toolbar-left">
             <div class="checkbox-select-all" title="Selecionar">
@@ -196,7 +244,7 @@
 
       <!-- View Item Details (Gmail Reader View) -->
       <section class="email-reader-panel" id="email-reader-view" style="display: none;">
-        <!-- Top Reader Controls (Back to list, Mark, Report) -->
+        <!-- Top Reader Controls -->
         <div class="reader-toolbar">
           <button class="toolbar-icon-btn" id="btn-back-to-inbox" title="Voltar à Caixa de Entrada">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
@@ -238,7 +286,6 @@
             <div class="header-line"><strong>Para:</strong> <span id="header-para">-</span></div>
             <div class="header-line"><strong>Data:</strong> <span id="header-data">-</span></div>
             <div class="header-line"><strong>Segurança:</strong> <span id="header-auth" class="auth-pill">-</span></div>
-            <div class="header-line" id="header-extra-row" style="display: none;"><strong>Extra:</strong> <span id="header-extra">-</span></div>
           </div>
 
           <!-- Email / Message Content Body -->
@@ -246,7 +293,7 @@
             <!-- Message injected here -->
           </div>
 
-          <!-- Technical Inspector Section (URL Preview / Git Diff / IAM Policy) -->
+          <!-- Technical Inspector Section -->
           <div class="reader-inspector-section" id="reader-inspector-section">
             <!-- Inspector injected here -->
           </div>
@@ -263,7 +310,7 @@
         </div>
       </section>
 
-      <!-- ================= RELATÓRIO FINAL DE AUDITORIA DO CISO ================= -->
+      <!-- ================= 4. RELATÓRIO FINAL DE AUDITORIA DO CISO ================= -->
       <section class="audit-report-panel" id="audit-report-view" style="display: none;">
         <div class="audit-header">
           <div class="ciso-stamp" id="audit-stamp">TECHCORE CISO AUDIT</div>
@@ -337,7 +384,7 @@
       </section>
     </div>
 
-    <!-- Quick Reference Guide Modal -->
+    <!-- Quick Reference Guide Modal (Triggered via Topbar) -->
     <div id="guide-modal" class="modal-overlay" style="display: none;">
       <div class="modal-card guide-modal-card">
         <div class="modal-header">
@@ -377,7 +424,7 @@
       </div>
     </div>
 
-    <!-- Feedback Toast for Action Confirmation (Without spoiling counters) -->
+    <!-- Feedback Toast for Action Confirmation -->
     <div id="action-toast" class="action-toast" style="display: none;">
       <span id="toast-icon">✓</span>
       <span id="toast-msg">Ação registrada com sucesso no sistema.</span>
