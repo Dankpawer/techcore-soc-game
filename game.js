@@ -1,9 +1,9 @@
 /**
  * TechMail // TechCore Cyber SOC & IT Analyst Simulator
- * Engine & Game State Logic
+ * Retro CRT & 2000s Desktop Engine Logic
  */
 
-// Native Web Audio Synthesizer
+// Native Web Audio Synthesizer with 8-bit Retro Flavors
 class SoundEngine {
   constructor() {
     this.ctx = null;
@@ -19,7 +19,7 @@ class SoundEngine {
     }
   }
 
-  playTone(freq, type = 'sine', duration = 0.1, gainVal = 0.1) {
+  playTone(freq, type = 'square', duration = 0.08, gainVal = 0.08) {
     if (!this.enabled) return;
     this.init();
     if (!this.ctx) return;
@@ -40,17 +40,18 @@ class SoundEngine {
     }
   }
 
-  click() { this.playTone(850, 'sine', 0.04, 0.04); }
-  openMail() { this.playTone(600, 'triangle', 0.06, 0.06); }
+  menuHover() { this.playTone(440, 'triangle', 0.04, 0.04); }
+  click() { this.playTone(880, 'square', 0.05, 0.06); }
+  openMail() { this.playTone(587.33, 'triangle', 0.06, 0.05); }
   actionDone() {
-    this.playTone(523.25, 'sine', 0.08, 0.08); // C5
-    setTimeout(() => this.playTone(659.25, 'sine', 0.12, 0.08), 80); // E5
+    this.playTone(523.25, 'square', 0.06, 0.06);
+    setTimeout(() => this.playTone(659.25, 'square', 0.08, 0.06), 60);
   }
   endFanfare() {
-    this.playTone(523.25, 'sine', 0.1, 0.1);
-    setTimeout(() => this.playTone(659.25, 'sine', 0.1, 0.1), 120);
-    setTimeout(() => this.playTone(783.99, 'sine', 0.1, 0.1), 240);
-    setTimeout(() => this.playTone(1046.50, 'sine', 0.3, 0.15), 360);
+    this.playTone(523.25, 'square', 0.1, 0.08);
+    setTimeout(() => this.playTone(659.25, 'square', 0.1, 0.08), 100);
+    setTimeout(() => this.playTone(783.99, 'square', 0.1, 0.08), 200);
+    setTimeout(() => this.playTone(1046.50, 'square', 0.25, 0.12), 300);
   }
 }
 
@@ -636,18 +637,30 @@ class TechMailSimulator {
     this.btnExitSite = document.getElementById('btn-exit-site');
     this.btnReopenSite = document.getElementById('btn-reopen-site');
     this.btnEnterWorkstation = document.getElementById('btn-enter-workstation');
+    this.btnCloseInstructions = document.getElementById('btn-close-instructions');
 
     this.shiftClock = document.getElementById('shift-clock');
-    this.btnOpenGuide = document.getElementById('btn-open-guide');
+    this.taskbarClock = document.getElementById('taskbar-clock');
+    this.btnTopGuide = document.getElementById('btn-top-guide');
     this.btnCloseGuide = document.getElementById('btn-close-guide');
+    this.btnCloseGuideFoot = document.getElementById('btn-close-guide-foot');
     this.guideModal = document.getElementById('guide-modal');
     this.btnSoundToggle = document.getElementById('btn-sound-toggle');
+    this.btnWinExit = document.getElementById('btn-win-exit');
+
+    // Desktop icons
+    this.diconMail = document.getElementById('dicon-mail');
+    this.diconGithub = document.getElementById('dicon-github');
+    this.diconIam = document.getElementById('dicon-iam');
+    this.diconGuide = document.getElementById('dicon-guide');
 
     this.inboxListView = document.getElementById('inbox-list-view');
     this.emailItemsContainer = document.getElementById('email-items-container');
     this.emailReaderView = document.getElementById('email-reader-view');
     this.auditReportView = document.getElementById('audit-report-view');
     this.btnBackToInbox = document.getElementById('btn-back-to-inbox');
+    this.browserBackBtn = document.getElementById('browser-back-btn');
+    this.browserRefreshBtn = document.getElementById('browser-refresh-btn');
 
     // Badges
     this.badgeEmailCount = document.getElementById('badge-email-count');
@@ -657,7 +670,6 @@ class TechMailSimulator {
     this.tabEmailTag = document.getElementById('tab-email-tag');
     this.tabGithubTag = document.getElementById('tab-github-tag');
     this.tabIamTag = document.getElementById('tab-iam-tag');
-    this.inboxPaginationLabel = document.getElementById('inbox-pagination-label');
 
     // Reader elements
     this.readerTypeTag = document.getElementById('reader-type-tag');
@@ -700,15 +712,22 @@ class TechMailSimulator {
       audio.click();
       this.instructionsModal.style.display = 'flex';
     });
+    this.btnStartShift.addEventListener('mouseenter', () => audio.menuHover());
 
-    // 2. Click "Sair" -> Exit screen / window.close
+    // 2. Click "Sair" -> Exit CRT screen
     this.btnExitSite.addEventListener('click', () => {
       audio.click();
       this.startScreen.style.display = 'none';
       this.exitScreen.style.display = 'flex';
-      try {
-        window.close();
-      } catch (e) {}
+      try { window.close(); } catch (e) {}
+    });
+    this.btnExitSite.addEventListener('mouseenter', () => audio.menuHover());
+
+    // Close window X button in browser titlebar
+    this.btnWinExit.addEventListener('click', () => {
+      audio.click();
+      this.mainWorkspace.style.display = 'none';
+      this.startScreen.style.display = 'flex';
     });
 
     // 3. Reopen from exit screen
@@ -718,11 +737,15 @@ class TechMailSimulator {
       this.startScreen.style.display = 'flex';
     });
 
-    // 4. Click "Entendido! Acessar Estação de Trabalho" in instructions modal
+    // 4. Click "Entendido! Iniciar Expediente" in instructions modal
     this.btnEnterWorkstation.addEventListener('click', () => {
       audio.click();
       this.instructionsModal.style.display = 'none';
       this.startShift();
+    });
+    this.btnCloseInstructions.addEventListener('click', () => {
+      audio.click();
+      this.instructionsModal.style.display = 'none';
     });
 
     // Sound toggle
@@ -732,21 +755,48 @@ class TechMailSimulator {
       if (audio.enabled) audio.click();
     });
 
-    // Guide Modal in Topbar
-    this.btnOpenGuide.addEventListener('click', () => {
+    // Guide Modal
+    const openGuideFn = () => {
       audio.click();
       this.guideModal.style.display = 'flex';
-    });
+    };
+    this.btnTopGuide.addEventListener('click', openGuideFn);
+    this.diconGuide.addEventListener('click', openGuideFn);
 
-    this.btnCloseGuide.addEventListener('click', () => {
+    const closeGuideFn = () => {
       audio.click();
       this.guideModal.style.display = 'none';
+    };
+    this.btnCloseGuide.addEventListener('click', closeGuideFn);
+    this.btnCloseGuideFoot.addEventListener('click', closeGuideFn);
+
+    // Desktop icons filtering
+    this.diconMail.addEventListener('click', () => {
+      audio.click();
+      this.setCategoryView('email');
+    });
+    this.diconGithub.addEventListener('click', () => {
+      audio.click();
+      this.setCategoryView('github');
+    });
+    this.diconIam.addEventListener('click', () => {
+      audio.click();
+      this.setCategoryView('iam');
     });
 
-    // Back to Inbox button in reader
+    // Back to Inbox buttons
     this.btnBackToInbox.addEventListener('click', () => {
       audio.click();
       this.showInboxList();
+    });
+    this.browserBackBtn.addEventListener('click', () => {
+      audio.click();
+      this.showInboxList();
+    });
+    this.browserRefreshBtn.addEventListener('click', () => {
+      audio.click();
+      this.renderInboxRows();
+      this.showToast('Caixa de entrada sincronizada.');
     });
 
     // Toggle Technical Headers dropdown in reader
@@ -757,35 +807,23 @@ class TechMailSimulator {
       this.btnToggleHeaders.textContent = isHidden ? 'Ocultar Detalhes ▴' : 'Detalhes de Segurança ▾';
     });
 
-    // Category Tabs in Inbox
-    document.querySelectorAll('.gmail-category-tabs .cat-tab').forEach(tab => {
+    // Category Tabs in Webmail
+    document.querySelectorAll('.gmail-tabs-header .cat-tab-btn').forEach(tab => {
       tab.addEventListener('click', (e) => {
         audio.click();
-        document.querySelectorAll('.gmail-category-tabs .cat-tab').forEach(t => t.classList.remove('active'));
         const target = e.currentTarget;
-        target.classList.add('active');
-        this.currentCategoryFilter = target.getAttribute('data-cat');
-        this.renderInboxRows();
+        const cat = target.getAttribute('data-cat');
+        this.setCategoryView(cat);
       });
     });
 
-    // Sidebar navigation items
-    document.querySelectorAll('.sidebar-nav-list .nav-item').forEach(item => {
+    // Sidebar navigation folders
+    document.querySelectorAll('.sidebar-folder-list .folder-row').forEach(item => {
       item.addEventListener('click', (e) => {
         audio.click();
-        document.querySelectorAll('.sidebar-nav-list .nav-item').forEach(i => i.classList.remove('active'));
         const target = e.currentTarget;
-        target.classList.add('active');
         const view = target.getAttribute('data-view');
-        
-        // Sync with category tabs
-        this.currentCategoryFilter = view;
-        document.querySelectorAll('.gmail-category-tabs .cat-tab').forEach(t => {
-          t.classList.toggle('active', t.getAttribute('data-cat') === view);
-        });
-
-        this.showInboxList();
-        this.renderInboxRows();
+        this.setCategoryView(view);
       });
     });
 
@@ -794,6 +832,21 @@ class TechMailSimulator {
       audio.click();
       this.restartShift();
     });
+  }
+
+  setCategoryView(view) {
+    this.currentCategoryFilter = view;
+
+    document.querySelectorAll('.sidebar-folder-list .folder-row').forEach(i => {
+      i.classList.toggle('active', i.getAttribute('data-view') === view);
+    });
+
+    document.querySelectorAll('.gmail-tabs-header .cat-tab-btn').forEach(t => {
+      t.classList.toggle('active', t.getAttribute('data-cat') === view);
+    });
+
+    this.showInboxList();
+    this.renderInboxRows();
   }
 
   startShift() {
@@ -810,6 +863,7 @@ class TechMailSimulator {
 
   restartShift() {
     this.auditReportView.style.display = 'none';
+    this.mainWorkspace.style.display = 'none';
     this.startScreen.style.display = 'flex';
   }
 
@@ -834,12 +888,12 @@ class TechMailSimulator {
     this.tabEmailTag.textContent = `${unreadEmail} novos`;
     this.tabGithubTag.textContent = `${unreadGithub} novos`;
     this.tabIamTag.textContent = `${unreadIam} novos`;
-
-    this.inboxPaginationLabel.textContent = `${this.processedItems.length + 1 <= SCENARIOS.length ? this.processedItems.length + 1 : SCENARIOS.length} de ${SCENARIOS.length}`;
     
-    // Update shift clock according to progress
+    // Update shift clock
     const activeItem = SCENARIOS[this.processedItems.length] || SCENARIOS[SCENARIOS.length - 1];
-    this.shiftClock.textContent = this.processedItems.length >= SCENARIOS.length ? '18:00' : activeItem.time;
+    const timeStr = this.processedItems.length >= SCENARIOS.length ? '18:00' : activeItem.time;
+    this.shiftClock.textContent = timeStr;
+    this.taskbarClock.textContent = timeStr;
   }
 
   renderInboxRows() {
@@ -888,7 +942,7 @@ class TechMailSimulator {
 
     if (this.emailItemsContainer.children.length === 0) {
       this.emailItemsContainer.innerHTML = `
-        <div style="padding: 40px; text-align: center; color: var(--text-dim);">
+        <div style="padding: 40px; text-align: center; color: #747775;">
           <div style="font-size: 32px; margin-bottom: 8px;">📭</div>
           <p>Nenhuma mensagem nesta visualização.</p>
         </div>
@@ -905,7 +959,6 @@ class TechMailSimulator {
     this.technicalHeadersBox.style.display = 'none';
     this.btnToggleHeaders.textContent = 'Detalhes de Segurança ▾';
 
-    // Populate Reader Headers
     let typeText = 'E-MAIL CORPORATIVO';
     if (item.channel === 'github') typeText = 'GITHUB PULL REQUEST';
     if (item.channel === 'iam') typeText = 'CHAMADO DE ACESSO IAM';
@@ -946,7 +999,7 @@ class TechMailSimulator {
         <div class="url-inspector-card">
           <span style="font-size: 10.5px; color: #94a3b8;">ORIGEM / DESTINO ANALISADO:</span>
           <span class="url-dest">${item.inspector.dest}</span>
-          <small style="color: #cbd5e1; margin-top: 4px;">${item.inspector.details}</small>
+          <small style="color: #cbd5e1; margin-top: 4px; display: block;">${item.inspector.details}</small>
         </div>
       `;
     }
@@ -954,7 +1007,7 @@ class TechMailSimulator {
     // Render Decision Buttons
     if (isProcessed) {
       this.decisionButtonsGroup.innerHTML = `
-        <div style="font-size: 13px; color: var(--google-green); font-weight: 600;">
+        <div style="font-size: 13px; color: #188038; font-weight: 600;">
           ✓ Este item já foi processado anteriormente durante este expediente.
         </div>
       `;
@@ -985,7 +1038,6 @@ class TechMailSimulator {
   processAction(index, item, action) {
     audio.actionDone();
 
-    // Mark as processed
     this.processedItems.push(index);
     this.decisionsHistory.push({
       scenarioIndex: index,
@@ -998,12 +1050,9 @@ class TechMailSimulator {
       explanation: action.explanation
     });
 
-    // Show clean toast
     this.showToast(action.toastMsg);
-
     this.updateBadges();
 
-    // Check if shift is finished
     if (this.processedItems.length >= SCENARIOS.length) {
       setTimeout(() => {
         this.showFinalAuditReport();
@@ -1029,23 +1078,22 @@ class TechMailSimulator {
     this.emailReaderView.style.display = 'none';
     this.inboxListView.style.display = 'none';
     this.auditReportView.style.display = 'flex';
-    this.shiftClock.textContent = '18:00 (Fim do Turno)';
+    this.shiftClock.textContent = '18:00';
+    this.taskbarClock.textContent = '18:00';
 
     const totalScenarios = SCENARIOS.length;
     const correctCount = this.decisionsHistory.filter(d => d.correct).length;
     const incorrectCount = totalScenarios - correctCount;
 
-    // Calculate score
     const health = Math.max(0, 100 - (incorrectCount * 25));
     const reputation = Math.max(0, 100 - (incorrectCount * 15) + (correctCount * 5));
 
     this.reportThreatsAvoided.textContent = correctCount;
     this.reportThreatsTaken.textContent = incorrectCount;
     this.reportHealthFinal.textContent = `${health}%`;
-    this.reportHealthFinal.className = health >= 75 ? 'score-num text-emerald' : (health >= 50 ? 'score-num text-amber' : 'score-num text-danger');
+    this.reportHealthFinal.className = health >= 75 ? 'card-num text-emerald' : (health >= 50 ? 'card-num text-amber' : 'card-num text-danger');
     this.reportReputationFinal.textContent = `${reputation} pts`;
 
-    // Verdict Banner
     if (incorrectCount === 0) {
       this.auditStamp.textContent = 'CISO APPROVED // PROMOÇÃO A SÊNIOR';
       this.auditTitle.textContent = '🏆 DEFESA CIBERNÉTICA IMPECÁVEL!';
@@ -1063,7 +1111,6 @@ class TechMailSimulator {
       this.auditVerdictText.textContent = 'Credenciais corporativas foram vazadas e servidores de produção foram invadidos por backdoors/miners devido a decisões inadequadas durante o turno.';
     }
 
-    // Populate Detailed Audit Table
     this.auditTableBody.innerHTML = this.decisionsHistory.map((item, idx) => `
       <tr>
         <td><strong>#${idx + 1}</strong></td>
@@ -1071,9 +1118,9 @@ class TechMailSimulator {
         <td><strong>${this.escapeHtml(item.subject)}</strong></td>
         <td>${this.escapeHtml(item.chosenActionLabel)}</td>
         <td><strong style="color: ${item.correct ? 'var(--google-green)' : 'var(--google-red)'};">${item.correct ? '✅ ACERTO' : '❌ INCIDENTE'}</strong></td>
-        <td style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.4;">
+        <td style="font-size: 11.5px; color: #444746; line-height: 1.4;">
           <strong>${this.escapeHtml(item.logTitle)}:</strong> ${this.escapeHtml(item.consequence)}<br>
-          <em style="color: var(--text-muted);">${this.escapeHtml(item.explanation)}</em>
+          <em style="color: #747775;">${this.escapeHtml(item.explanation)}</em>
         </td>
       </tr>
     `).join('');
@@ -1090,7 +1137,7 @@ class TechMailSimulator {
   }
 }
 
-// Start Simulator on DOM Ready
+// Start Simulator
 window.addEventListener('DOMContentLoaded', () => {
   window.simulator = new TechMailSimulator();
 });
