@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TECHCORE // Cyber SOC & IT Analyst Simulator</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <title>TECHCORE // Cyber SOC & IT Analyst Simulator - 4 Turnos</title>
+  <link rel="stylesheet" href="style.css?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -46,8 +46,8 @@
           <span class="logo-star">★</span>
           <span class="logo-bot">CYBER SOC</span>
         </div>
-        <div class="retro-sub-logo">TACTICAL IT DEFENDER</div>
-        <div class="retro-tagline">Inspired by 2000s Enterprise Cyber Security</div>
+        <div class="retro-sub-logo">TACTICAL IT DEFENDER // 4 SHIFTS EDITION</div>
+        <div class="retro-tagline">Operações: E-mail, Banco de Dados, TechZap e Honeytokens</div>
       </div>
 
       <!-- Pixel Art Globe in Center -->
@@ -70,7 +70,7 @@
         <div class="sat-solar"></div>
       </div>
 
-      <!-- Menu Actions (ONLY 2 BUTTONS: Começar o seu turno & Sair) -->
+      <!-- Menu Actions (ONLY 2 BUTTONS) -->
       <div class="retro-menu-container">
         <button id="btn-start-shift" class="retro-menu-item active-menu">
           <span class="menu-pointer">▶</span> Começar o seu turno
@@ -83,7 +83,7 @@
       <!-- Bottom Credits -->
       <footer class="retro-footer">
         <span>© TechCore Systems Corp. All rights reserved</span>
-        <span>Game Version v1.01 - 2000s Edition</span>
+        <span>Game Version v2.0 - Campanha de 4 Turnos</span>
       </footer>
     </div>
   </div>
@@ -104,25 +104,22 @@
     </div>
   </div>
 
-  <!-- ================= 2. DIÁLOGO DO CEO ROGÉRIO (PREMIUM RETRO CYBER SOC DESIGN) ================= -->
+  <!-- ================= 2. DIÁLOGO DO CEO ROGÉRIO (COMUNICADOR CRIPTOGRAFADO ENTRE TURNOS) ================= -->
   <div id="ceo-dialog-modal" class="modal-overlay" style="display: none;">
     <div class="ceo-dialog-box-retro">
-      <!-- Titlebar of the dialogue box -->
       <div class="retro-window-titlebar">
         <div class="window-title-left">
-          <span>📡 CANAL_DIRETORIA_CRIPTO // CEO_ROGERIO_ONLINE</span>
+          <span id="ceo-dialog-titlebar">📡 CANAL_DIRETORIA_CRIPTO // CEO_ROGERIO_ONLINE</span>
         </div>
         <div class="window-controls">
           <button class="win-btn win-close" id="btn-skip-dialog" title="Pular Diálogo">✕</button>
         </div>
       </div>
 
-      <!-- Main Dialogue Content -->
       <div class="ceo-dialog-main">
-        <!-- CEO Avatar / Portrait Card -->
         <div class="ceo-portrait-card">
           <div class="ceo-avatar-frame">
-            <img src="ceo_rogerio.jpg?v=3" alt="CEO Rogério" class="ceo-pixel-img">
+            <img src="ceo_rogerio.jpg?v=4" alt="CEO Rogério" class="ceo-pixel-img">
           </div>
           <div class="ceo-name-badge">
             <strong>Rogério Silva</strong>
@@ -133,10 +130,9 @@
           </div>
         </div>
 
-        <!-- Speech Balloon & Message -->
         <div class="ceo-speech-container">
           <div class="speaker-tag">
-            <span>📟 COMUNICADO DO CEO:</span>
+            <span id="ceo-dialog-speaker-tag">📟 COMUNICADO DO CEO:</span>
           </div>
           
           <div class="ceo-speech-text" id="ceo-speech-text">
@@ -144,12 +140,11 @@
           </div>
 
           <div class="dialog-pagination" id="dialog-step-indicator">
-            Mensagem 1 de 4
+            Mensagem 1 de 3
           </div>
         </div>
       </div>
 
-      <!-- Dialogue Action Buttons Footer -->
       <div class="ceo-dialog-footer">
         <button id="btn-dialog-prev" class="btn-dialog-nav btn-dialog-prev" style="display: none;">
           🡰 Anterior
@@ -164,41 +159,53 @@
     </div>
   </div>
 
-  <!-- ================= 3. AMBIENTE DE TRABALHO (DESKTOP ANOS 2000 + GMAIL/TECHMAIL) ================= -->
+  <!-- ================= 3. AMBIENTE DE TRABALHO (DESKTOP ANOS 2000 MULTI-APP) ================= -->
   <div id="main-workspace" class="desktop-env" style="display: none;">
     
     <!-- Desktop Icons (Windows 2000 Style) -->
     <div class="desktop-icons-area">
       <div class="desktop-icon-item" title="Lixeira do Sistema">
-        <div class="icon-img icon-trash">🗑️</div>
+        <div class="icon-img">🗑️</div>
         <span>Lixeira</span>
       </div>
       <div class="desktop-icon-item active-desktop-icon" id="dicon-mail" title="TechMail - Correio Eletrônico">
-        <div class="icon-img icon-mail">📨</div>
+        <div class="icon-img">📨</div>
         <span>TechMail</span>
       </div>
       <div class="desktop-icon-item" id="dicon-github" title="TechHub - GitHub Monitor">
-        <div class="icon-img icon-github">🐙</div>
+        <div class="icon-img">🐙</div>
         <span>TechHub</span>
       </div>
       <div class="desktop-icon-item" id="dicon-iam" title="TechAccess - IAM Security">
-        <div class="icon-img icon-iam">🔐</div>
+        <div class="icon-img">🔐</div>
         <span>TechAccess</span>
       </div>
+      <div class="desktop-icon-item" id="dicon-db" title="TechDB - Auditor de Banco de Dados">
+        <div class="icon-img">🗄️</div>
+        <span>TechDB</span>
+      </div>
+      <div class="desktop-icon-item" id="dicon-zap" title="TechZap - WhatsApp Corporativo">
+        <div class="icon-img">💬</div>
+        <span>TechZap</span>
+      </div>
+      <div class="desktop-icon-item" id="dicon-vault" title="TechVault - Despacho de Arquivos">
+        <div class="icon-img">📦</div>
+        <span>TechVault</span>
+      </div>
       <div class="desktop-icon-item" id="dicon-guide" title="Cola de Segurança">
-        <div class="icon-img icon-guide">📋</div>
+        <div class="icon-img">📋</div>
         <span>Cola TI</span>
       </div>
     </div>
 
-    <!-- The Floating Webmail Window -->
+    <!-- The Floating Browser / Application Window -->
     <div class="browser-window" id="mail-browser-window">
       <!-- Browser Top Titlebar -->
       <div class="browser-titlebar">
         <div class="tab-strip">
           <div class="browser-tab active-tab">
-            <svg class="tab-mail-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-            <span class="tab-title-text" id="browser-tab-title">TechMail Inbox (10) - voce@techcore.com</span>
+            <span id="browser-tab-icon">📨</span>
+            <span class="tab-title-text" id="browser-tab-title">TechMail Inbox - Turno 1</span>
             <span class="tab-close-icon">×</span>
           </div>
           <div class="browser-tab-add">+</div>
@@ -219,34 +226,35 @@
         </div>
         <div class="url-input-container">
           <span class="url-lock-icon">🔒</span>
-          <input type="text" class="browser-url-bar" value="https://mail.techcore.com/mail/u/0/#inbox" readonly>
+          <input type="text" class="browser-url-bar" id="browser-url-bar" value="https://mail.techcore.com/mail/u/0/#inbox" readonly>
           <span class="url-star-btn">★</span>
         </div>
         <div class="browser-ext-icons">
+          <span class="shift-pill-badge" id="shift-pill-badge">TURNO 1/4</span>
           <button class="btn-ext" id="btn-top-guide" title="Guia de Segurança">📋 Cola TI</button>
           <button class="btn-ext" id="btn-sound-toggle" title="Som">🔊</button>
           <div class="user-avatar-pill" title="Analista de TI">TI</div>
         </div>
       </div>
 
-      <!-- Inside Browser: TechMail / Gmail Application -->
+      <!-- Inside Browser: TechMail / TechDB / TechZap Multi-App Body -->
       <div class="webmail-app-body">
         
-        <!-- Webmail Top Header (Gmail Search) -->
+        <!-- Webmail Top Header (Search & Shift Progress) -->
         <div class="webmail-top-header">
           <div class="mail-brand-logo">
-            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-            <span>TechMail</span>
+            <span id="app-brand-icon">📨</span>
+            <span id="app-brand-name">TechMail</span>
           </div>
 
           <div class="mail-search-pill">
             <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Pesquisar e-mails, repositórios ou acessos..." readonly value="Fila Operacional de TI">
+            <input type="text" id="app-search-input" placeholder="Pesquisar..." readonly value="Fila Operacional de TI">
             <span class="search-tune">⚙️</span>
           </div>
 
           <div class="mail-shift-clock">
-            <span>EXPEDIENTE:</span>
+            <span id="shift-status-lbl">EXPEDIENTE:</span>
             <strong id="shift-clock">09:00</strong>
           </div>
         </div>
@@ -256,7 +264,7 @@
           
           <!-- Left Sidebar -->
           <aside class="webmail-sidebar">
-            <button class="compose-pill-btn">
+            <button class="compose-pill-btn" id="sidebar-action-btn">
               <span>✏️</span>
               <span>Escrever</span>
             </button>
@@ -265,17 +273,32 @@
               <button class="folder-row active" data-view="email">
                 <span class="f-icon">📥</span>
                 <span class="f-name">Caixa de Entrada</span>
-                <span class="f-badge" id="badge-email-count">5</span>
+                <span class="f-badge" id="badge-email-count">0</span>
               </button>
               <button class="folder-row" data-view="github">
                 <span class="f-icon">🐙</span>
                 <span class="f-name">GitHub PRs</span>
-                <span class="f-badge badge-purple" id="badge-github-count">3</span>
+                <span class="f-badge badge-purple" id="badge-github-count">0</span>
               </button>
               <button class="folder-row" data-view="iam">
                 <span class="f-icon">🔐</span>
                 <span class="f-name">IAM & Acessos</span>
-                <span class="f-badge badge-amber" id="badge-iam-count">2</span>
+                <span class="f-badge badge-amber" id="badge-iam-count">0</span>
+              </button>
+              <button class="folder-row" data-view="db" id="folder-db-row" style="display: none;">
+                <span class="f-icon">🗄️</span>
+                <span class="f-name">TechDB SQL</span>
+                <span class="f-badge badge-cyan" id="badge-db-count">0</span>
+              </button>
+              <button class="folder-row" data-view="zap" id="folder-zap-row" style="display: none;">
+                <span class="f-icon">💬</span>
+                <span class="f-name">TechZap Chat</span>
+                <span class="f-badge badge-emerald" id="badge-zap-count">0</span>
+              </button>
+              <button class="folder-row" data-view="vault" id="folder-vault-row" style="display: none;">
+                <span class="f-icon">📦</span>
+                <span class="f-name">TechVault</span>
+                <span class="f-badge badge-rose" id="badge-vault-count">0</span>
               </button>
               <button class="folder-row" data-view="processed">
                 <span class="f-icon">✓</span>
@@ -284,48 +307,44 @@
               </button>
             </div>
 
-            <!-- Pinned Security Rules in Sidebar -->
-            <div class="sidebar-retro-card">
-              <div class="card-head">🛡️ REGRAS TECHCORE</div>
+            <!-- Dynamic Security Rules for current shift -->
+            <div class="sidebar-retro-card" id="sidebar-rules-card">
+              <div class="card-head">🛡️ REGRAS DO TURNO 1</div>
               <p><strong>E-mails Válidos:</strong><br><code>@techcore.com</code><br><code>@techcore-hr.com</code> (RH)</p>
-              <p><strong>Repos Oficiais:</strong><br><code>core-api-v2</code><br><code>auth-service</code><br><code>deploy-pipeline</code></p>
-              <p><strong>Usuários Chave:</strong><br><code>carlos.dev</code>, <code>beatriz.sec</code>, <code>marcos.rh</code></p>
+              <p><strong>Repos Oficiais:</strong><br><code>core-api-v2</code>, <code>auth-service</code>, <code>deploy-pipeline</code></p>
             </div>
           </aside>
 
           <!-- Main Center Panel: Inbox List -->
           <main class="inbox-main-table" id="inbox-list-view">
-            
-            <!-- Category Tabs -->
-            <div class="gmail-tabs-header">
+            <div class="gmail-tabs-header" id="category-tabs-header">
               <button class="cat-tab-btn active" data-cat="all">
-                <span class="tab-ic">📥</span> Principal
+                <span class="tab-ic">📥</span> Todos os Itens
               </button>
-              <button class="cat-tab-btn" data-cat="email">
-                <span class="tab-ic">📨</span> TechMail (E-mails)
-                <span class="tab-tag-count" id="tab-email-tag">5 novos</span>
+              <button class="cat-tab-btn" data-cat="email" id="tab-btn-email">
+                <span class="tab-ic">📨</span> E-mails
+                <span class="tab-tag-count" id="tab-email-tag">0 novos</span>
               </button>
-              <button class="cat-tab-btn" data-cat="github">
-                <span class="tab-ic">🐙</span> GitHub PRs
-                <span class="tab-tag-count" id="tab-github-tag">3 novos</span>
+              <button class="cat-tab-btn" data-cat="github" id="tab-btn-github">
+                <span class="tab-ic">🐙</span> GitHub
+                <span class="tab-tag-count" id="tab-github-tag">0 novos</span>
               </button>
-              <button class="cat-tab-btn" data-cat="iam">
-                <span class="tab-ic">🔐</span> IAM & Acessos
-                <span class="tab-tag-count" id="tab-iam-tag">2 novos</span>
+              <button class="cat-tab-btn" data-cat="iam" id="tab-btn-iam">
+                <span class="tab-ic">🔐</span> IAM
+                <span class="tab-tag-count" id="tab-iam-tag">0 novos</span>
               </button>
             </div>
 
-            <!-- Email Rows List -->
             <div class="email-rows-scroll" id="email-items-container">
               <!-- Dynamically Populated -->
             </div>
           </main>
 
-          <!-- Message Thread Reader View -->
+          <!-- Message Thread / Ticket / Chat Reader View -->
           <main class="reader-main-view" id="email-reader-view" style="display: none;">
             <div class="reader-toolbar-top">
               <button class="btn-back-inbox" id="btn-back-to-inbox">
-                <span>🡰</span> Voltar à Caixa de Entrada
+                <span>🡰</span> Voltar à Fila
               </button>
               <span class="reader-tag-pill" id="reader-type-tag">E-MAIL CORPORATIVO</span>
               <span class="reader-time-badge" id="reader-time-meta">09:15</span>
@@ -359,17 +378,17 @@
                 <div><strong>Autenticação:</strong> <span id="header-auth" class="auth-pill">-</span></div>
               </div>
 
-              <!-- Email Content Body -->
+              <!-- Email / Chat / SQL Query Content Body -->
               <div class="reader-body-html" id="reader-body-message">
                 <!-- Injected by JS -->
               </div>
 
-              <!-- Technical Inspector -->
+              <!-- Technical Inspector (Diff / URL / SQL / Honeytoken) -->
               <div class="reader-inspector-card" id="reader-inspector-section">
                 <!-- Injected by JS -->
               </div>
 
-              <!-- Decision Maker Action Bar -->
+              <!-- Decision Maker Action Bar (NEUTRAL NO SPOILERS) -->
               <div class="decision-footer-bar">
                 <div class="decision-title">
                   <strong>Qual é a sua decisão técnica de segurança?</strong>
@@ -381,12 +400,12 @@
             </div>
           </main>
 
-          <!-- ================= 4. RELATÓRIO FINAL DO CISO (18:00) ================= -->
+          <!-- ================= 4. RELATÓRIO DO CISO & TRANSIÇÃO DE TURNO ================= -->
           <main class="audit-report-view" id="audit-report-view" style="display: none;">
             <div class="audit-header-banner">
               <div class="audit-stamp-badge" id="audit-stamp">TECHCORE CISO AUDIT</div>
               <h1 id="audit-title">Relatório de Desempenho & Incidentes de TI</h1>
-              <p class="audit-sub-text">Expediente encerrado às 18:00. Avaliação completa da integridade cibernética.</p>
+              <p class="audit-sub-text" id="audit-sub-text">Expediente encerrado. Avaliação completa da integridade cibernética.</p>
             </div>
 
             <div class="audit-cards-grid">
@@ -446,9 +465,12 @@
               </div>
             </div>
 
-            <div class="audit-actions-bottom">
-              <button class="btn-win-primary" id="btn-restart-shift">
-                🔄 Jogar Novo Turno
+            <div class="audit-actions-bottom" style="gap: 14px;">
+              <button class="btn-dialog-nav btn-dialog-launch" id="btn-next-shift-action">
+                ▶ Avançar para o Próximo Turno
+              </button>
+              <button class="btn-dialog-nav btn-dialog-prev" id="btn-restart-shift" style="display: none;">
+                🔄 Reiniciar Campanha Completa
               </button>
             </div>
           </main>
@@ -465,7 +487,7 @@
 
       <div class="taskbar-window-tabs">
         <div class="taskbar-tab active-taskbar-tab" id="taskbar-mail-tab">
-          <span>📨 TechMail - Inbox</span>
+          <span id="taskbar-active-title">📨 TechMail - Inbox</span>
         </div>
       </div>
 
@@ -477,9 +499,9 @@
     </footer>
   </div>
 
-  <!-- Quick Reference Guide Modal -->
+  <!-- Quick Reference Guide Modal (Atualizado dinamicamente por turno) -->
   <div id="guide-modal" class="modal-overlay" style="display: none;">
-    <div class="modal-card instructions-dialog-retro" style="max-width: 580px;">
+    <div class="modal-card instructions-dialog-retro" style="max-width: 620px;">
       <div class="retro-window-titlebar">
         <div class="window-title-left">
           <span>📋 COLA_DE_SEGURANÇA_TI.TXT</span>
@@ -488,29 +510,8 @@
           <button class="win-btn win-close" id="btn-close-guide">✕</button>
         </div>
       </div>
-      <div class="retro-instructions-body">
-        <div class="instructions-section">
-          <h4>1. Projetos Oficiais no GitHub (@TechCore-Official)</h4>
-          <ul>
-            <li><code>core-api-v2</code>: API principal de pagamentos.</li>
-            <li><code>auth-service</code>: Microsserviço de autenticação e JWT.</li>
-            <li><code>deploy-pipeline</code>: Automação CI/CD de deploy.</li>
-          </ul>
-        </div>
-        <div class="instructions-section">
-          <h4>2. Domínios de E-mail Oficiais</h4>
-          <ul>
-            <li><code>@techcore.com</code>: Colaboradores gerais e TI.</li>
-            <li><code>@techcore-hr.com</code>: <strong>APENAS</strong> Recursos Humanos.</li>
-            <li><em class="text-danger">Golpes: @tech-core.com, @techcore-beneficios.com, @techcore-suporte.com!</em></li>
-          </ul>
-        </div>
-        <div class="instructions-section">
-          <h4>3. Usuários Autorizados Conhecidos</h4>
-          <ul>
-            <li><code>carlos.dev</code> (Sênior), <code>beatriz.sec</code> (SecOps), <code>marcos.rh</code> (RH).</li>
-          </ul>
-        </div>
+      <div class="retro-instructions-body" id="guide-modal-body">
+        <!-- Injected dynamically based on current shift -->
       </div>
       <div class="retro-dialog-footer">
         <button id="btn-close-guide-foot" class="btn-win-primary">Fechar Cola</button>
@@ -524,6 +525,6 @@
     <span id="toast-msg">Ação registrada com sucesso no sistema.</span>
   </div>
 
-  <script src="game.js?v=3"></script>
+  <script src="game.js?v=4"></script>
 </body>
 </html>

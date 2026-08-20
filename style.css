@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TECHCORE // CYBER SOC - RETRO CRT, CEO ROGÉRIO DIALOG & 2000s DESKTOP
+   TECHCORE // CYBER SOC - RETRO CRT, 4 TURNOS MULTI-APP ENGINE
    ========================================================================== */
 
 :root {
@@ -56,7 +56,6 @@ body {
   overflow: hidden;
 }
 
-/* CRT Curved Overlay & Vignette */
 .crt-overlay {
   position: absolute;
   top: 0;
@@ -69,7 +68,6 @@ body {
   z-index: 10;
 }
 
-/* CRT Horizontal Scanlines */
 .crt-scanlines {
   position: absolute;
   top: 0;
@@ -103,7 +101,6 @@ body {
   z-index: 5;
 }
 
-/* TV Color Test Pattern Bars at Top */
 .tv-color-bars {
   display: flex;
   width: 220px;
@@ -121,7 +118,6 @@ body {
 .bar-red { background: #ff0000; }
 .bar-blue { background: #0000ff; }
 
-/* Space Sunburst Rays */
 .space-bg-rays {
   position: absolute;
   top: 45%;
@@ -144,7 +140,6 @@ body {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Starfield */
 .starfield {
   position: absolute;
   top: 0;
@@ -171,7 +166,6 @@ body {
   50% { opacity: 1; transform: scale(1.2); text-shadow: 0 0 10px #38bdf8; }
 }
 
-/* Chroma Squad Style Big 3D Logo */
 .retro-title-box {
   position: relative;
   margin-top: 6px;
@@ -209,9 +203,9 @@ body {
 
 .retro-sub-logo {
   font-family: var(--font-pixel);
-  font-size: 14px;
+  font-size: 13px;
   color: #38bdf8;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   margin-top: 6px;
   text-shadow: 2px 2px 0 #000;
 }
@@ -224,7 +218,6 @@ body {
   margin-top: 4px;
 }
 
-/* Pixel Art Planet Earth in Center */
 .retro-earth-globe {
   position: relative;
   width: 170px;
@@ -254,7 +247,6 @@ body {
 .c2 { top: 55%; left: 45%; width: 45px; height: 50px; border-radius: 5px 15px 30px 10px; }
 .c3 { top: 20%; left: 65%; width: 35px; height: 30px; border-radius: 10px 20px 5px 15px; }
 
-/* Radar Satellites */
 .retro-satellite {
   position: absolute;
   bottom: 120px;
@@ -279,7 +271,6 @@ body {
   margin: -10px auto 0 auto;
 }
 
-/* Retro Menu (ONLY 2 BUTTONS) */
 .retro-menu-container {
   display: flex;
   flex-direction: column;
@@ -317,10 +308,7 @@ body {
   box-shadow: 2px 2px 0 #000000;
 }
 
-.menu-pointer {
-  color: #facc15;
-  font-size: 14px;
-}
+.menu-pointer { color: #facc15; font-size: 14px; }
 
 .retro-footer {
   font-family: var(--font-term);
@@ -334,7 +322,6 @@ body {
   z-index: 6;
 }
 
-/* Exit TV screen */
 .exit-tv-container {
   max-width: 500px;
   justify-content: center;
@@ -353,7 +340,7 @@ body {
 }
 
 /* ==========================================================================
-   2. DIÁLOGO DO CEO ROGÉRIO (PREMIUM RETRO CYBER SOC DESIGN)
+   2. DIÁLOGO DO CEO ROGÉRIO (CYBER SOC GLASSMORPHISM DESIGN)
    ========================================================================== */
 .ceo-dialog-box-retro {
   background: #0d1527;
@@ -414,7 +401,6 @@ body {
   box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
 }
 
-/* CEO Dialogue Main Layout */
 .ceo-dialog-main {
   display: flex;
   align-items: flex-start;
@@ -423,7 +409,6 @@ body {
   background: radial-gradient(circle at 20% 20%, #172554 0%, #0a0f1d 100%);
 }
 
-/* CEO Portrait Box */
 .ceo-portrait-card {
   width: 120px;
   flex-shrink: 0;
@@ -474,16 +459,9 @@ body {
   width: 100%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-.ceo-name-badge strong {
-  font-size: 12.5px;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-}
-.ceo-name-badge span {
-  font-size: 10px;
-  color: #38bdf8;
-  font-weight: 600;
-}
+.ceo-name-badge strong { font-size: 12.5px; color: #ffffff; letter-spacing: 0.5px; }
+.ceo-name-badge span { font-size: 10px; color: #38bdf8; font-weight: 600; }
+
 .ceo-status-pill {
   font-size: 9px;
   color: #10b981;
@@ -507,7 +485,6 @@ body {
   50% { opacity: 1; transform: scale(1.2); }
 }
 
-/* Speech Container (Glass Card RPG Style) */
 .ceo-speech-container {
   flex: 1;
   display: flex;
@@ -524,7 +501,6 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Speech Bubble Directional Pointer */
 .ceo-speech-container::before {
   content: '';
   position: absolute;
@@ -536,7 +512,6 @@ body {
   display: block;
   width: 0;
 }
-
 .ceo-speech-container::after {
   content: '';
   position: absolute;
@@ -556,9 +531,6 @@ body {
   margin-bottom: 12px;
   letter-spacing: 1px;
   text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .ceo-speech-text {
@@ -567,14 +539,8 @@ body {
   color: #e2e8f0;
   flex: 1;
 }
-.ceo-speech-text p {
-  margin-bottom: 10px;
-}
-.ceo-speech-text strong {
-  color: #38bdf8;
-}
-
-/* Inline Badges in Dialog */
+.ceo-speech-text p { margin-bottom: 10px; }
+.ceo-speech-text strong { color: #38bdf8; }
 .ceo-speech-text code {
   background: rgba(30, 41, 59, 0.9);
   color: #38bdf8;
@@ -603,7 +569,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Footer Buttons */
 .ceo-dialog-footer {
   padding: 14px 24px;
   background: #090e1a;
@@ -632,11 +597,7 @@ body {
   border: 1px solid #475569;
   color: #94a3b8;
 }
-.btn-dialog-prev:hover {
-  background: #334155;
-  color: #ffffff;
-  border-color: #64748b;
-}
+.btn-dialog-prev:hover { background: #334155; color: #ffffff; border-color: #64748b; }
 
 .btn-dialog-next {
   background: #0284c7;
@@ -664,8 +625,8 @@ body {
 }
 
 /* ==========================================================================
-   3. AMBIENTE DESKTOP ANOS 2000 (INSPIRADO NA IMAGEM 2)
-   ========================================================================= */
+   3. AMBIENTE DESKTOP ANOS 2000 (MULTI-APP)
+   ========================================================================== */
 .desktop-env {
   width: 100vw;
   height: 100vh;
@@ -676,19 +637,18 @@ body {
   overflow: hidden;
 }
 
-/* Desktop Icons Area */
 .desktop-icons-area {
   position: absolute;
   top: 14px;
   left: 14px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   z-index: 1;
 }
 
 .desktop-icon-item {
-  width: 74px;
+  width: 76px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -706,19 +666,18 @@ body {
   border: 1px dotted #ffffff;
 }
 
-.icon-img { font-size: 32px; }
+.icon-img { font-size: 30px; }
 .desktop-icon-item span {
-  font-size: 11.5px;
+  font-size: 11px;
   color: #ffffff;
   text-shadow: 1px 1px 2px #000000;
   font-family: var(--font-sans);
 }
 
-/* Floating Webmail Window Frame */
 .browser-window {
   position: absolute;
   top: 16px;
-  left: 100px;
+  left: 105px;
   right: 16px;
   bottom: 46px;
   background: #ffffff;
@@ -730,7 +689,6 @@ body {
   z-index: 2;
 }
 
-/* Browser Titlebar & Tabs */
 .browser-titlebar {
   background: #dee1e6;
   height: 38px;
@@ -785,7 +743,6 @@ body {
 .win-btn-control:hover { background: #d3e3fd; }
 .win-close-red:hover { background: #d93025; color: #fff; }
 
-/* Browser Nav & Address Bar */
 .browser-nav-bar {
   background: #ffffff;
   padding: 6px 12px;
@@ -830,6 +787,16 @@ body {
 .url-star-btn { color: #5f6368; cursor: pointer; }
 
 .browser-ext-icons { display: flex; align-items: center; gap: 8px; }
+.shift-pill-badge {
+  background: #0055ea;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 85, 234, 0.4);
+}
 .btn-ext {
   background: #e8f0fe;
   color: #0b57d0;
@@ -853,7 +820,6 @@ body {
   font-weight: 700;
 }
 
-/* Inside Webmail Application */
 .webmail-app-body {
   flex: 1;
   display: flex;
@@ -862,7 +828,6 @@ body {
   overflow: hidden;
 }
 
-/* Webmail Top Header (Gmail Search) */
 .webmail-top-header {
   height: 52px;
   padding: 0 16px;
@@ -877,8 +842,8 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 18px;
-  font-weight: 500;
-  color: #444746;
+  font-weight: 600;
+  color: #1e293b;
 }
 
 .mail-search-pill {
@@ -914,7 +879,6 @@ body {
   font-size: 13px;
 }
 
-/* Webmail Inner Layout (Sidebar + Center) */
 .webmail-workspace-inner {
   flex: 1;
   display: flex;
@@ -923,9 +887,8 @@ body {
   gap: 10px;
 }
 
-/* Webmail Sidebar */
 .webmail-sidebar {
-  width: 210px;
+  width: 215px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -936,9 +899,9 @@ body {
   color: #001d35;
   border: none;
   border-radius: 14px;
-  height: 46px;
+  height: 44px;
   padding: 0 18px;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -958,13 +921,13 @@ body {
 .folder-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 14px;
+  gap: 10px;
+  padding: 0 12px;
   height: 32px;
   border-radius: 16px;
   background: transparent;
   border: none;
-  font-size: 13px;
+  font-size: 12.5px;
   color: #444746;
   font-weight: 500;
   cursor: pointer;
@@ -983,6 +946,9 @@ body {
 }
 .badge-purple { background: #f3e8ff; color: #9333ea; }
 .badge-amber { background: #fef7e0; color: #b45309; }
+.badge-cyan { background: #e0f2fe; color: #0284c7; }
+.badge-emerald { background: #d1fae5; color: #059669; }
+.badge-rose { background: #ffe4e6; color: #e11d48; }
 
 .sidebar-retro-card {
   margin-top: auto;
@@ -996,7 +962,6 @@ body {
 .sidebar-retro-card p { margin-bottom: 4px; line-height: 1.3; }
 .sidebar-retro-card code { background: #f1f3f4; color: #1e293b; padding: 0 2px; font-family: var(--font-mono); }
 
-/* Center Inbox List */
 .inbox-main-table {
   flex: 1;
   background: #ffffff;
@@ -1080,6 +1045,9 @@ body {
 .tag-email { background: #e8f0fe; color: #1967d2; }
 .tag-github { background: #f3e8ff; color: #7e22ce; }
 .tag-iam { background: #fef7e0; color: #b45309; }
+.tag-db { background: #e0f2fe; color: #0284c7; }
+.tag-zap { background: #d1fae5; color: #059669; }
+.tag-vault { background: #ffe4e6; color: #e11d48; }
 
 .row-sender { width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
 .row-content { flex: 1; display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1174,6 +1142,38 @@ body {
 .reader-body-html { font-size: 13.5px; line-height: 1.5; color: #202124; }
 .email-quote-box { background: #f1f3f4; border-left: 3px solid #0b57d0; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0; }
 
+/* Chat WhatsApp Style Inside Reader */
+.techzap-chat-card {
+  background: #efeae2;
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-bubble-incoming {
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 0 10px 10px 10px;
+  max-width: 85%;
+  align-self: flex-start;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  color: #111b21;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.chat-bubble-challenge {
+  background: #d9fdd3;
+  padding: 10px 14px;
+  border-radius: 10px 0 10px 10px;
+  max-width: 85%;
+  align-self: flex-end;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  color: #111b21;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .reader-inspector-card { background: #1e293b; border-radius: 8px; padding: 12px 14px; color: #f8fafc; }
 .inspector-title { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 6px; }
 .diff-view { background: #0f172a; border: 1px solid #334155; border-radius: 4px; padding: 8px 10px; font-family: var(--font-mono); font-size: 11.5px; overflow-x: auto; }
@@ -1225,7 +1225,7 @@ body {
   box-shadow: none;
 }
 
-/* Relatório Final CISO */
+/* Relatório CISO */
 .audit-report-view {
   flex: 1;
   background: #ffffff;
@@ -1262,9 +1262,7 @@ body {
 
 .audit-actions-bottom { display: flex; justify-content: center; }
 
-/* ==========================================================================
-   4. WINDOWS TASKBAR AT THE BOTTOM (WINDOWS 2000 / XP STYLE)
-   ========================================================================== */
+/* Windows Taskbar */
 .windows-taskbar {
   position: absolute;
   bottom: 0;
@@ -1296,13 +1294,7 @@ body {
 }
 .taskbar-start-btn:active { border-style: inset; }
 
-.taskbar-window-tabs {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
+.taskbar-window-tabs { flex: 1; display: flex; align-items: center; gap: 4px; }
 .taskbar-tab {
   background: #ece9d8;
   border: 2px outset #ffffff;
@@ -1315,16 +1307,12 @@ body {
   font-weight: 600;
   color: #1f1f1f;
   cursor: pointer;
-  max-width: 180px;
+  max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.active-taskbar-tab {
-  background: #ffffff;
-  border-style: inset;
-  font-weight: 700;
-}
+.active-taskbar-tab { background: #ffffff; border-style: inset; font-weight: 700; }
 
 .taskbar-tray {
   background: #d4d0c8;
@@ -1336,11 +1324,7 @@ body {
   gap: 8px;
   font-size: 11.5px;
 }
-.tray-clock {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: #000;
-}
+.tray-clock { font-family: var(--font-mono); font-weight: 700; color: #000; }
 
 /* Modals & Toasts */
 .modal-overlay {
@@ -1379,17 +1363,8 @@ body {
   font-size: 13px;
   color: #1f1f1f;
 }
-.instructions-section h4 {
-  font-size: 13px;
-  color: #0f172a;
-  margin-bottom: 4px;
-}
-.instructions-section ul {
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
+.instructions-section h4 { font-size: 13px; color: #0f172a; margin-bottom: 4px; }
+.instructions-section ul { padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
 .retro-dialog-footer {
   padding: 12px 16px;
   background: #d4d0c8;
