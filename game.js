@@ -63,32 +63,35 @@ const CEO_DIALOGUES = [
   {
     step: 1,
     text: `
-      <p>Olá, Analista! Seja bem-vindo à linha de frente de segurança da <strong>TechCore</strong>.</p>
-      <p>Hoje é um dia crítico na empresa: detectamos que grupos externos de cibercriminosos estão tentando invadir nossos sistemas através de <strong>engenharia social</strong>, links falsos e adulteração de código.</p>
+      <p>Olá, Analista! Seja bem-vindo à linha de frente da <strong>TechCore</strong>.</p>
+      <p>Hoje é um dia crítico na empresa: nossos servidores e colaboradores estão sob constante mira de ataques virtuais, tentativas de <strong>engenharia social</strong>, phishing e adulteração de código.</p>
+      <p>Você é o nosso escudo de segurança durante todo o expediente.</p>
     `
   },
   {
     step: 2,
     text: `
-      <p>O seu papel na estação de trabalho é conduzir o expediente das <strong>09:00 às 18:00</strong>.</p>
-      <p>Você terá que monitorar a sua caixa de entrada no <strong>TechMail</strong>, auditar Pull Requests da nossa organização no <strong>GitHub</strong> e aprovar ou rejeitar concessões de acesso no <strong>IAM</strong>.</p>
+      <p>O seu turno vai das <strong>09:00 às 18:00</strong>. Sua missão na estação de trabalho é gerenciar 3 canais:</p>
+      <p>• 📨 <strong>TechMail:</strong> Inspecione links, cabeçalhos de segurança (SPF/DKIM) e remetentes dos e-mails.</p>
+      <p>• 🐙 <strong>GitHub:</strong> Audite diffs de Pull Requests em busca de backdoors, miners e vazamento de chaves.</p>
+      <p>• 🔐 <strong>TechAccess (IAM):</strong> Conceda ou negue permissões de acesso com base na política de menor privilégio.</p>
     `
   },
   {
     step: 3,
     text: `
       <p>Preste muita atenção na nossa <strong>Guia de Segurança (Sua Cola de TI)</strong>:</p>
-      <p>• Nossos e-mails legítimos usam <code>@techcore.com</code> e <code>@techcore-hr.com</code> (RH Oficial). Desconfie de golpes com hífen como <code>@tech-core.com</code> ou <code>@techcore-beneficios.com</code>!</p>
-      <p>• No GitHub, só temos 3 repos oficiais: <code>core-api-v2</code>, <code>auth-service</code> e <code>deploy-pipeline</code>. Sempre inspecione os diffs de código!</p>
-      <p>• Novos colaboradores pedindo permissão de Admin em Produção sem chamado devem ser barrados na hora!</p>
+      <p>• ✉️ E-mails legítimos usam <code>@techcore.com</code> e <code>@techcore-hr.com</code> (RH). Cuidado com golpes como <code class="badge-code-warn">@tech-core.com</code> ou <code class="badge-code-warn">@techcore-beneficios.com</code>!</p>
+      <p>• 🐙 No GitHub, só temos 3 repos oficiais: <code>core-api-v2</code>, <code>auth-service</code> e <code>deploy-pipeline</code>. Sempre inspecione os diffs de código!</p>
+      <p>• 🛡️ Novos colaboradores pedindo permissão de Admin em Produção sem chamado devem ser barrados na hora!</p>
     `
   },
   {
     step: 4,
     text: `
-      <p><strong>Regra de Ouro:</strong> Durante o expediente, <em>não haverá avisos imediatos de vírus ou erros</em>. Você precisa confiar na sua análise técnica!</p>
-      <p>Às <strong>18:00</strong>, eu e o CISO vamos analisar todas as suas decisões no <strong>Relatório Final de Auditoria</strong>.</p>
-      <p>Conto com a sua competência para manter a TechCore segura. Boa sorte no seu turno!</p>
+      <p>⚠️ <strong>Regra de Ouro:</strong> Durante o expediente, <em>não haverá avisos na hora se você acertou ou errou</em>. Você deve confiar puramente no seu julgamento técnico!</p>
+      <p>📊 Às <strong>18:00</strong>, eu e o CISO vamos avaliar todo o seu desempenho no <strong>Relatório Final de Auditoria</strong>.</p>
+      <p>A segurança da TechCore está em suas mãos. Bom trabalho!</p>
     `
   }
 ];

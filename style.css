@@ -15,10 +15,11 @@
   --google-green: #188038;
   --google-yellow: #f29900;
   
-  --win-bg: #ece9d8;
-  --win-title: #0055ea;
-  --win-border: #7f9db9;
-  --win-btn: #f0f0f0;
+  --neon-cyan: #38bdf8;
+  --neon-blue: #0284c7;
+  --neon-emerald: #10b981;
+  --neon-amber: #f59e0b;
+  --neon-rose: #f43f5e;
 }
 
 * {
@@ -352,85 +353,100 @@ body {
 }
 
 /* ==========================================================================
-   2. DIÁLOGO DO CEO ROGÉRIO COM O JOGADOR (ORGANIZADO & POLIDO)
+   2. DIÁLOGO DO CEO ROGÉRIO (PREMIUM RETRO CYBER SOC DESIGN)
    ========================================================================== */
 .ceo-dialog-box-retro {
-  background: #ece9d8;
-  border: 4px outset #ffffff;
-  border-radius: 6px;
-  max-width: 740px;
+  background: #0d1527;
+  border: 2px solid #38bdf8;
+  border-radius: 10px;
+  max-width: 760px;
   width: 100%;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
+  box-shadow: 
+    0 0 35px rgba(56, 189, 248, 0.35),
+    0 25px 50px rgba(0, 0, 0, 0.9),
+    inset 0 0 20px rgba(14, 116, 144, 0.25);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: start-fade-in 0.25s ease-out;
+  animation: modal-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #f1f5f9;
 }
 
-@keyframes start-fade-in {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes modal-pop {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .retro-window-titlebar {
-  background: linear-gradient(90deg, #0055ea 0%, #3b8cfc 100%);
-  color: #ffffff;
-  padding: 6px 12px;
+  background: linear-gradient(90deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  border-bottom: 1px solid #38bdf8;
+  color: #38bdf8;
+  padding: 8px 14px;
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  letter-spacing: 0.5px;
 }
 
 .win-btn {
-  background: #ece9d8;
-  border: 2px outset #ffffff;
-  color: #000000;
-  width: 22px;
-  height: 22px;
+  background: #1e293b;
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.15s;
 }
-.win-btn:active { border-style: inset; }
+.win-btn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
 
 /* CEO Dialogue Main Layout */
 .ceo-dialog-main {
   display: flex;
   align-items: flex-start;
-  padding: 20px 22px;
-  gap: 20px;
-  background: #f4f2e8;
-  border-bottom: 2px groove #ffffff;
+  padding: 22px 24px;
+  gap: 22px;
+  background: radial-gradient(circle at 20% 20%, #172554 0%, #0a0f1d 100%);
 }
 
-/* CEO Character Portrait Frame (Properly Sized & Clean) */
+/* CEO Portrait Box */
 .ceo-portrait-card {
-  width: 110px;
+  width: 120px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .ceo-avatar-frame {
-  width: 100px;
-  height: 100px;
-  background: #0f172a;
-  border: 2px inset #7f9db9;
-  border-radius: 4px;
+  width: 110px;
+  height: 110px;
+  background: #020617;
+  border: 2px solid #38bdf8;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 85, 234, 0.25);
+  box-shadow: 
+    0 0 15px rgba(56, 189, 248, 0.4),
+    inset 0 0 10px rgba(0, 0, 0, 0.8);
   padding: 2px;
 }
 
@@ -440,50 +456,83 @@ body {
   object-fit: contain;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  border-radius: 2px;
+  border-radius: 6px;
   display: block;
 }
 
 .ceo-name-badge {
-  background: #0055ea;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #38bdf8;
   color: #ffffff;
-  border: 1px solid #002277;
-  padding: 4px 6px;
-  border-radius: 4px;
+  padding: 6px 8px;
+  border-radius: 6px;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 11px;
   display: flex;
   flex-direction: column;
+  gap: 2px;
   width: 100%;
-  box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-.ceo-name-badge strong { font-size: 12px; }
-.ceo-name-badge span { font-size: 9.5px; opacity: 0.85; }
+.ceo-name-badge strong {
+  font-size: 12.5px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+.ceo-name-badge span {
+  font-size: 10px;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.ceo-status-pill {
+  font-size: 9px;
+  color: #10b981;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #10b981;
+  animation: pulse-dot 1.5s infinite ease-in-out;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
 
-/* Speech Balloon with RPG Arrow */
+/* Speech Container (Glass Card RPG Style) */
 .ceo-speech-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #ffffff;
-  border: 2px solid #7f9db9;
-  border-radius: 6px;
-  padding: 16px 20px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 8px;
+  padding: 18px 22px;
   position: relative;
-  min-height: 190px;
-  box-shadow: inset 1px 1px 0 #ffffff;
+  min-height: 200px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
+/* Speech Bubble Directional Pointer */
 .ceo-speech-container::before {
   content: '';
   position: absolute;
-  top: 36px;
-  left: -10px;
-  border-width: 6px 10px 6px 0;
+  top: 38px;
+  left: -9px;
+  border-width: 6px 9px 6px 0;
   border-style: solid;
-  border-color: transparent #7f9db9 transparent transparent;
+  border-color: transparent #38bdf8 transparent transparent;
   display: block;
   width: 0;
 }
@@ -491,107 +540,132 @@ body {
 .ceo-speech-container::after {
   content: '';
   position: absolute;
-  top: 37px;
-  left: -8px;
+  top: 39px;
+  left: -7px;
   border-width: 5px 8px 5px 0;
   border-style: solid;
-  border-color: transparent #ffffff transparent transparent;
+  border-color: transparent rgba(15, 23, 42, 0.95) transparent transparent;
   display: block;
   width: 0;
 }
 
 .speaker-tag {
   font-family: var(--font-pixel);
-  font-size: 10.5px;
-  color: #0055ea;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  font-size: 11px;
+  color: #38bdf8;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .ceo-speech-text {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: #1e293b;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #e2e8f0;
   flex: 1;
 }
 .ceo-speech-text p {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .ceo-speech-text strong {
-  color: #0055ea;
+  color: #38bdf8;
 }
+
+/* Inline Badges in Dialog */
 .ceo-speech-text code {
-  background: #f1f5f9;
-  color: #0f172a;
-  padding: 2px 6px;
+  background: rgba(30, 41, 59, 0.9);
+  color: #38bdf8;
+  padding: 2px 7px;
   border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 12.5px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid rgba(56, 189, 248, 0.3);
   font-weight: 600;
+}
+.badge-code-warn {
+  color: #f87171 !important;
+  border-color: rgba(248, 113, 113, 0.4) !important;
+  background: rgba(239, 68, 68, 0.1) !important;
 }
 
 .dialog-pagination {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: #64748b;
+  font-size: 11.5px;
+  color: #94a3b8;
   align-self: flex-end;
-  margin-top: 8px;
+  margin-top: 10px;
+  background: rgba(30, 41, 59, 0.6);
+  padding: 2px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Footer Buttons */
 .ceo-dialog-footer {
-  padding: 12px 20px;
-  background: #d4d0c8;
+  padding: 14px 24px;
+  background: #090e1a;
+  border-top: 1px solid rgba(56, 189, 248, 0.2);
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
 }
 
-.btn-win-primary {
-  background: #ece9d8;
-  border: 2px outset #ffffff;
-  color: #000000;
+.btn-dialog-nav {
   font-family: var(--font-sans);
   font-size: 13.5px;
-  font-weight: 700;
-  padding: 8px 18px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 2px 2px 0 #000;
+  transition: all 0.15s;
 }
-.btn-win-primary:hover { background: #dfdbcc; }
-.btn-win-primary:active { border-style: inset; transform: translate(1px, 1px); }
 
-.btn-win-secondary {
-  background: #ece9d8;
-  border: 2px outset #ffffff;
-  color: #334155;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 16px;
-  cursor: pointer;
-  box-shadow: 1px 1px 0 #000;
+.btn-dialog-prev {
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: #94a3b8;
 }
-.btn-win-secondary:hover { background: #dfdbcc; }
-
-.btn-win-glow {
-  background: linear-gradient(135deg, #0055ea, #0284c7);
+.btn-dialog-prev:hover {
+  background: #334155;
   color: #ffffff;
-  border-color: #38bdf8;
-  box-shadow: 2px 2px 0 #000, 0 0 12px rgba(0, 85, 234, 0.6);
+  border-color: #64748b;
 }
-.btn-win-glow:hover {
-  background: linear-gradient(135deg, #0842a0, #0369a1);
+
+.btn-dialog-next {
+  background: #0284c7;
+  border: 1px solid #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+.btn-dialog-next:hover {
+  background: #0369a1;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+  transform: translateY(-1px);
+}
+
+.btn-dialog-launch {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: 1px solid #34d399;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.5);
+}
+.btn-dialog-launch:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.8);
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
    3. AMBIENTE DESKTOP ANOS 2000 (INSPIRADO NA IMAGEM 2)
-   ========================================================================== */
+   ========================================================================= */
 .desktop-env {
   width: 100vw;
   height: 100vh;
@@ -1108,7 +1182,7 @@ body {
 .diff-info { color: #60a5fa; display: block; }
 .url-dest { color: #fbbf24; font-family: var(--font-mono); font-size: 11.5px; word-break: break-all; }
 
-/* Decision Maker Action Bar - NEUTRAL STYLING WITHOUT GREEN/RED COLOR SPOILERS */
+/* Decision Maker Action Bar */
 .decision-footer-bar {
   margin-top: auto;
   background: #f8fafc;
@@ -1122,7 +1196,6 @@ body {
 .decision-title { font-size: 13px; color: #1e293b; }
 .decision-buttons-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-/* ALL ACTION BUTTONS ARE NEUTRAL WITH NO COLOR CLUES */
 .btn-decision {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -1276,8 +1349,8 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
