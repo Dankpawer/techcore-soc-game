@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TECHCORE // CYBER SOC - RETRO CRT, 4 TURNOS MULTI-APP ENGINE
+   TECHCORE // CYBER SOC - RETRO CRT, 4 TURNOS & WORD 2000 INTEGRATION
    ========================================================================== */
 
 :root {
@@ -340,7 +340,7 @@ body {
 }
 
 /* ==========================================================================
-   2. DIÁLOGO DO CEO ROGÉRIO (CYBER SOC GLASSMORPHISM DESIGN)
+   2. DIÁLOGO DO CEO ROGÉRIO (CYBER SOC DESIGN)
    ========================================================================== */
 .ceo-dialog-box-retro {
   background: #0d1527;
@@ -658,13 +658,8 @@ body {
   border-radius: 4px;
   text-align: center;
 }
-.desktop-icon-item:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-.active-desktop-icon {
-  background: rgba(11, 87, 208, 0.4);
-  border: 1px dotted #ffffff;
-}
+.desktop-icon-item:hover { background: rgba(255, 255, 255, 0.15); }
+.active-desktop-icon { background: rgba(11, 87, 208, 0.4); border: 1px dotted #ffffff; }
 
 .icon-img { font-size: 30px; }
 .desktop-icon-item span {
@@ -707,20 +702,33 @@ body {
 }
 
 .browser-tab {
-  background: #ffffff;
+  background: #e9ecef;
   border-radius: 8px 8px 0 0;
-  padding: 6px 12px;
+  padding: 6px 14px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: #1f1f1f;
+  color: #495057;
   font-weight: 500;
   height: 32px;
+  cursor: pointer;
   box-shadow: 0 -1px 2px rgba(0,0,0,0.05);
+  transition: background 0.15s;
 }
-.tab-close-icon { font-size: 14px; color: #747775; cursor: pointer; }
-.browser-tab-add { font-size: 16px; color: #5f6368; padding: 4px 8px; cursor: pointer; }
+.browser-tab:hover { background: #f8f9fa; }
+.browser-tab.active-tab {
+  background: #ffffff;
+  color: #0b57d0;
+  font-weight: 700;
+  border-top: 2px solid #0b57d0;
+}
+.word-tab.active-tab {
+  color: #185abd;
+  border-top: 2px solid #185abd;
+}
+
+.tab-close-icon { font-size: 14px; color: #747775; margin-left: 4px; }
 
 .window-control-buttons {
   display: flex;
@@ -950,18 +958,6 @@ body {
 .badge-emerald { background: #d1fae5; color: #059669; }
 .badge-rose { background: #ffe4e6; color: #e11d48; }
 
-.sidebar-retro-card {
-  margin-top: auto;
-  background: #ffffff;
-  border: 1px solid #e0e2e7;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 11px;
-}
-.card-head { font-weight: 700; color: #0b57d0; margin-bottom: 4px; font-size: 10.5px; }
-.sidebar-retro-card p { margin-bottom: 4px; line-height: 1.3; }
-.sidebar-retro-card code { background: #f1f3f4; color: #1e293b; padding: 0 2px; font-family: var(--font-mono); }
-
 .inbox-main-table {
   flex: 1;
   background: #ffffff;
@@ -1174,13 +1170,14 @@ body {
   line-height: 1.4;
 }
 
+/* Technical Inspector (Without Spoiler Hints) */
 .reader-inspector-card { background: #1e293b; border-radius: 8px; padding: 12px 14px; color: #f8fafc; }
 .inspector-title { font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 6px; }
 .diff-view { background: #0f172a; border: 1px solid #334155; border-radius: 4px; padding: 8px 10px; font-family: var(--font-mono); font-size: 11.5px; overflow-x: auto; }
 .diff-added { color: #4ade80; background: rgba(74, 222, 128, 0.1); display: block; }
 .diff-removed { color: #f87171; background: rgba(248, 113, 113, 0.1); display: block; }
 .diff-info { color: #60a5fa; display: block; }
-.url-dest { color: #fbbf24; font-family: var(--font-mono); font-size: 11.5px; word-break: break-all; }
+.url-dest { color: #fbbf24; font-family: var(--font-mono); font-size: 12px; word-break: break-all; }
 
 /* Decision Maker Action Bar */
 .decision-footer-bar {
@@ -1225,7 +1222,125 @@ body {
   box-shadow: none;
 }
 
-/* Relatório CISO */
+/* ==========================================================================
+   4. APLICATIVO MICROSOFT WORD 2000 / TECHDOC VIEW
+   ========================================================================== */
+.word-doc-view {
+  flex: 1;
+  background: #808080;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Word Classic Toolbar */
+.word-classic-toolbar {
+  background: #d4d0c8;
+  border-bottom: 2px groove #ffffff;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.word-menubar {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #000;
+}
+.word-menu-item { cursor: pointer; padding: 2px 4px; }
+.word-menu-item:hover { background: #0a246a; color: #fff; }
+
+.word-tools-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+}
+.word-font-select {
+  background: #fff;
+  border: 1px inset #fff;
+  padding: 2px 6px;
+  font-size: 11.5px;
+}
+.word-btn-tool {
+  background: #ece9d8;
+  border: 1px outset #fff;
+  padding: 2px 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Word Document Sheet (White Paper Page) */
+.word-page-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  background: #808080;
+}
+
+.word-paper-sheet {
+  background: #ffffff;
+  width: 100%;
+  max-width: 720px;
+  min-height: 600px;
+  padding: 40px 48px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  color: #000000;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.word-doc-header {
+  border-bottom: 2px solid #000000;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.word-doc-header h1 {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000080;
+  margin-bottom: 4px;
+}
+.word-doc-header p {
+  font-size: 12px;
+  color: #555555;
+  font-style: italic;
+}
+
+.word-doc-body h2 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000080;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #c0c0c0;
+  padding-bottom: 2px;
+}
+.word-doc-body ul {
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+.word-doc-body li {
+  margin-bottom: 4px;
+}
+.word-doc-body code {
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  padding: 1px 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   5. RELATÓRIO DO CISO
+   ========================================================================== */
 .audit-report-view {
   flex: 1;
   background: #ffffff;
@@ -1340,37 +1455,6 @@ body {
   justify-content: center;
   z-index: 10000;
   padding: 20px;
-}
-
-.instructions-dialog-retro {
-  background: #ece9d8;
-  border: 3px outset #ffffff;
-  border-radius: 4px;
-  max-width: 650px;
-  width: 100%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.retro-instructions-body {
-  padding: 16px;
-  max-height: 60vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  font-size: 13px;
-  color: #1f1f1f;
-}
-.instructions-section h4 { font-size: 13px; color: #0f172a; margin-bottom: 4px; }
-.instructions-section ul { padding-left: 20px; display: flex; flex-direction: column; gap: 3px; }
-.retro-dialog-footer {
-  padding: 12px 16px;
-  background: #d4d0c8;
-  border-top: 2px groove #ffffff;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .action-toast {

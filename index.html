@@ -4,20 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TECHCORE // Cyber SOC & IT Analyst Simulator - 4 Turnos</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- ================= 1. TELA DE INÍCIO RETRÔ / CRT (CHROMA SQUAD STYLE) ================= -->
+  <!-- ================= 1. TELA DE INÍCIO RETRÔ / CRT ================= -->
   <div id="start-screen" class="crt-screen-wrapper">
     <div class="crt-overlay"></div>
     <div class="crt-scanlines"></div>
     
     <div class="crt-tv-container">
-      <!-- Top Color Test Pattern Bars -->
       <div class="tv-color-bars">
         <span class="bar bar-white"></span>
         <span class="bar bar-yellow"></span>
@@ -28,7 +27,6 @@
         <span class="bar bar-blue"></span>
       </div>
 
-      <!-- Radiating Background Beams & Stars -->
       <div class="space-bg-rays"></div>
       <div class="starfield">
         <span class="star s1">★</span>
@@ -39,7 +37,6 @@
         <span class="star s6">★</span>
       </div>
 
-      <!-- Center Big Title Logo -->
       <div class="retro-title-box">
         <div class="retro-main-logo">
           <span class="logo-top">TECHCORE</span>
@@ -50,7 +47,6 @@
         <div class="retro-tagline">Operações: E-mail, Banco de Dados, TechZap e Honeytokens</div>
       </div>
 
-      <!-- Pixel Art Globe in Center -->
       <div class="retro-earth-globe">
         <div class="globe-sphere">
           <div class="continent c1"></div>
@@ -60,7 +56,6 @@
         </div>
       </div>
 
-      <!-- Side Radar / Satellites -->
       <div class="retro-satellite sat-left">
         <div class="sat-dish"></div>
         <div class="sat-solar"></div>
@@ -70,7 +65,6 @@
         <div class="sat-solar"></div>
       </div>
 
-      <!-- Menu Actions (ONLY 2 BUTTONS) -->
       <div class="retro-menu-container">
         <button id="btn-start-shift" class="retro-menu-item active-menu">
           <span class="menu-pointer">▶</span> Começar o seu turno
@@ -80,10 +74,9 @@
         </button>
       </div>
 
-      <!-- Bottom Credits -->
       <footer class="retro-footer">
         <span>© TechCore Systems Corp. All rights reserved</span>
-        <span>Game Version v2.0 - Campanha de 4 Turnos</span>
+        <span>Game Version v2.1 - Campanha de 4 Turnos</span>
       </footer>
     </div>
   </div>
@@ -104,12 +97,12 @@
     </div>
   </div>
 
-  <!-- ================= 2. DIÁLOGO DO CEO ROGÉRIO (COMUNICADOR CRIPTOGRAFADO ENTRE TURNOS) ================= -->
+  <!-- ================= 2. DIÁLOGO DO CEO ROGÉRIO ================= -->
   <div id="ceo-dialog-modal" class="modal-overlay" style="display: none;">
     <div class="ceo-dialog-box-retro">
       <div class="retro-window-titlebar">
         <div class="window-title-left">
-          <span id="ceo-dialog-titlebar">📡 CANAL_DIRETORIA_CRIPTO // CEO_ROGERIO_ONLINE</span>
+          <span id="ceo-dialog-titlebar">📡 CANAL_DIRETORIA // CEO_ROGERIO_ONLINE</span>
         </div>
         <div class="window-controls">
           <button class="win-btn win-close" id="btn-skip-dialog" title="Pular Diálogo">✕</button>
@@ -119,7 +112,7 @@
       <div class="ceo-dialog-main">
         <div class="ceo-portrait-card">
           <div class="ceo-avatar-frame">
-            <img src="ceo_rogerio.jpg?v=4" alt="CEO Rogério" class="ceo-pixel-img">
+            <img src="ceo_rogerio.jpg?v=5" alt="CEO Rogério" class="ceo-pixel-img">
           </div>
           <div class="ceo-name-badge">
             <strong>Rogério Silva</strong>
@@ -132,7 +125,7 @@
 
         <div class="ceo-speech-container">
           <div class="speaker-tag">
-            <span id="ceo-dialog-speaker-tag">📟 COMUNICADO DO CEO:</span>
+            <span id="ceo-dialog-speaker-tag">📟 COMUNICADO DO CEO ROGÉRIO:</span>
           </div>
           
           <div class="ceo-speech-text" id="ceo-speech-text">
@@ -192,20 +185,25 @@
         <div class="icon-img">📦</div>
         <span>TechVault</span>
       </div>
-      <div class="desktop-icon-item" id="dicon-guide" title="Cola de Segurança">
-        <div class="icon-img">📋</div>
-        <span>Cola TI</span>
+      <div class="desktop-icon-item" id="dicon-word" title="Microsoft Word - Procedimentos de TI">
+        <div class="icon-img">📄</div>
+        <span>Manual TI (Word)</span>
       </div>
     </div>
 
     <!-- The Floating Browser / Application Window -->
     <div class="browser-window" id="mail-browser-window">
-      <!-- Browser Top Titlebar -->
+      <!-- Browser Top Titlebar with Clickable Tabs (TechMail & Word 2000) -->
       <div class="browser-titlebar">
         <div class="tab-strip">
-          <div class="browser-tab active-tab">
+          <div class="browser-tab active-tab" id="tab-btn-mailview">
             <span id="browser-tab-icon">📨</span>
             <span class="tab-title-text" id="browser-tab-title">TechMail Inbox - Turno 1</span>
+            <span class="tab-close-icon">×</span>
+          </div>
+          <div class="browser-tab word-tab" id="tab-btn-wordview">
+            <span>📄</span>
+            <span class="tab-title-text">Procedimentos_TI.doc (Word)</span>
             <span class="tab-close-icon">×</span>
           </div>
           <div class="browser-tab-add">+</div>
@@ -231,16 +229,16 @@
         </div>
         <div class="browser-ext-icons">
           <span class="shift-pill-badge" id="shift-pill-badge">TURNO 1/4</span>
-          <button class="btn-ext" id="btn-top-guide" title="Guia de Segurança">📋 Cola TI</button>
+          <button class="btn-ext" id="btn-open-word-tab" title="Abrir Manual no Word">📄 Manual Word</button>
           <button class="btn-ext" id="btn-sound-toggle" title="Som">🔊</button>
           <div class="user-avatar-pill" title="Analista de TI">TI</div>
         </div>
       </div>
 
-      <!-- Inside Browser: TechMail / TechDB / TechZap Multi-App Body -->
-      <div class="webmail-app-body">
+      <!-- VIEW 1: WEBMAIL / TECHDB / TECHZAP INTERFACE -->
+      <div class="webmail-app-body" id="app-workspace-body">
         
-        <!-- Webmail Top Header (Search & Shift Progress) -->
+        <!-- Webmail Top Header -->
         <div class="webmail-top-header">
           <div class="mail-brand-logo">
             <span id="app-brand-icon">📨</span>
@@ -259,7 +257,7 @@
           </div>
         </div>
 
-        <!-- Webmail Layout: Sidebar + Inbox -->
+        <!-- Webmail Workspace: Sidebar + Inbox -->
         <div class="webmail-workspace-inner">
           
           <!-- Left Sidebar -->
@@ -306,13 +304,6 @@
                 <span class="f-badge" id="badge-done-count">0</span>
               </button>
             </div>
-
-            <!-- Dynamic Security Rules for current shift -->
-            <div class="sidebar-retro-card" id="sidebar-rules-card">
-              <div class="card-head">🛡️ REGRAS DO TURNO 1</div>
-              <p><strong>E-mails Válidos:</strong><br><code>@techcore.com</code><br><code>@techcore-hr.com</code> (RH)</p>
-              <p><strong>Repos Oficiais:</strong><br><code>core-api-v2</code>, <code>auth-service</code>, <code>deploy-pipeline</code></p>
-            </div>
           </aside>
 
           <!-- Main Center Panel: Inbox List -->
@@ -333,6 +324,18 @@
                 <span class="tab-ic">🔐</span> IAM
                 <span class="tab-tag-count" id="tab-iam-tag">0 novos</span>
               </button>
+              <button class="cat-tab-btn" data-cat="db" id="tab-btn-db" style="display: none;">
+                <span class="tab-ic">🗄️</span> TechDB
+                <span class="tab-tag-count" id="tab-db-tag">0 novos</span>
+              </button>
+              <button class="cat-tab-btn" data-cat="zap" id="tab-btn-zap" style="display: none;">
+                <span class="tab-ic">💬</span> TechZap
+                <span class="tab-tag-count" id="tab-zap-tag">0 novos</span>
+              </button>
+              <button class="cat-tab-btn" data-cat="vault" id="tab-btn-vault" style="display: none;">
+                <span class="tab-ic">📦</span> TechVault
+                <span class="tab-tag-count" id="tab-vault-tag">0 novos</span>
+              </button>
             </div>
 
             <div class="email-rows-scroll" id="email-items-container">
@@ -340,7 +343,7 @@
             </div>
           </main>
 
-          <!-- Message Thread / Ticket / Chat Reader View -->
+          <!-- Message Thread / Reader View -->
           <main class="reader-main-view" id="email-reader-view" style="display: none;">
             <div class="reader-toolbar-top">
               <button class="btn-back-inbox" id="btn-back-to-inbox">
@@ -370,37 +373,29 @@
                 <div class="time-right" id="reader-received-time">09:12</div>
               </div>
 
-              <!-- Technical Security Headers -->
               <div class="security-headers-box" id="technical-headers-box" style="display: none;">
-                <div><strong>De:</strong> <span id="header-de">-</span></div>
-                <div><strong>Para:</strong> <span id="header-para">-</span></div>
+                <div><strong>De / Origem:</strong> <span id="header-de">-</span></div>
+                <div><strong>Para / Destino:</strong> <span id="header-para">-</span></div>
                 <div><strong>Data:</strong> <span id="header-data">-</span></div>
                 <div><strong>Autenticação:</strong> <span id="header-auth" class="auth-pill">-</span></div>
               </div>
 
-              <!-- Email / Chat / SQL Query Content Body -->
-              <div class="reader-body-html" id="reader-body-message">
-                <!-- Injected by JS -->
-              </div>
+              <div class="reader-body-html" id="reader-body-message"></div>
 
-              <!-- Technical Inspector (Diff / URL / SQL / Honeytoken) -->
-              <div class="reader-inspector-card" id="reader-inspector-section">
-                <!-- Injected by JS -->
-              </div>
+              <!-- Technical Inspector (NO SPOILERS) -->
+              <div class="reader-inspector-card" id="reader-inspector-section"></div>
 
-              <!-- Decision Maker Action Bar (NEUTRAL NO SPOILERS) -->
+              <!-- Decision Maker Action Bar -->
               <div class="decision-footer-bar">
                 <div class="decision-title">
                   <strong>Qual é a sua decisão técnica de segurança?</strong>
                 </div>
-                <div class="decision-buttons-row" id="decision-buttons-group">
-                  <!-- Injected by JS -->
-                </div>
+                <div class="decision-buttons-row" id="decision-buttons-group"></div>
               </div>
             </div>
           </main>
 
-          <!-- ================= 4. RELATÓRIO DO CISO & TRANSIÇÃO DE TURNO ================= -->
+          <!-- Relatório do CISO -->
           <main class="audit-report-view" id="audit-report-view" style="display: none;">
             <div class="audit-header-banner">
               <div class="audit-stamp-badge" id="audit-stamp">TECHCORE CISO AUDIT</div>
@@ -420,7 +415,7 @@
                 <span class="card-ic">🚨</span>
                 <div>
                   <div class="card-num text-danger" id="report-threats-taken">0</div>
-                  <div class="card-lbl">Incidentes Sofridos / Vírus Contraídos</div>
+                  <div class="card-lbl">Incidentes Sofridos / Erros</div>
                 </div>
               </div>
               <div class="audit-card">
@@ -458,9 +453,7 @@
                       <th>Consequência Técnica</th>
                     </tr>
                   </thead>
-                  <tbody id="audit-table-body">
-                    <!-- Rendered by JS -->
-                  </tbody>
+                  <tbody id="audit-table-body"></tbody>
                 </table>
               </div>
             </div>
@@ -476,9 +469,62 @@
           </main>
         </div>
       </div>
+
+      <!-- VIEW 2: MICROSOFT WORD 2000 (TECHDOC PROCEDIMENTOS DE TI) -->
+      <div class="word-doc-view" id="word-doc-view" style="display: none;">
+        <!-- Classic Word Toolbar -->
+        <div class="word-classic-toolbar">
+          <div class="word-menubar">
+            <span class="word-menu-item"><u>A</u>rquivo</span>
+            <span class="word-menu-item"><u>E</u>ditar</span>
+            <span class="word-menu-item"><u>E</u>xibir</span>
+            <span class="word-menu-item"><u>I</u>nserir</span>
+            <span class="word-menu-item"><u>F</u>ormatar</span>
+            <span class="word-menu-item"><u>F</u>erramentas</span>
+            <span class="word-menu-item"><u>T</u>abela</span>
+            <span class="word-menu-item"><u>A</u>juda</span>
+          </div>
+          <div class="word-tools-row">
+            <select class="word-font-select">
+              <option>Times New Roman</option>
+              <option>Arial</option>
+              <option>Courier New</option>
+            </select>
+            <select class="word-font-select" style="width: 50px;">
+              <option>12</option>
+              <option>10</option>
+              <option>14</option>
+            </select>
+            <button class="word-btn-tool"><b>N</b></button>
+            <button class="word-btn-tool"><i>I</i></button>
+            <button class="word-btn-tool"><u>S</u></button>
+            <span style="border-left: 1px solid #808080; height: 16px; margin: 0 4px;"></span>
+            <button class="word-btn-tool">≡</button>
+            <button class="word-btn-tool">≡</button>
+            <button class="word-btn-tool">≡</button>
+            <span style="margin-left: auto; font-size: 11px; color: #555;">Documento Oficial: <strong>Procedimentos_TI_TechCore.doc</strong></span>
+          </div>
+        </div>
+
+        <!-- Word Paper Sheet Area -->
+        <div class="word-page-container">
+          <div class="word-paper-sheet">
+            <div class="word-doc-header">
+              <h1>TECHCORE SYSTEMS CORP.</h1>
+              <p>Departamento de Segurança da Informação & Operações de TI</p>
+              <p><strong>MANUAL DE PROCEDIMENTOS OPERACIONAIS E DIRETRIZES DE SEGURANÇA</strong></p>
+            </div>
+            
+            <div class="word-doc-body" id="word-doc-content">
+              <!-- Dynamically populated based on current shift -->
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Windows Taskbar at the bottom -->
+    <!-- Windows Taskbar -->
     <footer class="windows-taskbar">
       <button class="taskbar-start-btn" id="btn-taskbar-start">
         <span class="start-logo">🪟</span>
@@ -499,32 +545,12 @@
     </footer>
   </div>
 
-  <!-- Quick Reference Guide Modal (Atualizado dinamicamente por turno) -->
-  <div id="guide-modal" class="modal-overlay" style="display: none;">
-    <div class="modal-card instructions-dialog-retro" style="max-width: 620px;">
-      <div class="retro-window-titlebar">
-        <div class="window-title-left">
-          <span>📋 COLA_DE_SEGURANÇA_TI.TXT</span>
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-close" id="btn-close-guide">✕</button>
-        </div>
-      </div>
-      <div class="retro-instructions-body" id="guide-modal-body">
-        <!-- Injected dynamically based on current shift -->
-      </div>
-      <div class="retro-dialog-footer">
-        <button id="btn-close-guide-foot" class="btn-win-primary">Fechar Cola</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Feedback Toast -->
   <div id="action-toast" class="action-toast" style="display: none;">
     <span id="toast-icon">✓</span>
     <span id="toast-msg">Ação registrada com sucesso no sistema.</span>
   </div>
 
-  <script src="game.js?v=4"></script>
+  <script src="game.js?v=5"></script>
 </body>
 </html>
