@@ -130,7 +130,7 @@ const SCENARIOS = [
       {
         id: 'click_phish',
         label: '🌐 Acessar Link e Inserir Credenciais',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Credenciais inseridas no formulário externo.',
         logTitle: 'Vazamento de Credenciais em Phishing',
@@ -140,7 +140,7 @@ const SCENARIOS = [
       {
         id: 'report_phish',
         label: '🛡️ Reportar Phishing ao SOC',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'E-mail reportado ao gateway de segurança.',
         logTitle: 'Phishing de RH Neutralizado',
@@ -150,7 +150,7 @@ const SCENARIOS = [
       {
         id: 'archive_mail',
         label: '🗑️ Deletar / Arquivar sem Reportar',
-        type: 'secondary',
+        type: 'neutral',
         correct: false,
         toastMsg: 'E-mail arquivado.',
         logTitle: 'Ameaça Não Notificada ao SOC',
@@ -196,7 +196,7 @@ const SCENARIOS = [
       {
         id: 'merge_pr',
         label: '✅ Aprovar e Fazer Merge no Main',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Pull Request #142 aprovado e integrado ao main.',
         logTitle: 'PR Legítimo Integrado',
@@ -206,7 +206,7 @@ const SCENARIOS = [
       {
         id: 'reject_pr',
         label: '❌ Rejeitar e Bloquear PR',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Pull Request #142 rejeitado.',
         logTitle: 'Falso Positivo em PR Legítimo',
@@ -248,7 +248,7 @@ const SCENARIOS = [
       {
         id: 'grant_iam',
         label: '🔓 Aprovar Permissão de Admin',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Privilégio de Administrador concedido a alex.intern.',
         logTitle: 'Violação Crítica de Menor Privilégio',
@@ -258,7 +258,7 @@ const SCENARIOS = [
       {
         id: 'deny_iam',
         label: '🚫 Rejeitar Solicitação & Exigir Chamado SecOps',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Solicitação de acesso rejeitada por inconformidade.',
         logTitle: 'Acesso Indevido Barrado no IAM',
@@ -301,7 +301,7 @@ const SCENARIOS = [
       {
         id: 'keep_email',
         label: '📨 Manter / Arquivar Normalmente',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Comunicado corporativo arquivado.',
         logTitle: 'Comunicado Legítimo de RH Processado',
@@ -311,7 +311,7 @@ const SCENARIOS = [
       {
         id: 'block_rh',
         label: '🚨 Bloquear Domínio e Reportar como Phishing',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Domínio do RH bloqueado no gateway.',
         logTitle: 'Falso Positivo - Canal de RH Bloqueado',
@@ -358,7 +358,7 @@ const SCENARIOS = [
       {
         id: 'approve_miner',
         label: '✅ Aprovar PR e Deploy',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'PR aprovado no repositório crypto-worker-node.',
         logTitle: 'Injeção de Cryptominer em Servidores',
@@ -368,7 +368,7 @@ const SCENARIOS = [
       {
         id: 'ban_miner',
         label: '🚫 Fechar PR, Deletar Repositório e Banir Usuário',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Repositório não oficial excluído e minerador barrado.',
         logTitle: 'Tentativa de Cryptojacking Neutralizada',
@@ -412,7 +412,7 @@ const SCENARIOS = [
       {
         id: 'click_typo',
         label: '🔑 Clicar no Link e Reconfigurar 2FA',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Sessão 2FA enviada para servidor externo.',
         logTitle: 'Invasão de Conta via Typosquatting',
@@ -422,7 +422,7 @@ const SCENARIOS = [
       {
         id: 'report_typo',
         label: '🛡️ Reportar Phishing / Typosquatting ao SOC',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Domínio com hífen bloqueado no DNS.',
         logTitle: 'Typosquatting Bloqueado com Sucesso',
@@ -468,7 +468,7 @@ const SCENARIOS = [
       {
         id: 'merge_backdoor',
         label: '✅ Aprovar PR no auth-service',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'PR #89 aprovado no auth-service.',
         logTitle: 'Backdoor Injetado no Serviço de Autenticação',
@@ -478,7 +478,7 @@ const SCENARIOS = [
       {
         id: 'reject_backdoor',
         label: '🚫 Rejeitar PR & Alertar beatriz.sec (SecOps)',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Backdoor rejeitado e equipe de SecOps alertada.',
         logTitle: 'Backdoor no Auth-Service Neutralizado',
@@ -520,7 +520,7 @@ const SCENARIOS = [
       {
         id: 'grant_sec_audit',
         label: '🔓 Aprovar Concessão Temporária (4h)',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Acesso temporário de auditoria liberado para beatriz.sec.',
         logTitle: 'Acesso Legítimo de SecOps Concedido',
@@ -530,7 +530,7 @@ const SCENARIOS = [
       {
         id: 'deny_sec_audit',
         label: '🚫 Rejeitar Solicitação de beatriz.sec',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Solicitação de beatriz.sec rejeitada.',
         logTitle: 'Investigação de Segurança Bloqueada',
@@ -576,7 +576,7 @@ const SCENARIOS = [
       {
         id: 'merge_supply_chain',
         label: '✅ Aprovar Pipeline CI/CD',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Pipeline de deploy atualizada.',
         logTitle: 'Exfiltração de Secrets no CI/CD',
@@ -586,7 +586,7 @@ const SCENARIOS = [
       {
         id: 'reject_supply_chain',
         label: '🚫 Rejeitar PR, Revogar Chaves e Bloquear Fork',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'PR malicioso rejeitado e credenciais protegidas.',
         logTitle: 'Ataque de Supply Chain Neutralizado',
@@ -630,7 +630,7 @@ const SCENARIOS = [
       {
         id: 'add_ssh',
         label: '🔑 Adicionar Chave SSH no Servidor',
-        type: 'danger',
+        type: 'neutral',
         correct: false,
         toastMsg: 'Chave SSH adicionada ao servidor de produção.',
         logTitle: 'Invasão Direta via Fraude do CEO',
@@ -640,7 +640,7 @@ const SCENARIOS = [
       {
         id: 'report_ceo',
         label: '🛡️ Bloquear E-mail & Reportar Spear Phishing',
-        type: 'success',
+        type: 'neutral',
         correct: true,
         toastMsg: 'Incidente de Spear Phishing registrado no SOC.',
         logTitle: 'Fraude do CEO Neutralizada com Sucesso',
@@ -906,7 +906,6 @@ class TechMailSimulator {
     this.ceoSpeechText.innerHTML = dialog.text;
     this.dialogStepIndicator.textContent = `Mensagem ${dialog.step} de ${CEO_DIALOGUES.length}`;
 
-    // Manage Next/Prev/Start visibility
     this.btnDialogPrev.style.display = this.currentDialogIndex > 0 ? 'inline-flex' : 'none';
     
     if (this.currentDialogIndex === CEO_DIALOGUES.length - 1) {
@@ -1086,22 +1085,17 @@ class TechMailSimulator {
       `;
     }
 
-    // Render Decision Buttons
+    // Render Decision Buttons (ALL NEUTRAL WITHOUT RED/GREEN COLOR CLUES)
     if (isProcessed) {
       this.decisionButtonsGroup.innerHTML = `
-        <div style="font-size: 13px; color: #188038; font-weight: 600;">
+        <div style="font-size: 13px; color: #475569; font-weight: 600;">
           ✓ Este item já foi processado anteriormente durante este expediente.
         </div>
       `;
     } else {
       this.decisionButtonsGroup.innerHTML = item.actions.map(action => {
-        let btnClass = 'btn-decision-secondary';
-        if (action.type === 'danger') btnClass = 'btn-decision-danger';
-        if (action.type === 'success') btnClass = 'btn-decision-success';
-        if (action.type === 'primary') btnClass = 'btn-decision-primary';
-
         return `
-          <button class="btn-decision ${btnClass}" data-action-id="${action.id}">
+          <button class="btn-decision" data-action-id="${action.id}">
             ${action.label}
           </button>
         `;

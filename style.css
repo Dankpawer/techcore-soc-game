@@ -431,7 +431,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 85, 234, 0.3);
 }
 
-/* Rogério Pixel Avatar (Custom CSS Pixel Art) */
+/* Rogério Pixel Avatar */
 .ceo-pixel-avatar {
   width: 80px;
   height: 100px;
@@ -569,7 +569,7 @@ body {
 }
 .ceo-speech-text code {
   background: #f1f5f9;
-  color: #dc2626;
+  color: #0f172a;
   padding: 1px 5px;
   border-radius: 3px;
   font-family: var(--font-mono);
@@ -966,7 +966,7 @@ body {
 }
 .card-head { font-weight: 700; color: #0b57d0; margin-bottom: 4px; font-size: 10.5px; }
 .sidebar-retro-card p { margin-bottom: 4px; line-height: 1.3; }
-.sidebar-retro-card code { background: #f1f3f4; color: #d93025; padding: 0 2px; font-family: var(--font-mono); }
+.sidebar-retro-card code { background: #f1f3f4; color: #1e293b; padding: 0 2px; font-family: var(--font-mono); }
 
 /* Center Inbox List */
 .inbox-main-table {
@@ -1033,8 +1033,8 @@ body {
   right: 70px;
   font-size: 9.5px;
   font-weight: 800;
-  color: #188038;
-  background: #e6f4ea;
+  color: #475569;
+  background: #e2e8f0;
   padding: 1px 5px;
   border-radius: 4px;
 }
@@ -1081,13 +1081,16 @@ body {
 }
 .btn-back-inbox {
   background: #f1f3f4;
-  border: none;
-  padding: 5px 10px;
+  border: 1px solid #cbd5e1;
+  padding: 5px 12px;
   border-radius: 6px;
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
+  color: #1f1f1f;
 }
+.btn-back-inbox:hover { background: #e2e8f0; }
+
 .reader-tag-pill {
   font-size: 10.5px;
   font-weight: 700;
@@ -1151,32 +1154,49 @@ body {
 .diff-info { color: #60a5fa; display: block; }
 .url-dest { color: #fbbf24; font-family: var(--font-mono); font-size: 11.5px; word-break: break-all; }
 
+/* Decision Maker Action Bar - NEUTRAL STYLING WITHOUT GREEN/RED COLOR SPOILERS */
 .decision-footer-bar {
   margin-top: auto;
   background: #f8fafc;
-  border: 1px solid #e0e2e7;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
-.decision-title { font-size: 12.5px; color: #444746; }
-.decision-buttons-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.decision-title { font-size: 13px; color: #1e293b; }
+.decision-buttons-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
+/* ALL ACTION BUTTONS ARE NEUTRAL WITH NO COLOR CLUES */
 .btn-decision {
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
-  padding: 8px 14px;
+  padding: 9px 18px;
   border-radius: 6px;
   cursor: pointer;
-  border: 1px solid transparent;
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #7f9db9;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.btn-decision-primary { background: #0b57d0; color: #fff; }
-.btn-decision-danger { background: #fce8e6; color: #d93025; border-color: rgba(217, 48, 37, 0.3); }
-.btn-decision-success { background: #e6f4ea; color: #188038; border-color: rgba(24, 128, 56, 0.3); }
-.btn-decision-secondary { background: #fff; color: #444746; border-color: #c4c7c5; }
+.btn-decision:hover {
+  background: #eff6ff;
+  border-color: #0055ea;
+  color: #0055ea;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+.btn-decision:active {
+  background: #dbeafe;
+  transform: translateY(1px);
+  box-shadow: none;
+}
 
 /* Relatório Final CISO */
 .audit-report-view {
@@ -1309,6 +1329,46 @@ body {
   justify-content: center;
   z-index: 10000;
   padding: 20px;
+}
+
+.instructions-dialog-retro {
+  background: #ece9d8;
+  border: 3px outset #ffffff;
+  border-radius: 4px;
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.retro-instructions-body {
+  padding: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  color: #1f1f1f;
+}
+.instructions-section h4 {
+  font-size: 13px;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.instructions-section ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.retro-dialog-footer {
+  padding: 12px 16px;
+  background: #d4d0c8;
+  border-top: 2px groove #ffffff;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .action-toast {
