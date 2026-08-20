@@ -1,6 +1,6 @@
 /**
  * TechMail // TechCore Cyber SOC & IT Analyst Simulator
- * Retro CRT & 2000s Desktop Engine Logic
+ * Retro CRT, CEO Rogério Dialogue & 2000s Desktop Engine Logic
  */
 
 // Native Web Audio Synthesizer with 8-bit Retro Flavors
@@ -42,6 +42,7 @@ class SoundEngine {
 
   menuHover() { this.playTone(440, 'triangle', 0.04, 0.04); }
   click() { this.playTone(880, 'square', 0.05, 0.06); }
+  speechAdvance() { this.playTone(660, 'square', 0.04, 0.05); }
   openMail() { this.playTone(587.33, 'triangle', 0.06, 0.05); }
   actionDone() {
     this.playTone(523.25, 'square', 0.06, 0.06);
@@ -56,6 +57,41 @@ class SoundEngine {
 }
 
 const audio = new SoundEngine();
+
+// CEO Rogério Dialogue Steps
+const CEO_DIALOGUES = [
+  {
+    step: 1,
+    text: `
+      <p>Olá, Analista! Seja bem-vindo à linha de frente de segurança da <strong>TechCore</strong>.</p>
+      <p>Hoje é um dia crítico na empresa: detectamos que grupos externos de cibercriminosos estão tentando invadir nossos sistemas através de <strong>engenharia social</strong>, links falsos e adulteração de código.</p>
+    `
+  },
+  {
+    step: 2,
+    text: `
+      <p>O seu papel na estação de trabalho é conduzir o expediente das <strong>09:00 às 18:00</strong>.</p>
+      <p>Você terá que monitorar a sua caixa de entrada no <strong>TechMail</strong>, auditar Pull Requests da nossa organização no <strong>GitHub</strong> e aprovar ou rejeitar concessões de acesso no <strong>IAM</strong>.</p>
+    `
+  },
+  {
+    step: 3,
+    text: `
+      <p>Preste muita atenção na nossa <strong>Guia de Segurança (Sua Cola de TI)</strong>:</p>
+      <p>• Nossos e-mails legítimos usam <code>@techcore.com</code> e <code>@techcore-hr.com</code> (RH Oficial). Desconfie de golpes com hífen como <code>@tech-core.com</code> ou <code>@techcore-beneficios.com</code>!</p>
+      <p>• No GitHub, só temos 3 repos oficiais: <code>core-api-v2</code>, <code>auth-service</code> e <code>deploy-pipeline</code>. Sempre inspecione os diffs de código!</p>
+      <p>• Novos colaboradores pedindo permissão de Admin em Produção sem chamado devem ser barrados na hora!</p>
+    `
+  },
+  {
+    step: 4,
+    text: `
+      <p><strong>Regra de Ouro:</strong> Durante o expediente, <em>não haverá avisos imediatos de vírus ou erros</em>. Você precisa confiar na sua análise técnica!</p>
+      <p>Às <strong>18:00</strong>, eu e o CISO vamos analisar todas as suas decisões no <strong>Relatório Final de Auditoria</strong>.</p>
+      <p>Conto com a sua competência para manter a TechCore segura. Boa sorte no seu turno!</p>
+    `
+  }
+];
 
 // 10 Curated Scenarios based on the Security Guide
 const SCENARIOS = [
@@ -619,6 +655,7 @@ const SCENARIOS = [
 class TechMailSimulator {
   constructor() {
     this.currentIndex = 0;
+    this.currentDialogIndex = 0;
     this.processedItems = [];
     this.decisionsHistory = [];
     this.currentCategoryFilter = 'all';
@@ -630,14 +667,20 @@ class TechMailSimulator {
   cacheDOMElements() {
     this.startScreen = document.getElementById('start-screen');
     this.exitScreen = document.getElementById('exit-screen');
-    this.instructionsModal = document.getElementById('instructions-modal');
+    this.ceoDialogModal = document.getElementById('ceo-dialog-modal');
     this.mainWorkspace = document.getElementById('main-workspace');
 
     this.btnStartShift = document.getElementById('btn-start-shift');
     this.btnExitSite = document.getElementById('btn-exit-site');
     this.btnReopenSite = document.getElementById('btn-reopen-site');
-    this.btnEnterWorkstation = document.getElementById('btn-enter-workstation');
-    this.btnCloseInstructions = document.getElementById('btn-close-instructions');
+
+    // Dialogue elements
+    this.ceoSpeechText = document.getElementById('ceo-speech-text');
+    this.dialogStepIndicator = document.getElementById('dialog-step-indicator');
+    this.btnDialogPrev = document.getElementById('btn-dialog-prev');
+    this.btnDialogNext = document.getElementById('btn-dialog-next');
+    this.btnStartWorkstationFromDialog = document.getElementById('btn-start-workstation-from-dialog');
+    this.btnSkipDialog = document.getElementById('btn-skip-dialog');
 
     this.shiftClock = document.getElementById('shift-clock');
     this.taskbarClock = document.getElementById('taskbar-clock');
@@ -707,10 +750,10 @@ class TechMailSimulator {
   }
 
   bindEvents() {
-    // 1. Click "Começar o seu turno" -> Open Instructions Modal
+    // 1. Click "Começar o seu turno" -> Open CEO Rogério Dialogue
     this.btnStartShift.addEventListener('click', () => {
       audio.click();
-      this.instructionsModal.style.display = 'flex';
+      this.openCeoDialogue();
     });
     this.btnStartShift.addEventListener('mouseenter', () => audio.menuHover());
 
@@ -737,15 +780,33 @@ class TechMailSimulator {
       this.startScreen.style.display = 'flex';
     });
 
-    // 4. Click "Entendido! Iniciar Expediente" in instructions modal
-    this.btnEnterWorkstation.addEventListener('click', () => {
+    // 4. CEO Dialogue Navigation
+    this.btnDialogNext.addEventListener('click', () => {
+      audio.speechAdvance();
+      if (this.currentDialogIndex < CEO_DIALOGUES.length - 1) {
+        this.currentDialogIndex++;
+        this.renderDialogueStep();
+      }
+    });
+
+    this.btnDialogPrev.addEventListener('click', () => {
+      audio.speechAdvance();
+      if (this.currentDialogIndex > 0) {
+        this.currentDialogIndex--;
+        this.renderDialogueStep();
+      }
+    });
+
+    this.btnStartWorkstationFromDialog.addEventListener('click', () => {
       audio.click();
-      this.instructionsModal.style.display = 'none';
+      this.ceoDialogModal.style.display = 'none';
       this.startShift();
     });
-    this.btnCloseInstructions.addEventListener('click', () => {
+
+    this.btnSkipDialog.addEventListener('click', () => {
       audio.click();
-      this.instructionsModal.style.display = 'none';
+      this.ceoDialogModal.style.display = 'none';
+      this.startShift();
     });
 
     // Sound toggle
@@ -834,6 +895,29 @@ class TechMailSimulator {
     });
   }
 
+  openCeoDialogue() {
+    this.currentDialogIndex = 0;
+    this.renderDialogueStep();
+    this.ceoDialogModal.style.display = 'flex';
+  }
+
+  renderDialogueStep() {
+    const dialog = CEO_DIALOGUES[this.currentDialogIndex];
+    this.ceoSpeechText.innerHTML = dialog.text;
+    this.dialogStepIndicator.textContent = `Mensagem ${dialog.step} de ${CEO_DIALOGUES.length}`;
+
+    // Manage Next/Prev/Start visibility
+    this.btnDialogPrev.style.display = this.currentDialogIndex > 0 ? 'inline-flex' : 'none';
+    
+    if (this.currentDialogIndex === CEO_DIALOGUES.length - 1) {
+      this.btnDialogNext.style.display = 'none';
+      this.btnStartWorkstationFromDialog.style.display = 'inline-flex';
+    } else {
+      this.btnDialogNext.style.display = 'inline-flex';
+      this.btnStartWorkstationFromDialog.style.display = 'none';
+    }
+  }
+
   setCategoryView(view) {
     this.currentCategoryFilter = view;
 
@@ -889,7 +973,6 @@ class TechMailSimulator {
     this.tabGithubTag.textContent = `${unreadGithub} novos`;
     this.tabIamTag.textContent = `${unreadIam} novos`;
     
-    // Update shift clock
     const activeItem = SCENARIOS[this.processedItems.length] || SCENARIOS[SCENARIOS.length - 1];
     const timeStr = this.processedItems.length >= SCENARIOS.length ? '18:00' : activeItem.time;
     this.shiftClock.textContent = timeStr;
@@ -902,7 +985,6 @@ class TechMailSimulator {
     SCENARIOS.forEach((item, index) => {
       const isProcessed = this.processedItems.includes(index);
 
-      // Filtering
       if (this.currentCategoryFilter === 'processed') {
         if (!isProcessed) return;
       } else if (this.currentCategoryFilter !== 'all' && item.channel !== this.currentCategoryFilter) {
@@ -1097,17 +1179,17 @@ class TechMailSimulator {
     if (incorrectCount === 0) {
       this.auditStamp.textContent = 'CISO APPROVED // PROMOÇÃO A SÊNIOR';
       this.auditTitle.textContent = '🏆 DEFESA CIBERNÉTICA IMPECÁVEL!';
-      this.auditVerdictTitle.textContent = 'Parecer do CISO: Aprovado com Louvor (Staff SecOps)';
+      this.auditVerdictTitle.textContent = 'Parecer do CISO & CEO Rogério: Aprovado com Louvor (Staff SecOps)';
       this.auditVerdictText.textContent = 'Parabéns! Você identificou 100% dos ataques de phishing, supply chain no CI/CD, malwares e backdoors, preservando a total integridade dos servidores e credenciais da TechCore.';
     } else if (incorrectCount <= 2 && health >= 50) {
       this.auditStamp.textContent = 'AUDITORIA FINALIZADA COM RESSALVAS';
       this.auditTitle.textContent = '⚠️ TURNO CONCLUÍDO COM INCIDENTES LEVES';
-      this.auditVerdictTitle.textContent = 'Parecer do CISO: Advertência Formal & Retreinamento';
+      this.auditVerdictTitle.textContent = 'Parecer do CISO & CEO Rogério: Advertência Formal & Retreinamento';
       this.auditVerdictText.textContent = 'A infraestrutura da empresa sobreviveu, mas alguns incidentes de segurança ocorreram. Revise a tabela pós-mortem abaixo para reforçar os pontos de atenção da Guia de Referência.';
     } else {
       this.auditStamp.textContent = 'DEMISSÃO POR JUSTA CAUSA // INCIDENTE CRÍTICO';
       this.auditTitle.textContent = '🚨 COMPROMETIMENTO GRAVE DA INFRAESTRUTURA';
-      this.auditVerdictTitle.textContent = 'Parecer do CISO: Demitido / Vazamento Massivo de Dados';
+      this.auditVerdictTitle.textContent = 'Parecer do CISO & CEO Rogério: Demitido / Vazamento Massivo de Dados';
       this.auditVerdictText.textContent = 'Credenciais corporativas foram vazadas e servidores de produção foram invadidos por backdoors/miners devido a decisões inadequadas durante o turno.';
     }
 

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-  <!-- ================= 1. TELA DE INÍCIO RETRÔ / CRT (INSPIRADA NO CHROMA SQUAD) ================= -->
+  <!-- ================= 1. TELA DE INÍCIO RETRÔ / CRT (CHROMA SQUAD STYLE) ================= -->
   <div id="start-screen" class="crt-screen-wrapper">
     <div class="crt-overlay"></div>
     <div class="crt-scanlines"></div>
@@ -39,7 +39,7 @@
         <span class="star s6">★</span>
       </div>
 
-      <!-- Center Big Title Logo (Chroma Squad Style) -->
+      <!-- Center Big Title Logo -->
       <div class="retro-title-box">
         <div class="retro-main-logo">
           <span class="logo-top">TECHCORE</span>
@@ -104,58 +104,66 @@
     </div>
   </div>
 
-  <!-- ================= 2. MODAL DE INSTRUÇÕES DE SEGURANÇA (APÓS CLICAR EM COMEÇAR) ================= -->
-  <div id="instructions-modal" class="modal-overlay" style="display: none;">
-    <div class="modal-card instructions-dialog-retro">
+  <!-- ================= 2. DIÁLOGO DO CEO ROGÉRIO COM O JOGADOR ================= -->
+  <div id="ceo-dialog-modal" class="modal-overlay" style="display: none;">
+    <div class="ceo-dialog-box-retro">
+      <!-- Titlebar of the dialogue box -->
       <div class="retro-window-titlebar">
         <div class="window-title-left">
-          <span>📋 INSTRUÇÕES_DE_SEGURANÇA.EXE</span>
+          <span>📞 COMUNICADOR_DIRETORIA_SECURE.EXE // ROGERIO_CEO</span>
         </div>
         <div class="window-controls">
-          <button class="win-btn win-close" id="btn-close-instructions">✕</button>
+          <button class="win-btn win-close" id="btn-skip-dialog" title="Pular Diálogo">✕</button>
         </div>
       </div>
 
-      <div class="retro-instructions-body">
-        <div class="instructions-banner">
-          <h3>🛡️ BRIEFING OPERACIONAL: COMO IDENTIFICAR E EVITAR E-MAILS FALSOS</h3>
-          <p>Leia atentamente as diretrizes da <strong>Guia de Referência Rápida</strong> antes de assumir a estação de trabalho:</p>
+      <!-- Main Dialogue Content -->
+      <div class="ceo-dialog-main">
+        <!-- CEO Avatar / Portrait Card -->
+        <div class="ceo-portrait-card">
+          <div class="ceo-avatar-frame">
+            <div class="ceo-pixel-avatar">
+              <div class="avatar-hair"></div>
+              <div class="avatar-face">
+                <div class="avatar-glasses"></div>
+                <div class="avatar-eyes"></div>
+                <div class="avatar-smile"></div>
+              </div>
+              <div class="avatar-suit">
+                <div class="avatar-tie"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ceo-name-badge">
+            <strong>Rogério</strong>
+            <span>CEO TechCore</span>
+          </div>
         </div>
 
-        <div class="instructions-section">
-          <h4>📨 1. Domínios de E-mail Corporativos</h4>
-          <ul>
-            <li><strong>Colaboradores & TI:</strong> Somente <code>@techcore.com</code> é válido.</li>
-            <li><strong>Recursos Humanos:</strong> Somente <code>@techcore-hr.com</code> é válido para comunicados oficiais do RH.</li>
-            <li><strong class="text-danger">⚠️ Golpes e Typosquatting Comuns:</strong> Atenção a variações como <code>@tech-core.com</code> (com hífen), <code>@techcore-beneficios.com</code> ou <code>@techcore-suporte.com</code>.</li>
-          </ul>
-        </div>
+        <!-- Speech Balloon & Message -->
+        <div class="ceo-speech-container">
+          <div class="speaker-tag">Rogério (CEO) diz ao Analista:</div>
+          
+          <div class="ceo-speech-text" id="ceo-speech-text">
+            <!-- Injected dynamically by JS -->
+          </div>
 
-        <div class="instructions-section">
-          <h4>🐙 2. Repositórios Oficiais no GitHub (@TechCore-Official)</h4>
-          <ul>
-            <li>Somente <code>core-api-v2</code>, <code>auth-service</code> e <code>deploy-pipeline</code> são legítimos.</li>
-            <li>Inspecione sempre o <strong>Diff de Código</strong>! Verifique mineradores de cripto (ex: <code>xmrig</code>), scripts maliciosos de CI/CD e backdoors de bypass de autenticação.</li>
-          </ul>
-        </div>
-
-        <div class="instructions-section">
-          <h4>🔐 3. Controle de Acessos IAM & Usuários Autorizados</h4>
-          <ul>
-            <li>Usuários oficiais: <code>carlos.dev</code> (Sênior), <code>beatriz.sec</code> (SecOps), <code>marcos.rh</code> (RH).</li>
-            <li>Rejeite solicitações de acesso de administrador em produção vindas de novos colaboradores sem chamado prévio de SecOps.</li>
-          </ul>
-        </div>
-
-        <div class="instructions-section callout-section">
-          <h4>🤫 4. Regra do Expediente (09:00 às 18:00)</h4>
-          <p>Durante o turno de trabalho <strong>não haverá alertas ou contadores imediatos de vírus</strong>. Seja criterioso em cada decisão! Ao final do expediente às 18:00, o CISO gerará o seu <strong>Relatório de Auditoria Forense</strong> completo.</p>
+          <div class="dialog-pagination" id="dialog-step-indicator">
+            Passo 1 de 4
+          </div>
         </div>
       </div>
 
-      <div class="retro-dialog-footer">
-        <button id="btn-enter-workstation" class="btn-win-primary">
-          <span>🚀</span> Entendido! Iniciar Expediente de TI (09:00)
+      <!-- Dialogue Action Buttons Footer -->
+      <div class="ceo-dialog-footer">
+        <button id="btn-dialog-prev" class="btn-win-secondary" style="display: none;">
+          🡰 Anterior
+        </button>
+        <button id="btn-dialog-next" class="btn-win-primary">
+          Avançar ➔
+        </button>
+        <button id="btn-start-workstation-from-dialog" class="btn-win-primary btn-win-glow" style="display: none;">
+          🚀 Entendido, Rogério! Iniciar Turno (09:00)
         </button>
       </div>
     </div>
@@ -164,7 +172,7 @@
   <!-- ================= 3. AMBIENTE DE TRABALHO (DESKTOP ANOS 2000 + GMAIL/TECHMAIL) ================= -->
   <div id="main-workspace" class="desktop-env" style="display: none;">
     
-    <!-- Desktop Icons (Windows 2000 / XP Style) -->
+    <!-- Desktop Icons (Windows 2000 Style) -->
     <div class="desktop-icons-area">
       <div class="desktop-icon-item" title="Lixeira do Sistema">
         <div class="icon-img icon-trash">🗑️</div>
@@ -188,9 +196,9 @@
       </div>
     </div>
 
-    <!-- The Floating Webmail Window (Inspired by Image 2 - Gmail & 2000s Browser) -->
+    <!-- The Floating Webmail Window -->
     <div class="browser-window" id="mail-browser-window">
-      <!-- Browser Top Titlebar (Windows Chrome / 2000s Frame) -->
+      <!-- Browser Top Titlebar -->
       <div class="browser-titlebar">
         <div class="tab-strip">
           <div class="browser-tab active-tab">
@@ -207,7 +215,7 @@
         </div>
       </div>
 
-      <!-- Browser Navigation & URL Bar (Y2K / Chrome Style) -->
+      <!-- Browser Navigation & URL Bar -->
       <div class="browser-nav-bar">
         <div class="nav-arrows">
           <button class="btn-nav-arrow" id="browser-back-btn" title="Voltar">🡰</button>
@@ -229,7 +237,7 @@
       <!-- Inside Browser: TechMail / Gmail Application -->
       <div class="webmail-app-body">
         
-        <!-- Webmail Header Search (Gmail Search Bar) -->
+        <!-- Webmail Header Search -->
         <div class="webmail-top-header">
           <div class="mail-brand-logo">
             <svg viewBox="0 0 24 24" width="24" height="24"><path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
@@ -251,7 +259,7 @@
         <!-- Webmail Layout: Sidebar + Inbox -->
         <div class="webmail-workspace-inner">
           
-          <!-- Left Gmail-Style Sidebar -->
+          <!-- Left Sidebar -->
           <aside class="webmail-sidebar">
             <button class="compose-pill-btn">
               <span>✏️</span>
@@ -293,7 +301,7 @@
           <!-- Main Center Panel: Inbox List -->
           <main class="inbox-main-table" id="inbox-list-view">
             
-            <!-- Category Tabs (Primary, TechMail, GitHub, IAM) -->
+            <!-- Category Tabs -->
             <div class="gmail-tabs-header">
               <button class="cat-tab-btn active" data-cat="all">
                 <span class="tab-ic">📥</span> Principal
@@ -318,7 +326,7 @@
             </div>
           </main>
 
-          <!-- Message Thread Reader View (When clicking an email) -->
+          <!-- Message Thread Reader View -->
           <main class="reader-main-view" id="email-reader-view" style="display: none;">
             <div class="reader-toolbar-top">
               <button class="btn-back-inbox" id="btn-back-to-inbox">
@@ -361,7 +369,7 @@
                 <!-- Injected by JS -->
               </div>
 
-              <!-- Technical Inspector (Git Diff / URL preview) -->
+              <!-- Technical Inspector -->
               <div class="reader-inspector-card" id="reader-inspector-section">
                 <!-- Injected by JS -->
               </div>
@@ -418,7 +426,7 @@
             </div>
 
             <div class="audit-verdict-box" id="audit-verdict-banner">
-              <h3 id="audit-verdict-title">Avaliação do CISO</h3>
+              <h3 id="audit-verdict-title">Avaliação do CISO & CEO Rogério</h3>
               <p id="audit-verdict-text">Resultado da sua atuação durante o turno.</p>
             </div>
 
@@ -453,7 +461,7 @@
       </div>
     </div>
 
-    <!-- Windows Taskbar at the bottom (Windows 2000 / XP Style) -->
+    <!-- Windows Taskbar at the bottom -->
     <footer class="windows-taskbar">
       <button class="taskbar-start-btn" id="btn-taskbar-start">
         <span class="start-logo">🪟</span>
@@ -474,7 +482,7 @@
     </footer>
   </div>
 
-  <!-- Quick Reference Guide Modal (Triggered via Topbar or Desktop Icon) -->
+  <!-- Quick Reference Guide Modal -->
   <div id="guide-modal" class="modal-overlay" style="display: none;">
     <div class="modal-card instructions-dialog-retro" style="max-width: 580px;">
       <div class="retro-window-titlebar">
@@ -515,7 +523,7 @@
     </div>
   </div>
 
-  <!-- Feedback Toast for Action Confirmation -->
+  <!-- Feedback Toast -->
   <div id="action-toast" class="action-toast" style="display: none;">
     <span id="toast-icon">✓</span>
     <span id="toast-msg">Ação registrada com sucesso no sistema.</span>
