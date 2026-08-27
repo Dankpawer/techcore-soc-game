@@ -1024,6 +1024,10 @@ class TechMailSimulator {
     // Cheat Code Elements
     this.cheatCodeInput = document.getElementById('cheat-code-input');
     this.cheatCodeHint = document.getElementById('cheat-code-hint');
+    this.cheatCodeArea = document.getElementById('cheat-code-area');
+    this.mainMenuContainer = document.getElementById('main-menu-container');
+    this.secretLogoStar = document.getElementById('secret-logo-star');
+    this.btnCancelCheat = document.getElementById('btn-cancel-cheat');
   }
 
   getCurrentShift() {
@@ -1031,6 +1035,30 @@ class TechMailSimulator {
   }
 
   bindEvents() {
+    // Cheat Code Toggle Logic
+    if (this.secretLogoStar) {
+      this.secretLogoStar.addEventListener('click', () => {
+        if (this.mainMenuContainer && this.cheatCodeArea) {
+          audio.click();
+          this.mainMenuContainer.style.display = 'none';
+          this.cheatCodeArea.style.display = 'flex';
+          this.cheatCodeInput.focus();
+        }
+      });
+    }
+
+    if (this.btnCancelCheat) {
+      this.btnCancelCheat.addEventListener('click', () => {
+        if (this.mainMenuContainer && this.cheatCodeArea) {
+          audio.click();
+          this.cheatCodeArea.style.display = 'none';
+          this.mainMenuContainer.style.display = 'flex';
+          this.cheatCodeInput.value = '';
+          this.cheatCodeHint.textContent = 'Digite o código e pressione ENTER';
+        }
+      });
+    }
+
     // Cheat Code Logic
     if (this.cheatCodeInput) {
       this.cheatCodeInput.addEventListener('keydown', (e) => {
@@ -1055,6 +1083,10 @@ class TechMailSimulator {
               this.cheatCodeInput.value = '';
               this.cheatCodeHint.textContent = 'Digite o código e pressione ENTER';
               this.cheatCodeHint.style.color = '';
+              if (this.mainMenuContainer && this.cheatCodeArea) {
+                this.cheatCodeArea.style.display = 'none';
+                this.mainMenuContainer.style.display = 'flex';
+              }
               this.openCeoDialogueForShift(targetShift);
             }, 1000);
           } else if (code !== '') {

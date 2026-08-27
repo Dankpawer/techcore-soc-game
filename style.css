@@ -1373,6 +1373,7 @@ body {
   padding: 20px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   background: #808080;
 }
 
@@ -1589,9 +1590,6 @@ body {
 
 /* Cheat Code Access Area */
 .cheat-code-area {
-  position: absolute;
-  top: 40px;
-  right: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1601,6 +1599,8 @@ body {
   border: 3px solid #38bdf8;
   box-shadow: 4px 4px 0 #000000, 0 0 10px rgba(56, 189, 248, 0.4);
   z-index: 100;
+  width: 100%;
+  max-width: 380px;
 }
 .cheat-code-label {
   color: #38bdf8;

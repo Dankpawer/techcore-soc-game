@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TECHCORE // Cyber SOC & IT Analyst Simulator - 4 Turnos</title>
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=9">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
       <div class="retro-title-box">
         <div class="retro-main-logo">
           <span class="logo-top">TECHCORE</span>
-          <span class="logo-star">★</span>
+          <span class="logo-star" id="secret-logo-star" style="cursor:pointer;" title="Acesso Restrito">★</span>
           <span class="logo-bot">CYBER SOC</span>
         </div>
         <div class="retro-sub-logo">TACTICAL IT DEFENDER // 4 SHIFTS EDITION</div>
@@ -65,7 +65,7 @@
         <div class="sat-solar"></div>
       </div>
 
-      <div class="retro-menu-container">
+      <div class="retro-menu-container" id="main-menu-container">
         <button id="btn-start-shift" class="retro-menu-item active-menu">
           <span class="menu-pointer">▶</span> Começar o seu turno
         </button>
@@ -75,10 +75,11 @@
       </div>
 
       <!-- Cheat Code Access -->
-      <div class="cheat-code-area">
+      <div class="cheat-code-area" id="cheat-code-area" style="display: none;">
         <div class="cheat-code-label">🔑 CÓDIGO DE ACESSO:</div>
         <input type="text" id="cheat-code-input" class="cheat-code-input" placeholder="_ _ _ _ _ _" maxlength="20" autocomplete="off" spellcheck="false">
         <div class="cheat-code-hint" id="cheat-code-hint">Digite o código e pressione ENTER</div>
+        <button id="btn-cancel-cheat" class="retro-menu-item" style="margin-top: 10px; font-size: 10px; padding: 6px 16px; min-height: unset; height: auto;">VOLTAR</button>
       </div>
 
       <footer class="retro-footer">
@@ -558,6 +559,6 @@
     <span id="toast-msg">Ação registrada com sucesso no sistema.</span>
   </div>
 
-  <script src="game.js?v=8"></script>
+  <script src="game.js?v=9"></script>
 </body>
 </html>
