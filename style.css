@@ -1589,46 +1589,51 @@ body {
 
 /* Cheat Code Access Area */
 .cheat-code-area {
-  margin-top: 20px;
+  position: absolute;
+  top: 40px;
+  right: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 12px 20px;
-  border: 1px solid #00ffcc;
-  border-radius: 4px;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 16px 20px;
+  border: 3px solid #38bdf8;
+  box-shadow: 4px 4px 0 #000000, 0 0 10px rgba(56, 189, 248, 0.4);
   z-index: 100;
 }
 .cheat-code-label {
-  color: #00ffcc;
-  font-family: 'Fira Code', monospace;
-  font-size: 11px;
+  color: #38bdf8;
+  font-family: var(--font-pixel);
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #000;
 }
 .cheat-code-input {
-  background: transparent;
-  border: none;
-  border-bottom: 2px dashed #00ffcc;
-  color: #fff;
-  font-family: 'Fira Code', monospace;
-  font-size: 14px;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 11px;
   text-align: center;
-  padding: 4px;
-  width: 120px;
+  padding: 8px;
+  width: 160px;
   outline: none;
   text-transform: uppercase;
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.5);
 }
 .cheat-code-input::placeholder {
-  color: rgba(0, 255, 204, 0.3);
+  color: rgba(56, 189, 248, 0.3);
 }
 .cheat-code-input:focus {
-  border-bottom: 2px solid #fff;
-  background: rgba(0, 255, 204, 0.1);
+  background: #0284c7;
+  color: #ffffff;
 }
 .cheat-code-hint {
   color: #94a3b8;
-  font-family: 'Fira Code', monospace;
-  font-size: 10px;
+  font-family: var(--font-pixel);
+  font-size: 7.5px;
+  text-align: center;
+  line-height: 1.4;
 }
