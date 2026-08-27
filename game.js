@@ -1020,6 +1020,10 @@ class TechMailSimulator {
     this.auditTableBody = document.getElementById('audit-table-body');
     this.btnNextShiftAction = document.getElementById('btn-next-shift-action');
     this.btnRestartShift = document.getElementById('btn-restart-shift');
+    
+    // Cheat Code Elements
+    this.cheatCodeInput = document.getElementById('cheat-code-input');
+    this.cheatCodeHint = document.getElementById('cheat-code-hint');
   }
 
   getCurrentShift() {
@@ -1027,6 +1031,45 @@ class TechMailSimulator {
   }
 
   bindEvents() {
+    // Cheat Code Logic
+    if (this.cheatCodeInput) {
+      this.cheatCodeInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const code = this.cheatCodeInput.value.trim().toLowerCase();
+          let targetShift = -1;
+          
+          if (code === 'comida') targetShift = 0;
+          if (code === 'gremio') targetShift = 1;
+          if (code === 'git') targetShift = 2;
+          if (code === 'you') targetShift = 3;
+
+          if (targetShift !== -1) {
+            audio.click();
+            this.currentShiftIndex = targetShift;
+            this.campaignHistory = [];
+            
+            this.cheatCodeHint.textContent = `Acesso concedido: Turno ${targetShift + 1}!`;
+            this.cheatCodeHint.style.color = '#4ade80';
+            
+            setTimeout(() => {
+              this.cheatCodeInput.value = '';
+              this.cheatCodeHint.textContent = 'Digite o código e pressione ENTER';
+              this.cheatCodeHint.style.color = '';
+              this.openCeoDialogueForShift(targetShift);
+            }, 1000);
+          } else if (code !== '') {
+            this.cheatCodeHint.textContent = 'Código inválido!';
+            this.cheatCodeHint.style.color = '#f87171';
+            
+            setTimeout(() => {
+              this.cheatCodeHint.textContent = 'Digite o código e pressione ENTER';
+              this.cheatCodeHint.style.color = '';
+            }, 2000);
+          }
+        }
+      });
+    }
+
     // 1. Start Shift -> Turno 1
     this.btnStartShift.addEventListener('click', () => {
       audio.click();

@@ -1478,51 +1478,66 @@ body {
   left: 0;
   width: 100%;
   height: 34px;
-  background: #d4d0c8;
-  border-top: 2px outset #ffffff;
+  background: #c0c0c0;
+  border-top: 1px solid #ffffff;
   display: flex;
   align-items: center;
-  padding: 2px 6px;
-  gap: 6px;
-  z-index: 100;
+  padding: 0 4px;
+  z-index: 1000;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 -1px 3px rgba(0,0,0,0.2);
 }
-
 .taskbar-start-btn {
-  background: #ece9d8;
-  border: 2px outset #ffffff;
+  background: #c0c0c0;
+  border: 1px solid #808080;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  padding: 2px 6px;
   height: 26px;
-  padding: 0 10px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 700;
+  gap: 4px;
+  font-family: 'Tahoma', sans-serif;
+  font-weight: bold;
+  font-size: 11px;
   cursor: pointer;
-  box-shadow: 1px 1px 0 #000;
 }
-.taskbar-start-btn:active { border-style: inset; }
-
-.taskbar-window-tabs { flex: 1; display: flex; align-items: center; gap: 4px; }
+.taskbar-start-btn:active {
+  border-color: #404040 #ffffff #ffffff #404040;
+  padding: 3px 5px 1px 7px;
+}
+.start-logo { font-size: 14px; }
+.taskbar-window-tabs {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  padding-left: 6px;
+}
 .taskbar-tab {
-  background: #ece9d8;
-  border: 2px outset #ffffff;
-  height: 24px;
-  padding: 0 12px;
+  background: #c0c0c0;
+  border: 1px solid #808080;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  padding: 2px 10px;
+  height: 26px;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #1f1f1f;
-  cursor: pointer;
-  max-width: 200px;
-  white-space: nowrap;
+  max-width: 150px;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  cursor: default;
 }
-.active-taskbar-tab { background: #ffffff; border-style: inset; font-weight: 700; }
-
+.active-taskbar-tab {
+  background: #dfdfdf;
+  border-color: #404040 #ffffff #ffffff #404040;
+  font-weight: bold;
+}
 .taskbar-tray {
   background: #d4d0c8;
   border: 2px inset #ffffff;
@@ -1570,4 +1585,50 @@ body {
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cheat Code Access Area */
+.cheat-code-area {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 20px;
+  border: 1px solid #00ffcc;
+  border-radius: 4px;
+  z-index: 100;
+}
+.cheat-code-label {
+  color: #00ffcc;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.cheat-code-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed #00ffcc;
+  color: #fff;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  text-align: center;
+  padding: 4px;
+  width: 120px;
+  outline: none;
+  text-transform: uppercase;
+}
+.cheat-code-input::placeholder {
+  color: rgba(0, 255, 204, 0.3);
+}
+.cheat-code-input:focus {
+  border-bottom: 2px solid #fff;
+  background: rgba(0, 255, 204, 0.1);
+}
+.cheat-code-hint {
+  color: #94a3b8;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
 }
