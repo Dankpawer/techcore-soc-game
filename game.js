@@ -441,7 +441,7 @@ const CAMPAIGN_SHIFTS = [
     shiftNumber: 3,
     title: 'Turno 3: Contas Comprometidas & TechZap Chat',
     brandName: 'TechZap & TechMail',
-    brandIcon: '💬',
+    brandIcon: '<img src="techzap_logo.png" class="brand-img-ic" alt="TechZap">',
     url: 'https://techzap.techcore.internal/chat/#direct-messages',
     wordContent: `
       <h2>1. DIRETRIZES DO TECHZAP (WHATSAPP CORPORATIVO)</h2>
@@ -1377,12 +1377,12 @@ class TechMailSimulator {
 
     // Update Header
     this.shiftPillBadge.textContent = `TURNO ${shift.shiftNumber}/4`;
-    this.browserTabIcon.textContent = shift.brandIcon;
+    this.browserTabIcon.innerHTML = shift.brandIcon;
     this.browserTabTitle.textContent = `${shift.brandName} - Turno ${shift.shiftNumber} (${shift.scenarios.length} itens)`;
     this.browserUrlBar.value = shift.url;
-    this.appBrandIcon.textContent = shift.brandIcon;
+    this.appBrandIcon.innerHTML = shift.brandIcon;
     this.appBrandName.textContent = shift.brandName;
-    this.taskbarActiveTitle.textContent = `${shift.brandIcon} ${shift.brandName} - Turno ${shift.shiftNumber}`;
+    this.taskbarActiveTitle.innerHTML = `${shift.brandIcon} ${shift.brandName} - Turno ${shift.shiftNumber}`;
 
     // Show/hide apps in sidebar & tabs based on shift
     this.folderDbRow.style.display = shift.shiftNumber >= 2 ? 'flex' : 'none';
@@ -1542,7 +1542,82 @@ class TechMailSimulator {
     this.headerData.textContent = item.meta['Data'] || '-';
     this.headerAuth.textContent = item.meta['Segurança'] || item.meta['Status'] || item.meta['Prioridade'] || '-';
 
-    this.readerBodyMessage.innerHTML = item.body;
+    // Determine if item should show Gmail Attachment Card (GitHub PRs, SQL/DB queries)
+    const isGithubOrDb = item.channel === 'github' || item.channel === 'db' || 
+      (item.inspector && (item.inspector.type === 'diff' || (item.inspector.dest && (item.inspector.dest.includes('SELECT') || item.inspector.dest.includes('DATABASE') || item.inspector.dest.includes('REINDEX') || item.inspector.dest.includes('ANALYZE') || item.inspector.dest.includes('DROP')))));
+
+    if (isGithubOrDb) {
+      let fileName = 'codigo_anexo.txt';
+      let badgeClass = 'badge-diff';
+
+      if (item.channel === 'github') {
+        badgeClass = 'badge-diff';
+        if (item.id === 's1-2') fileName = 'pix_optimization.diff';
+        else if (item.id === 's1-5') fileName = 'dockerfile_patch.diff';
+        else if (item.id === 's2-4') fileName = 'deploy_workflow.patch';
+        else fileName = 'pull_request_patch.diff';
+      } else {
+        badgeClass = 'badge-sql';
+        if (item.id === 's2-1') fileName = 'auth_sqli_payload.sql';
+        else if (item.id === 's2-3') fileName = 'pix_transactions_summary.sql';
+        else if (item.id === 's2-7') fileName = 'db_reindex_maintenance.sql';
+        else if (item.id === 's2-9') fileName = 'staging_analyze.sql';
+        else if (item.id === 's2-10') fileName = 'drop_table_logs.sql';
+        else fileName = 'database_query_audit.sql';
+      }
+
+      const attachmentHtml = `
+        <div class="gmail-attachment-container">
+          <div class="gmail-attachment-header">
+            <span class="att-count-text">One attachment</span>
+            <span class="att-bullet">•</span>
+            <span class="att-scanned-text">Scanned by Gmail</span>
+            <span class="att-info-icon" title="Scanned by Gmail">ⓘ</span>
+            <button class="att-drive-btn" type="button" onclick="event.stopPropagation()">
+              <svg viewBox="0 0 24 24" width="14" height="14" style="vertical-align:middle;margin-right:2px;"><path fill="#4285f4" d="M12 2L4.5 15h15z"/><path fill="#34a853" d="M12 2l7.5 13H4.5z"/><path fill="#fbc02d" d="M4.5 15l3.75 6.5h15.5L19.5 15z"/></svg>
+              Add to Drive
+            </button>
+          </div>
+
+          <div class="gmail-attachment-card" id="gmail-attachment-card" title="Clique para abrir e visualizar o código completo">
+            <div class="att-thumbnail-box">
+              <div class="att-doc-icon-preview">
+                <div class="att-doc-line"></div>
+                <div class="att-doc-line"></div>
+                <div class="att-doc-line short"></div>
+              </div>
+              <div class="att-click-hint">🔍 Clique para abrir o código</div>
+            </div>
+            <div class="att-footer-bar">
+              <div class="att-file-badge ${badgeClass}">&lt;/&gt;</div>
+              <span class="att-file-name" title="${fileName}">${fileName}</span>
+              <div class="att-dog-ear"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      this.readerBodyMessage.innerHTML = item.body + attachmentHtml;
+      this.readerInspectorSection.style.display = 'none'; // Hidden until attachment card is clicked
+
+      setTimeout(() => {
+        const attCard = document.getElementById('gmail-attachment-card');
+        if (attCard) {
+          attCard.addEventListener('click', () => {
+            audio.click();
+            const isHidden = this.readerInspectorSection.style.display === 'none';
+            this.readerInspectorSection.style.display = isHidden ? 'block' : 'none';
+            attCard.classList.toggle('active-open', isHidden);
+            if (isHidden) {
+              this.readerInspectorSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        }
+      }, 50);
+    } else {
+      this.readerBodyMessage.innerHTML = item.body;
+      this.readerInspectorSection.style.display = 'block';
+    }
 
     // Render Inspector (PURE RAW FACTS - NO SPOILER HINTS)
     if (item.inspector.type === 'diff') {
