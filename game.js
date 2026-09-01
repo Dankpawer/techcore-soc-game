@@ -276,23 +276,50 @@ const CAMPAIGN_SHIFTS = [
     ceoDialogues: [
       {
         step: 1,
+        speaker: 'Rogério Silva',
+        role: 'CEO TechCore',
+        avatar: 'ceo_rogerio.jpg',
         text: `
-          <p>Excelente trabalho no Turno 1! O CISO e eu estamos muito satisfeitos com o seu progresso.</p>
-          <p>No entanto, a equipe de inteligência detectou uma nova onda de ataques: os criminosos estão tentando atingir diretamente o nosso <strong>Banco de Dados de Produção (TechDB)</strong> enquanto continuam enviando e-mails maliciosos!</p>
+          <p><strong>Rogério Silva (CEO):</strong> "Rodrigo, a situação esquentou! O Analista conteve a primeira onda no Turno 1, mas relatórios mostram que os criminosos agora estão tentando invadir diretamente o nosso <strong>Banco de Dados de Produção (TechDB)</strong>!"</p>
+          <p><strong>Rogério Silva (CEO):</strong> "Preciso que você me explique e oriente o Analista sobre a anatomia desses ataques e <strong>como evitar erros</strong> na análise da fila mista."</p>
         `
       },
       {
         step: 2,
+        speaker: 'Rodrigo Rosa',
+        role: 'CISO TechCore',
+        avatar: 'rodrigo_rosa.jpg',
         text: `
-          <p>Neste <strong>Turno 2</strong>, você gerenciará uma <strong>fila integrada</strong>: além de e-mails e PRs, você agora auditará consultas SQL no módulo <strong>TechDB</strong>.</p>
-          <p>Clique na nova guia do <strong>Word (Procedimentos_TI.doc)</strong> sempre que precisar consultar as regras de banco.</p>
+          <p><strong>Rodrigo Rosa (CISO):</strong> "Com certeza, Rogério! Para defender a infraestrutura e evitar falhas neste <strong>Turno 2</strong>, o Analista precisa ficar atento às 3 ameaças principais:"</p>
+          <ul style="margin-top:6px; margin-left: 16px; line-height: 1.45;">
+            <li><strong>1. Injeções de Banco (TechDB):</strong> O ataque clássico é <code>SQL Injection</code> (ex: <code>UNION SELECT</code> no login). Usuários autorizados são apenas <code>dba_ops_techcore</code>, <code>svc_payment_api</code> e <code>reporting_reader</code>. Se vir <code>DROP TABLE</code> sem ticket aprovado, BLOQUEIE!</li>
+            <li><strong>2. Phishing de E-mail com Hífen:</strong> Atacantes usam domínios falsos sutis (ex: <code>@tech-core.com</code> com hífen ou <code>@techcore-beneficios.com</code>). O canal oficial de RH é estritamente <code>@techcore-hr.com</code>.</li>
+            <li><strong>3. Injeção de Scripts no CI/CD:</strong> No GitHub, analise PRs de forks externos que tentam rodar <code>curl</code> ou <code>wget</code> para exfiltrar a chave <code>AWS_SECRET_ACCESS_KEY</code>.</li>
+          </ul>
         `
       },
       {
         step: 3,
+        speaker: 'Rodrigo Rosa',
+        role: 'CISO TechCore',
+        avatar: 'rodrigo_rosa.jpg',
         text: `
-          <p>Lembre-se: usuários autorizados no banco são <code>dba_ops_techcore</code>, <code>svc_payment_api</code> e <code>reporting_reader</code>.</p>
-          <p>Solicitações de DBA por e-mail só são válidas vindas de <code>@techcore.com</code>. Fique de olho nos domínios! Você pode errar <strong>no máximo 2 itens</strong> para ser promovido.</p>
+          <p><strong>Rodrigo Rosa (CISO):</strong> "Como evitar erros de análise na prática:"</p>
+          <ol style="margin-top:6px; margin-left: 16px; line-height: 1.45;">
+            <li><strong>Abra a guia do Word (Procedimentos_TI.doc):</strong> Ela contém a lista completa de usuários autorizados e domínios legítimos.</li>
+            <li><strong>Clique no Card de Anexo:</strong> Sempre abra o código do anexo para inspecionar os comandos SQL reais antes de decidir.</li>
+            <li><strong>Valide o remetente original:</strong> DBA enviando e-mail de <code>@techcore-ops.net</code> ou <code>@gmail.com</code> é golpe. Solicitações de DBA só valem se vierem de <code>@techcore.com</code>.</li>
+          </ol>
+        `
+      },
+      {
+        step: 4,
+        speaker: 'Rogério Silva',
+        role: 'CEO TechCore',
+        avatar: 'ceo_rogerio.jpg',
+        text: `
+          <p><strong>Rogério Silva (CEO):</strong> "Excelente aula de segurança, Rodrigo! As instruções ficaram cristalinas."</p>
+          <p><strong>Rogério Silva (CEO):</strong> "Analista SOC, você ouviu o CISO Rodrigo Rosa! A sua meta no Turno 2 é auditar toda a fila com atenção máxima. A margem de tolerância é de <strong>no máximo 2 erros</strong>. Boa operação!"</p>
         `
       }
     ],
@@ -1449,6 +1476,22 @@ class TechMailSimulator {
     const dialog = shift.ceoDialogues[this.currentDialogIndex];
     this.ceoSpeechText.innerHTML = dialog.text;
     this.dialogStepIndicator.textContent = `Mensagem ${dialog.step} de ${shift.ceoDialogues.length}`;
+
+    const imgEl = document.getElementById('ceo-pixel-img');
+    const nameEl = document.getElementById('ceo-speaker-name');
+    const roleEl = document.getElementById('ceo-speaker-role');
+
+    if (dialog.speaker) {
+      if (nameEl) nameEl.textContent = dialog.speaker;
+      if (roleEl) roleEl.textContent = dialog.role || 'TechCore Executivo';
+      if (imgEl && dialog.avatar) imgEl.src = dialog.avatar;
+      this.ceoDialogSpeakerTag.textContent = `📟 BRIEFING // ${dialog.speaker.toUpperCase()} (${shift.title}):`;
+    } else {
+      if (nameEl) nameEl.textContent = 'Rogério Silva';
+      if (roleEl) roleEl.textContent = 'CEO TechCore';
+      if (imgEl) imgEl.src = 'ceo_rogerio.jpg?v=5';
+      this.ceoDialogSpeakerTag.textContent = `📟 COMUNICADO DO CEO ROGÉRIO (TURNO ${shift.shiftNumber}/${CAMPAIGN_SHIFTS.length}):`;
+    }
 
     this.btnDialogPrev.style.display = this.currentDialogIndex > 0 ? 'inline-flex' : 'none';
     
