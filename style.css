@@ -525,12 +525,63 @@ body {
 }
 
 .speaker-tag {
-  font-family: var(--font-pixel);
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
   color: #38bdf8;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
   text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+/* Turn 2 Emerald Green Theme */
+.ceo-dialog-box-retro.shift-2-dialog-theme {
+  background: #022c22 !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.4), 0 25px 50px rgba(0, 0, 0, 0.9) !important;
+}
+.shift-2-dialog-theme .retro-window-titlebar {
+  background: linear-gradient(90deg, #064e3b 0%, #047857 50%, #064e3b 100%) !important;
+  border-bottom-color: #34d399 !important;
+  color: #6ee7b7 !important;
+}
+.shift-2-dialog-theme .win-btn {
+  border-color: #34d399 !important;
+  color: #34d399 !important;
+}
+.shift-2-dialog-theme .ceo-dialog-main {
+  background: radial-gradient(circle at 20% 20%, #064e3b 0%, #022c22 100%) !important;
+}
+.shift-2-dialog-theme .ceo-avatar-frame {
+  border-color: #34d399 !important;
+}
+.shift-2-dialog-theme .ceo-name-badge {
+  border-color: #34d399 !important;
+  background: linear-gradient(180deg, #064e3b 0%, #022c22 100%) !important;
+}
+.shift-2-dialog-theme .ceo-name-badge span {
+  color: #6ee7b7 !important;
+}
+.shift-2-dialog-theme .ceo-speech-container {
+  background: rgba(2, 44, 34, 0.95) !important;
+  border-color: rgba(52, 211, 153, 0.4) !important;
+}
+.shift-2-dialog-theme .ceo-speech-container::before {
+  border-color: transparent #34d399 transparent transparent !important;
+}
+.shift-2-dialog-theme .ceo-speech-container::after {
+  border-color: transparent rgba(2, 44, 34, 0.95) transparent transparent !important;
+}
+.shift-2-dialog-theme .speaker-tag {
+  color: #6ee7b7 !important;
+  text-shadow: 0 0 8px rgba(110, 231, 183, 0.4) !important;
+}
+.shift-2-dialog-theme .ceo-speech-text strong {
+  color: #6ee7b7 !important;
+}
+.shift-2-dialog-theme .ceo-dialog-footer {
+  background: #022c22 !important;
+  border-top-color: rgba(52, 211, 153, 0.3) !important;
 }
 
 .ceo-speech-text {
