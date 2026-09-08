@@ -1464,11 +1464,13 @@ class TechMailSimulator {
     this.currentDialogIndex = 0;
     const shift = this.getCurrentShift();
 
-    // Tema dinamico por turno (Turno 2 Verde Esmeralda)
+    // Temas dinamicos por turno (Turno 2: Amarelo, Turno 3: Verde, Turno 4: Vermelho)
     const dialogBox = this.ceoDialogModal ? this.ceoDialogModal.querySelector('.ceo-dialog-box-retro') : null;
     if (dialogBox) {
       dialogBox.className = 'ceo-dialog-box-retro';
       if (shift.shiftNumber === 2) dialogBox.classList.add('shift-2-dialog-theme');
+      if (shift.shiftNumber === 3) dialogBox.classList.add('shift-3-dialog-theme');
+      if (shift.shiftNumber === 4) dialogBox.classList.add('shift-4-dialog-theme');
     }
 
     this.ceoDialogTitlebar.textContent = `📡 CANAL_DIRETORIA // BRIEFING_TURNO_${shift.shiftNumber}_ROGERIO_CEO`;

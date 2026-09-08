@@ -534,54 +534,206 @@ body {
   text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
 }
 
-/* Turn 2 Emerald Green Theme */
+/* ==========================================================================
+   THEMES DINÂMICOS POR TURNO (Turno 2: Amarelo, Turno 3: Verde, Turno 4: Vermelho)
+   ========================================================================== */
+
+/* Turno 2: Tema Amarelo / Dourado (TechDB & SQL) */
 .ceo-dialog-box-retro.shift-2-dialog-theme {
+  background: #1c1917 !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.4), 0 25px 50px rgba(0, 0, 0, 0.9) !important;
+}
+.shift-2-dialog-theme .retro-window-titlebar {
+  background: linear-gradient(90deg, #451a03 0%, #78350f 50%, #451a03 100%) !important;
+  border-bottom-color: #f59e0b !important;
+  color: #fbbf24 !important;
+}
+.shift-2-dialog-theme .win-btn {
+  border-color: #f59e0b !important;
+  color: #fbbf24 !important;
+}
+.shift-2-dialog-theme .ceo-dialog-main {
+  background: radial-gradient(circle at 20% 20%, #451a03 0%, #1c1917 100%) !important;
+}
+.shift-2-dialog-theme .ceo-avatar-frame {
+  border-color: #f59e0b !important;
+}
+.shift-2-dialog-theme .ceo-name-badge {
+  border-color: #f59e0b !important;
+  background: linear-gradient(180deg, #451a03 0%, #1c1917 100%) !important;
+}
+.shift-2-dialog-theme .ceo-name-badge span {
+  color: #fbbf24 !important;
+}
+.shift-2-dialog-theme .ceo-speech-container {
+  background: rgba(28, 25, 23, 0.95) !important;
+  border-color: rgba(245, 158, 11, 0.45) !important;
+}
+.shift-2-dialog-theme .ceo-speech-container::before {
+  border-color: transparent #f59e0b transparent transparent !important;
+}
+.shift-2-dialog-theme .ceo-speech-container::after {
+  border-color: transparent rgba(28, 25, 23, 0.95) transparent transparent !important;
+}
+.shift-2-dialog-theme .speaker-tag {
+  color: #fbbf24 !important;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.5) !important;
+}
+.shift-2-dialog-theme .ceo-speech-text strong {
+  color: #fbbf24 !important;
+}
+.shift-2-dialog-theme .ceo-speech-text code {
+  background: rgba(69, 26, 3, 0.9) !important;
+  color: #fef08a !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+.shift-2-dialog-theme .ceo-dialog-footer {
+  background: #1c1917 !important;
+  border-top-color: rgba(245, 158, 11, 0.3) !important;
+}
+.shift-2-dialog-theme .btn-dialog-next {
+  background: #d97706 !important;
+  border-color: #fbbf24 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4) !important;
+}
+.shift-2-dialog-theme .btn-dialog-launch {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.5) !important;
+}
+
+/* Turno 3: Tema Verde (TechZap & Contas) */
+.ceo-dialog-box-retro.shift-3-dialog-theme {
   background: #022c22 !important;
   border-color: #10b981 !important;
   box-shadow: 0 0 35px rgba(16, 185, 129, 0.4), 0 25px 50px rgba(0, 0, 0, 0.9) !important;
 }
-.shift-2-dialog-theme .retro-window-titlebar {
+.shift-3-dialog-theme .retro-window-titlebar {
   background: linear-gradient(90deg, #064e3b 0%, #047857 50%, #064e3b 100%) !important;
   border-bottom-color: #34d399 !important;
   color: #6ee7b7 !important;
 }
-.shift-2-dialog-theme .win-btn {
+.shift-3-dialog-theme .win-btn {
   border-color: #34d399 !important;
   color: #34d399 !important;
 }
-.shift-2-dialog-theme .ceo-dialog-main {
+.shift-3-dialog-theme .ceo-dialog-main {
   background: radial-gradient(circle at 20% 20%, #064e3b 0%, #022c22 100%) !important;
 }
-.shift-2-dialog-theme .ceo-avatar-frame {
+.shift-3-dialog-theme .ceo-avatar-frame {
   border-color: #34d399 !important;
 }
-.shift-2-dialog-theme .ceo-name-badge {
+.shift-3-dialog-theme .ceo-name-badge {
   border-color: #34d399 !important;
   background: linear-gradient(180deg, #064e3b 0%, #022c22 100%) !important;
 }
-.shift-2-dialog-theme .ceo-name-badge span {
+.shift-3-dialog-theme .ceo-name-badge span {
   color: #6ee7b7 !important;
 }
-.shift-2-dialog-theme .ceo-speech-container {
+.shift-3-dialog-theme .ceo-speech-container {
   background: rgba(2, 44, 34, 0.95) !important;
-  border-color: rgba(52, 211, 153, 0.4) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
 }
-.shift-2-dialog-theme .ceo-speech-container::before {
+.shift-3-dialog-theme .ceo-speech-container::before {
   border-color: transparent #34d399 transparent transparent !important;
 }
-.shift-2-dialog-theme .ceo-speech-container::after {
+.shift-3-dialog-theme .ceo-speech-container::after {
   border-color: transparent rgba(2, 44, 34, 0.95) transparent transparent !important;
 }
-.shift-2-dialog-theme .speaker-tag {
+.shift-3-dialog-theme .speaker-tag {
   color: #6ee7b7 !important;
-  text-shadow: 0 0 8px rgba(110, 231, 183, 0.4) !important;
+  text-shadow: 0 0 8px rgba(110, 231, 183, 0.5) !important;
 }
-.shift-2-dialog-theme .ceo-speech-text strong {
+.shift-3-dialog-theme .ceo-speech-text strong {
   color: #6ee7b7 !important;
 }
-.shift-2-dialog-theme .ceo-dialog-footer {
+.shift-3-dialog-theme .ceo-speech-text code {
+  background: rgba(6, 78, 59, 0.9) !important;
+  color: #a7f3d0 !important;
+  border-color: rgba(52, 211, 153, 0.4) !important;
+}
+.shift-3-dialog-theme .ceo-dialog-footer {
   background: #022c22 !important;
   border-top-color: rgba(52, 211, 153, 0.3) !important;
+}
+.shift-3-dialog-theme .btn-dialog-next {
+  background: #059669 !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4) !important;
+}
+.shift-3-dialog-theme .btn-dialog-launch {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border-color: #34d399 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.5) !important;
+}
+
+/* Turno 4: Tema Vermelho (TechVault & Contrainteligência) */
+.ceo-dialog-box-retro.shift-4-dialog-theme {
+  background: #180505 !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 35px rgba(239, 68, 68, 0.4), 0 25px 50px rgba(0, 0, 0, 0.9) !important;
+}
+.shift-4-dialog-theme .retro-window-titlebar {
+  background: linear-gradient(90deg, #450a0a 0%, #7f1d1d 50%, #450a0a 100%) !important;
+  border-bottom-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+.shift-4-dialog-theme .win-btn {
+  border-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+.shift-4-dialog-theme .ceo-dialog-main {
+  background: radial-gradient(circle at 20% 20%, #450a0a 0%, #180505 100%) !important;
+}
+.shift-4-dialog-theme .ceo-avatar-frame {
+  border-color: #ef4444 !important;
+}
+.shift-4-dialog-theme .ceo-name-badge {
+  border-color: #ef4444 !important;
+  background: linear-gradient(180deg, #450a0a 0%, #180505 100%) !important;
+}
+.shift-4-dialog-theme .ceo-name-badge span {
+  color: #fca5a5 !important;
+}
+.shift-4-dialog-theme .ceo-speech-container {
+  background: rgba(24, 5, 5, 0.95) !important;
+  border-color: rgba(239, 68, 68, 0.45) !important;
+}
+.shift-4-dialog-theme .ceo-speech-container::before {
+  border-color: transparent #ef4444 transparent transparent !important;
+}
+.shift-4-dialog-theme .ceo-speech-container::after {
+  border-color: transparent rgba(24, 5, 5, 0.95) transparent transparent !important;
+}
+.shift-4-dialog-theme .speaker-tag {
+  color: #fca5a5 !important;
+  text-shadow: 0 0 8px rgba(252, 165, 165, 0.5) !important;
+}
+.shift-4-dialog-theme .ceo-speech-text strong {
+  color: #fca5a5 !important;
+}
+.shift-4-dialog-theme .ceo-speech-text code {
+  background: rgba(69, 10, 10, 0.9) !important;
+  color: #fecaca !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+}
+.shift-4-dialog-theme .ceo-dialog-footer {
+  background: #180505 !important;
+  border-top-color: rgba(239, 68, 68, 0.3) !important;
+}
+.shift-4-dialog-theme .btn-dialog-next {
+  background: #dc2626 !important;
+  border-color: #f87171 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4) !important;
+}
+.shift-4-dialog-theme .btn-dialog-launch {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
+  border-color: #fca5a5 !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.5) !important;
 }
 
 .ceo-speech-text {
