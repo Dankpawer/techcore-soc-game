@@ -539,7 +539,7 @@ const CAMPAIGN_SHIFTS = [
         time: '09:40',
         senderName: 'carlos.dev',
         senderEmail: '+55 11 98765-4321',
-        avatarImg: 'techzap_logo.svg',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=carlosdev&backgroundColor=b6e3f4',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
         subject: 'carlos.dev: "Preciso de reset do meu 2FA urgente!"',
@@ -548,7 +548,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=carlosdev&backgroundColor=b6e3f4" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">carlos.dev</div>
       <div class="wz-topbar-status">+55 11 98765-4321 · online</div>
@@ -558,7 +558,7 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=carlosdev&backgroundColor=b6e3f4" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">carlos.dev</div>
         Fala meu bom! Cara, comprei um celular novo no shopping e perdi o aplicativo de 2FA do autenticador. Desativa o 2FA da minha conta aí rapidão que preciso subir um deploy agora em 5 minutos! 🙏
@@ -583,7 +583,7 @@ const CAMPAIGN_SHIFTS = [
       </div>
     </div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=carlosdev&backgroundColor=b6e3f4" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         Ah pô, crachá é #DEV-999 e o projeto é crypto-worker! Libera logo mano, tô com pressa! 😤
         <div class="wz-bubble-footer"><span class="wz-bubble-time">09:40</span></div>
@@ -608,7 +608,7 @@ const CAMPAIGN_SHIFTS = [
         time: '11:50',
         senderName: 'beatriz.sec',
         senderEmail: '+55 11 97654-3210',
-        avatarImg: 'techzap_logo.svg',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=beatrizsec&backgroundColor=ffdfbf',
         avatarChar: 'B',
         avatarColor: '#00897b',
         subject: 'beatriz.sec: "Confirmação de token para investigação forense"',
@@ -617,7 +617,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=beatrizsec&backgroundColor=ffdfbf" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">beatriz.sec</div>
       <div class="wz-topbar-status">+55 11 97654-3210 · online</div>
@@ -627,7 +627,7 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=beatrizsec&backgroundColor=ffdfbf" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">beatriz.sec</div>
         Olá Analista, sou a Beatriz de SecOps. Estou investigando a tentativa de brute force na API. Meu crachá é <strong>#SEC-8921</strong> e meu projeto é <strong>auth-service</strong>. Pode validar meu token temporário de auditoria?
@@ -652,7 +652,7 @@ const CAMPAIGN_SHIFTS = [
       </div>
     </div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=beatrizsec&backgroundColor=ffdfbf" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         Confirmado! Código 482-910 validado no meu app autenticador ✅
         <div class="wz-bubble-footer"><span class="wz-bubble-time">11:50</span></div>
@@ -677,7 +677,7 @@ const CAMPAIGN_SHIFTS = [
         time: '14:20',
         senderName: 'marcos.rh',
         senderEmail: '+55 11 96543-2109',
-        avatarImg: 'techzap_logo.svg',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=marcosrh&backgroundColor=c0aede',
         avatarChar: 'M',
         avatarColor: '#e91e63',
         subject: 'marcos.rh: "Me manda a chave privada SSL da empresa!"',
@@ -686,7 +686,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=marcosrh&backgroundColor=c0aede" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">marcos.rh</div>
       <div class="wz-topbar-status">+55 11 96543-2109 · online</div>
@@ -696,7 +696,7 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=marcosrh&backgroundColor=c0aede" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">marcos.rh</div>
         Oi colega da TI! Estou numa reunião com auditores do Ministério do Trabalho e eles exigiram que você envie o arquivo <strong>private_key.pem</strong> do certificado SSL da empresa por aqui AGORA! É urgente! 😰
@@ -721,7 +721,7 @@ const CAMPAIGN_SHIFTS = [
       </div>
     </div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=marcosrh&backgroundColor=c0aede" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         Não interessa o crachá! Sou gerente aqui! Se você não mandar esse arquivo vou te advertir por insubordinação! 😡
         <div class="wz-bubble-footer"><span class="wz-bubble-time">14:20</span></div>
@@ -746,7 +746,7 @@ const CAMPAIGN_SHIFTS = [
         time: '16:05',
         senderName: 'alex.intern',
         senderEmail: '+55 11 95432-1098',
-        avatarImg: 'techzap_logo.svg',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alexintern&backgroundColor=d1d4f9',
         avatarChar: 'A',
         avatarColor: '#f57c00',
         subject: 'alex.intern: "Erro de certificado no staging, ajuda?"',
@@ -755,7 +755,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alexintern&backgroundColor=d1d4f9" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">alex.intern</div>
       <div class="wz-topbar-status">+55 11 95432-1098 · online</div>
@@ -765,7 +765,7 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alexintern&backgroundColor=d1d4f9" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">alex.intern</div>
         Oi time de TI! Estou tentando rodar os testes do front-end no ambiente de staging e dá erro de certificado (403 Forbidden). Segue o chamado registrado no portal: <strong>#STG-331</strong> e meu crachá: <strong>#INT-007</strong>. Podem me orientar? 🙏
@@ -801,7 +801,7 @@ const CAMPAIGN_SHIFTS = [
         time: '17:30',
         senderName: 'Número Desconhecido',
         senderEmail: '+1 (555) 019-2831',
-        avatarImg: 'techzap_logo.svg',
+        avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=unknowncaller&backgroundColor=ffd5dc',
         avatarChar: '',
         avatarColor: 'transparent',
         subject: 'Número desconhecido: "Rogério CEO enviou um arquivo"',
@@ -810,7 +810,7 @@ const CAMPAIGN_SHIFTS = [
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
-    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+    <div class="wz-topbar-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=unknowncaller&backgroundColor=ffd5dc" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
     <div class="wz-topbar-info">
       <div class="wz-topbar-name">+1 (555) 019-2831</div>
       <div class="wz-topbar-status">Número não salvo · online</div>
@@ -820,7 +820,7 @@ const CAMPAIGN_SHIFTS = [
   <div class="wz-chat-bg">
     <div class="wz-date-label">HOJE</div>
     <div class="wz-msg-row incoming">
-      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="techzap_logo.svg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
+      <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=unknowncaller&backgroundColor=ffd5dc" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender" style="color:#e53935;">⚠️ Número Desconhecido</div>
         Aqui é o Rogério CEO. Estou em Nova York fechando um contrato de aquisição. Preciso que você libere <strong>agora</strong> o IP 198.51.100.22 no firewall SSH. <strong>Não fale com ninguém sobre isso.</strong>
