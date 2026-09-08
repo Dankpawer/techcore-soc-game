@@ -494,7 +494,7 @@ const CAMPAIGN_SHIFTS = [
     shiftNumber: 3,
     title: 'Turno 3: Contas Comprometidas & TechZap Chat',
     brandName: 'TechZap & TechMail',
-    brandIcon: '<img src="techzap_logo.png" class="brand-img-ic" alt="TechZap">',
+    brandIcon: '<img src="techzap_logo.svg" class="brand-img-ic" alt="TechZap">',
     url: 'https://techzap.techcore.internal/chat/#direct-messages',
     wordContent: `
       <h2>1. DIRETRIZES DO TECHZAP (WHATSAPP CORPORATIVO)</h2>
